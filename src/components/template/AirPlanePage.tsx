@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import TypeOfTravel from "../module/TypeOfTravel";
+import ChooseDestination from "../module/ChooseDestination";
 
 function AirPlanePage() {
   const [selectedType, setSelectedType] = useState({
@@ -16,6 +17,7 @@ function AirPlanePage() {
         way={selectedType.way}
         setSelectedType={setSelectedType}
       />
+      <ChooseDestination type={selectedType.type} way={selectedType.way} />
     </div>
   );
 }

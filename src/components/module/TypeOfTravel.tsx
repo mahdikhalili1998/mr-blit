@@ -78,7 +78,7 @@ const TypeOfTravel: FC<ITypeOfTravel> = ({ type, way, setSelectedType }) => {
         {openModal ? (
           <ul
             ref={modalRef}
-            className="absolute -right-16 top-9 flex w-[180px] flex-col justify-center rounded-lg p-3 text-base shadow-2xl"
+            className="absolute -right-16 top-9 flex w-[180px] flex-col justify-center rounded-lg bg-white p-3 text-base z-20 shadow-2xl"
           >
             <li
               onClick={() =>
