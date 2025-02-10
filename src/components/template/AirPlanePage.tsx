@@ -8,7 +8,7 @@ function AirPlanePage() {
     type: "",
     way: "یک طرفه",
   });
-  console.log(selectedType);
+
   return (
     <div>
       <TypeOfTravel

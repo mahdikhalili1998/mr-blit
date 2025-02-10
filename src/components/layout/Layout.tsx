@@ -1,5 +1,5 @@
 import Header from "./Header";
-import Footer from "./Footer";
+// import Footer from "./Footer";
 import { LayoutProps } from "@/types/layoutProps";
 
 function Layout({ children }: LayoutProps) {

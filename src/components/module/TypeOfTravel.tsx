@@ -30,7 +30,7 @@ const TypeOfTravel: FC<ITypeOfTravel> = ({ type, way, setSelectedType }) => {
       {/* رادیو باتن ها */}
       <ul className="flex items-center gap-1">
         <li
-          onClick={(e) =>
+          onClick={() =>
             setSelectedType((other: any) => ({
               ...other,
               type: "inside",
@@ -48,7 +48,7 @@ const TypeOfTravel: FC<ITypeOfTravel> = ({ type, way, setSelectedType }) => {
           <span>داخلی</span>
         </li>
         <li
-          onClick={(e) =>
+          onClick={() =>
             setSelectedType((other: any) => ({
               ...other,
               type: "outside",
