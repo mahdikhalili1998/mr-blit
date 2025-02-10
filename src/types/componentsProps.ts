@@ -1,4 +1,3 @@
-import { Interface } from "readline";
 
 export interface ITypeOfTravel {
   type: string;
