@@ -1,7 +1,19 @@
-import React from "react";
+"use client";
+
+import { useState } from "react";
+import TypeOfTravel from "../module/TypeOfTravel";
 
 function AirPlanePage() {
-  return <div>AirPlanePage</div>;
+  const [selectedType, setSelectedType] = useState<string>("");
+
+  return (
+    <div>
+      <TypeOfTravel
+        selectedType={selectedType}
+        setSelectedType={setSelectedType}
+      />
+    </div>
+  );
 }
 
 export default AirPlanePage;
