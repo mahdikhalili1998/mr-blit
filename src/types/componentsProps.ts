@@ -1,4 +1,5 @@
 export interface ITypeOfTravel {
-  selectedType: string;
+  type: string;
+  way: string;
   setSelectedType: Function;
 }
