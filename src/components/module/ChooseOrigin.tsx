@@ -82,7 +82,7 @@ function ChooseOrigin({
               onClick={() => setSearchValue("")}
               className="mr-auto text-blue"
             >
-              <Cancle width={4} height={4} color="currentColor" />
+              <Cancle width={14} height={22} color="currentColor" />
             </span>
           ) : null}
         </div>
