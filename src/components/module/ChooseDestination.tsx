@@ -9,6 +9,7 @@ import ChooseOrigin from "./ChooseOrigin";
 import ChooseTarget from "./ChooseTarget";
 
 function ChooseDestination({ type, way }: ITravelInfo) {
+  console.log(way);
   const [originName, setOriginName] = useState<string>(""); // اسم مبدا
   const [selectOrigin, setSelectOrigin] = useState<boolean>(false); // رفتن برای اتنخاب مبدا
   const [destinationName, setDestinationName] = useState<string>(""); // اسم مقصد

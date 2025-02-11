@@ -4,8 +4,8 @@ import React from "react";
 function Cancle({ width, height, color }: IIcon) {
   return (
     <svg
-      width={14}
-      height={22}
+      width={width}
+      height={height}
       data-v-a0a6a819=""
       aria-hidden="true"
       focusable="false"
