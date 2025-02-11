@@ -9,15 +9,14 @@ import ChooseOrigin from "./ChooseOrigin";
 import ChooseTarget from "./ChooseTarget";
 
 function ChooseDestination({ type, way }: ITravelInfo) {
-  console.log(type, way);
-  const [originName, setOriginName] = useState<string>("");
-  const [selectOrigin, setSelectOrigin] = useState<boolean>(false);
-  const [destinationName, setDestinationName] = useState<string>("");
-  const [selectDestination, setSelectDestination] = useState<boolean>(false);
-  const [userOrigin, setUserOrigin] = useState<string>("");
-  const [userDestination, setUserDestination] = useState<string>("");
-  const [switchValue, setSwitchValue] = useState<boolean>(false);
-  const [step, setStep] = useState<number>(0);
+  const [originName, setOriginName] = useState<string>(""); // اسم مبدا
+  const [selectOrigin, setSelectOrigin] = useState<boolean>(false); // رفتن برای اتنخاب مبدا
+  const [destinationName, setDestinationName] = useState<string>(""); // اسم مقصد
+  const [selectDestination, setSelectDestination] = useState<boolean>(false); // رفتن ب انتخاب مقصد
+  const [userOrigin, setUserOrigin] = useState<string>(""); // مبدا انتخاب شده توسط کاربر
+  const [userDestination, setUserDestination] = useState<string>(""); //مقصد انتخاب شده کاربر
+  const [switchValue, setSwitchValue] = useState<boolean>(false); // سنجش کلیک روی دکمه سوییچ
+  const [step, setStep] = useState<number>(0); // مراحل خرید بلیط
   const params = usePathname();
   const categoryName = params.split("/").pop();
 
@@ -52,7 +51,7 @@ function ChooseDestination({ type, way }: ITravelInfo) {
       <div
         onClick={() => {
           setSelectOrigin(true);
-          setStep(1);
+          setStep((step: number) => step + 1);
         }}
         className="flex items-center gap-4 rounded-lg bg-slate-200 p-3 text-gray-400"
       >
@@ -100,7 +99,16 @@ function ChooseDestination({ type, way }: ITravelInfo) {
           selectOrigin ? "translate-x-0" : "translate-x-full"
         } absolute right-0 top-0 z-30 h-screen w-screen bg-white transition-transform duration-700 ease-in-out`}
       >
-        {step === 1 && selectOrigin ? <ChooseOrigin /> : null}
+        {step === 1 && selectOrigin ? (
+          <ChooseOrigin
+            originName={originName}
+            setUserOrigin={setUserOrigin}
+            setSelectOrigin={setSelectOrigin}
+            type={type}
+            step={step}
+            setStep={setStep}
+          />
+        ) : null}
         {step === 2 && selectDestination ? <ChooseTarget /> : null}
       </div>
     </div>

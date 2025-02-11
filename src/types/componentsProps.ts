@@ -1,4 +1,3 @@
-
 export interface ITypeOfTravel {
   type: string;
   way: string;
@@ -10,4 +9,16 @@ export interface ITravelInfo {
   way: string;
 }
 
+export interface IOriginPage {
+  originName: string;
+  setUserOrigin: any;
+  setSelectOrigin: any;
+  type: string;
+  setStep: any;
+  step: number;
+}
 
+export interface ISearch {
+  name: string;
+  location: string;
+}

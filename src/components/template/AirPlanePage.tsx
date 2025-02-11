@@ -6,7 +6,7 @@ import ChooseDestination from "../module/ChooseDestination";
 
 function AirPlanePage() {
   const [selectedType, setSelectedType] = useState({
-    type: "",
+    type: "inside",
     way: "یک طرفه",
   });
 
