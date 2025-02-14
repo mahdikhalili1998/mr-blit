@@ -1,23 +1,32 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Mabda from "../icon/Mabda";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import SwichKey from "../icon/SwichKey";
 import Location from "../icon/Location";
 import { ITravelInfo } from "@/types/componentsProps";
 import ChooseOrigin from "./ChooseOrigin";
 import ChooseTarget from "./ChooseTarget";
+import Clender from "../icon/Clender";
+import { IDate } from "@/types/generalType";
+import ChooseDate from "./ChooseDate";
 
 function ChooseDestination({ type, way }: ITravelInfo) {
-  console.log(way);
+  // استیت مربوط به مبدا
   const [originName, setOriginName] = useState<string>(""); // اسم مبدا
   const [selectOrigin, setSelectOrigin] = useState<boolean>(false); // رفتن برای اتنخاب مبدا
+  const [userOrigin, setUserOrigin] = useState<string>(""); // مبدا انتخاب شده توسط کاربر
+  // استیت مربوط به مقصد
   const [destinationName, setDestinationName] = useState<string>(""); // اسم مقصد
   const [selectDestination, setSelectDestination] = useState<boolean>(false); // رفتن ب انتخاب مقصد
-  const [userOrigin, setUserOrigin] = useState<string>(""); // مبدا انتخاب شده توسط کاربر
   const [userDestination, setUserDestination] = useState<string>(""); //مقصد انتخاب شده کاربر
+  // استیت مربوط به تقویم
+  const [selectDate, setSelectDate] = useState<boolean>(false); //رفتن برا صفحه تقویم
+  const [userDate, setUserDate] = useState<IDate>({ go: "", back: "" });
+
   const [switchValue, setSwitchValue] = useState<boolean>(false); // سنجش کلیک روی دکمه سوییچ
   const [step, setStep] = useState<number>(0); // مراحل خرید بلیط
+
   const params = usePathname();
   const categoryName = params.split("/").pop();
 
@@ -46,13 +55,25 @@ function ChooseDestination({ type, way }: ITravelInfo) {
     }
   }, [categoryName]);
 
+  useEffect(() => {
+    if (type === "inside" && userDestination) {
+      setUserDestination("");
+    } else if (type === "outside" && userOrigin) {
+      setUserOrigin("");
+    } else if (type === "outside" && userDestination) {
+      setUserDestination("");
+    } else if (type === "inside" && userOrigin) {
+      setUserOrigin("");
+    }
+  }, [type]);
+
   return (
     <div className="mx-5 flex flex-col">
       {/* مبدا */}
       <div
         onClick={() => {
           setSelectOrigin(true);
-          setStep((step: number) => step + 1);
+          setStep(1);
         }}
         className="flex items-center gap-4 rounded-lg bg-slate-200 p-3 text-gray-400"
       >
@@ -75,7 +96,7 @@ function ChooseDestination({ type, way }: ITravelInfo) {
       >
         <SwichKey width={18} height={16} color="currentColor" />
       </button>
-      {/* مقصد */}
+      {/* مقصد*/}
       <div
         onClick={() => {
           setSelectDestination(true);
@@ -94,7 +115,43 @@ function ChooseDestination({ type, way }: ITravelInfo) {
           className="bg-transparent text-black focus:outline-none"
         />
       </div>
+      {/* تقویم */}
+      <div className="mt-3 flex items-center gap-4 rounded-lg bg-slate-200 p-3 text-gray-400">
+        <span>
+          <Clender width={15} height={18} color="currentColor" />
+        </span>
+        <div className="flex items-center">
+          <input
+            onClick={() => {
+              setSelectDate(true);
+              setStep(3);
+            }}
+            type="text"
+            value={userDestination}
+            readOnly={true}
+            placeholder="رفت"
+            className="mr-1 w-1/2 bg-transparent text-black focus:outline-none"
+          />
+          {way === "یک طرفه" ? (
+            <span>{`برگشت (اختیاری)`}</span>
+          ) : (
+            <input
+              onClick={() => {
+                setSelectDate(true);
+                setStep(3);
+              }}
+              type="text"
+              value={userDestination}
+              readOnly={true}
+              placeholder="برگشت"
+              className="w-1/2 bg-transparent text-black focus:outline-none"
+            />
+          )}
+        </div>
+      </div>
 
+      {/* --------- صفحات ----------- */}
+      {/*  صفحه انتخاب مبدا*/}
       <div
         className={`${
           selectOrigin ? "translate-x-0" : "translate-x-full"
@@ -110,10 +167,58 @@ function ChooseDestination({ type, way }: ITravelInfo) {
             setStep={setStep}
           />
         ) : null}
-        {step === 2 && selectDestination ? <ChooseTarget /> : null}
+      </div>
+      {/* صفحه انتخاب مقصد */}
+      <div
+        className={`${
+          selectDestination || step === 2 ? "translate-x-0" : "translate-x-full"
+        } absolute right-0 top-0 z-40 h-screen w-screen bg-white transition-transform duration-700 ease-in-out`}
+      >
+        {step === 2 || selectDestination ? (
+          <ChooseTarget
+            destinationName={destinationName}
+            setUserDestination={setUserDestination}
+            setSelectDestination={setSelectDestination}
+            setSelectOrigin={setSelectOrigin}
+            type={type}
+            step={step}
+            setStep={setStep}
+          />
+        ) : null}
+      </div>
+      {/* صفخه انتخاب تاریخ */}
+      <div
+        className={`${
+          selectDate || step === 3 ? "translate-x-0" : "translate-x-full"
+        } absolute right-0 top-0 z-40 h-screen w-screen bg-white transition-transform duration-700 ease-in-out`}
+      >
+        {step === 3 || selectDate ? (
+          <ChooseDate
+            go={userDate.go}
+            back={userDate.back}
+            setUserDate={setUserDate}
+          />
+        ) : null}
       </div>
     </div>
   );
 }
 
 export default ChooseDestination;
+
+//   {/* انتخاب مقصد*/}
+//   <div
+//   className={`${
+//     selectDestination ? "translate-x-0" : "translate-x-full"
+//   } absolute right-0 top-0 z-40 h-screen w-screen bg-white transition-transform duration-700 ease-in-out`}
+// >
+//   {step === 2 || selectDestination ? (
+//     <ChooseOrigin
+//       destinationName={destinationName}
+//       setUserDestination={setUserDestination}
+//       setSelectDestination={setSelectDestination}
+//       step={step}
+//       setStep={setStep}
+//     />
+//   ) : null}
+// </div>

@@ -52,6 +52,11 @@ function ChooseOrigin({
     setStep(0);
   };
 
+  const originValueHandler = (location: string) => {
+    setUserOrigin(location);
+    setStep(2);
+  };
+
   return (
     <div>
       {/* هدر بالا */}
@@ -98,14 +103,12 @@ function ChooseOrigin({
       </div>
       {/* لیست فرودگاها */}
       <div>
+        {/* //اگر سرچ نتیجه داشت */}
         {searchValue && filteredLocations.length > 0
           ? filteredLocations.map((item) => (
               <div
                 key={item.name}
-                onClick={() => {
-                  setUserOrigin(item.location);
-                  setSelectOrigin(false);
-                }}
+                onClick={() => originValueHandler(item.location)}
                 className="mt-5 flex items-center gap-3 space-y-2 pr-5 text-15"
               >
                 <span className="text-blue">
@@ -115,22 +118,26 @@ function ChooseOrigin({
                 <span className="text-slate-400">{item.name}</span>
               </div>
             ))
-          : country.map((item) => (
-              <div
-                key={item.name}
-                onClick={() => {
-                  setUserOrigin(item.location);
-                  setSelectOrigin(false);
-                }}
-                className="mt-5 flex items-center gap-3 space-y-2 pr-5 text-15"
-              >
-                <span className="text-blue">
-                  <LocationStroke width={14} height={18} color="currentColor" />
-                </span>
-                <span className="font-medium text-black">{item.location}</span>
-                <span className="text-slate-400">{item.name}</span>
-              </div>
-            ))}
+          : null}
+        {/* اگر سرچ نتیجه نداشت */}
+        {searchValue && filteredLocations.length === 0 ? (
+          <p className="p-5 font-semibold text-black">نتیجه ای یافت نشد</p>
+        ) : null}
+        {/* اصلا سرچ نکرده */}
+        {!searchValue &&
+          country.map((item) => (
+            <div
+              key={item.name}
+              onClick={() => originValueHandler(item.location)}
+              className="mt-5 flex items-center gap-3 space-y-2 pr-5 text-15"
+            >
+              <span className="text-blue">
+                <LocationStroke width={14} height={18} color="currentColor" />
+              </span>
+              <span className="font-medium text-black">{item.location}</span>
+              <span className="text-slate-400">{item.name}</span>
+            </div>
+          ))}
       </div>
     </div>
   );

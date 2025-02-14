@@ -10,15 +10,24 @@ export interface ITravelInfo {
 }
 
 export interface IOriginPage {
-  originName: string;
-  setUserOrigin: any;
-  setSelectOrigin: any;
-  type: string;
-  setStep: any;
-  step: number;
+  originName?: string;
+  setUserOrigin?: any;
+  setSelectOrigin?: any;
+  type?: string;
+  setStep?: any;
+  step?: number;
+  destinationName?: string;
+  setUserDestination?: any;
+  setSelectDestination?: any;
 }
 
 export interface ISearch {
   name: string;
   location: string;
+}
+
+export interface IChooseDate {
+  go: string;
+  back: string;
+  setUserDate: any;
 }

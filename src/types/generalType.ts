@@ -10,3 +10,8 @@ export interface Icategory {
   stroke: any;
   fill: any;
 }
+
+export interface IDate {
+  go: string;
+  back: string;
+}
