@@ -9,12 +9,14 @@ import LocationStroke from "../icon/LocationStroke";
 
 function ChooseTarget({
   type,
-  step,
   setStep,
   destinationName,
+  selectDestination,
   setUserDestination,
   setSelectDestination,
+  selectOrigin,
   setSelectOrigin,
+  setSelectDate,
 }: IOriginPage) {
   const [searchValue, setSearchValue] = useState<string>("");
   const [filteredLocations, setFilteredLocations] = useState<ISearch[]>([]);
@@ -42,8 +44,14 @@ function ChooseTarget({
   };
 
   const backHandler = () => {
-    if (step === 2) {
+    if (selectDestination) {
+      setStep(0);
+      setSelectDestination(false);
+    }
+    if (selectDestination && selectOrigin) {
       setStep(1);
+      setSelectDestination(false);
+      setSelectOrigin(true);
     }
   };
 
@@ -55,7 +63,8 @@ function ChooseTarget({
 
   const originValueHandler = (location: string) => {
     setUserDestination(location);
-    closeHandler();
+    setSelectDate(true);
+    setStep(3);
   };
 
   return (

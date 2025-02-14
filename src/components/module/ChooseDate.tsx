@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import DateObject from "react-date-object";
 import shamsi from "react-date-object/calendars/persian";
 import shamsiFa from "react-date-object/locales/persian_fa";
@@ -9,18 +9,39 @@ import BackArrow from "../icon/BackArrow";
 import Cancle from "../icon/Cancle";
 import { Calendar } from "react-multi-date-picker";
 import Plus from "../icon/Plus";
-import { IChooseDate } from "@/types/componentsProps";
+import { IOriginPage } from "@/types/componentsProps";
 
-const ChooseDate: FC<IChooseDate> = ({ go, back, setUserDate }) => {
+const ChooseDate: FC<IOriginPage> = ({
+  go,
+  way,
+  back,
+  setUserDate,
+  setStep,
+  dateName,
+  setSelectDate,
+  setSelectDestination,
+  setSelectOrigin,
+  selectDestination,
+  selectOrigin,
+  selectDate,
+}) => {
   const [selectedGo, setSelectedGo] = useState(go);
-  const [selectedBack, setSelectedBack] = useState<string | null>(back);
+  const [selectedBack, setSelectedBack] = useState<string | null>(back || null);
   const [calendar, setCalendar] = useState(shamsi); // پیش‌فرض شمسی
   const [locale, setLocale] = useState(shamsiFa); // زبان فارسی در شمسی
   const today = new DateObject({ calendar: calendar, locale: locale });
   const formattedToday = today.format("DD MMMM");
   const [minBackDate, setMinBackDate] = useState<DateObject | null>(null); // تاریخ حداقل برای تقویم برگشت
-
+  const [wayValidation, setWayValidation] = useState<boolean>(false);
   const weekDays = ["شنبه", "یک", "دو", "سه", "چهار", "پنج", "جمعه"];
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = () => {
+    if (sectionRef.current) {
+      sectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   //تغیر شمسی /میلادی
   const changeCalenderMood = () => {
     if (calendar === shamsi) {
@@ -31,6 +52,13 @@ const ChooseDate: FC<IChooseDate> = ({ go, back, setUserDate }) => {
       setLocale(shamsiFa);
     }
   };
+
+  useEffect(() => {
+    if (!go) {
+      setUserDate((userData: any) => ({ ...userData, go: formattedToday }));
+    }
+  }, []);
+
   //گرفتن تاریخ رفت
   const handleGoDate = (date: DateObject) => {
     const formattedDate = date.format("DD MMMM");
@@ -60,57 +88,113 @@ const ChooseDate: FC<IChooseDate> = ({ go, back, setUserDate }) => {
     }
   }, [selectedGo, selectedBack]);
 
+  const backHandler = () => {
+    if (!selectDestination && !selectOrigin && selectDate) {
+      setSelectDate(false);
+      setStep(0);
+    }
+    if (selectDestination && selectDate && selectOrigin) {
+      setStep(2);
+      setSelectDate(false);
+      setSelectDestination(true);
+    }
+  };
+
+  const closeHandler = () => {
+    setSelectDestination(false);
+    setSelectDate(false);
+    setSelectOrigin(false);
+    setStep(0);
+  };
+
+  const submitHandler = () => {
+    if (way === "رفت و برگشت" && !back) {
+      setWayValidation(true);
+    }
+    closeHandler();
+  };
+
   return (
     <div>
       {/* هدر بالا */}
       <div className="flex items-center justify-around bg-blue py-5 text-white">
-        <span className="p-2">
+        <span onClick={backHandler} className="p-2">
           <BackArrow width={19} height={22} color="currentColor" />
         </span>
-        <h1 className="text-xl font-semibold">انتخاب تاریخ رفت</h1>
-        <span className="p-2">
+        <h1 className="text-xl font-semibold">{`انتخاب تاریخ ${dateName}`}</h1>
+        <span onClick={closeHandler} className="p-2">
           <Cancle width={14} height={22} color="currentColor" />
         </span>
       </div>
       {/* نمایش تارریخ های انتخاب شده */}
       <ul className="mt-5 flex w-screen items-center justify-around overflow-x-hidden">
+        {/* رفت */}
         <li className="mx-3 flex w-1/2 items-center justify-center rounded-lg bg-gray-100 px-3 py-3 font-semibold">
           {!go ? formattedToday : go}
         </li>
-        <li className="mx-3 flex w-1/2 items-center gap-2 rounded-lg bg-gray-100 px-3 py-3">
+        {/* برگشت */}
+        <li
+          onClick={handleScroll}
+          className={` ${wayValidation ? "border-2 border-solid border-red-500" : "border-none"} mx-3 flex w-1/2 items-center gap-2 rounded-lg bg-gray-100 px-3 py-3`}
+        >
           <span className={`${back ? "hidden" : "block"} text-slate-400`}>
             <Plus width={15} height={18} color="currentColor" />
           </span>
           <input
             type="text"
-            value={selectedBack || ""}
+            value={back || ""}
             readOnly
-            placeholder={`برگشت (اختیاری)`}
-            className="w-28 bg-transparent text-center font-semibold placeholder:text-sm placeholder:text-slate-400 focus:outline-none"
+            placeholder={way === "یک طرفه" ? "برگشت (اختیاری)" : "برگشت"}
+            className={`w-28 bg-transparent text-center font-semibold placeholder:text-sm placeholder:text-slate-400 focus:outline-none`}
           />
         </li>
       </ul>
-      {/* تقویم */}
-      <div className="mx-auto mt-8 w-max">
-        <h2>تاریخ رفت</h2>
-        <Calendar
-          calendar={calendar}
-          weekDays={weekDays}
-          locale={locale}
-          minDate={new Date()}
-          onChange={handleGoDate}
-        />
-        <h2>تاریخ برگشت</h2>
-        <Calendar
-          calendar={calendar}
-          weekDays={weekDays}
-          locale={locale}
-          minDate={minBackDate || new Date()}
-          onChange={handleBackDate}
-        />
-        <button onClick={changeCalenderMood} className="bg-blue p-3">
+      {/* دکمه تایید نهایی  و تغیر مود تقویم*/}
+      <div className="mx-2 mt-5 flex items-center justify-around">
+        <button
+          onClick={submitHandler}
+          className="mx-6 mt-5 w-1/2 rounded-md bg-blue px-4 py-2 font-semibold text-white"
+        >
+          تایید
+        </button>
+        <button
+          onClick={changeCalenderMood}
+          className="mx-6 mt-5 w-1/2 rounded-md border-2 border-solid border-blue bg-white px-3 py-2 font-semibold text-blue"
+        >
           {calendar === shamsi ? "تقویم میلادی" : " تقویم شمسی"}
         </button>
+      </div>
+
+      {/* تقویم */}
+      <div className="mt-6 space-y-14 pb-20">
+        <div className="mt-4 flex w-full items-center px-4">
+          <h2 className="font-medium">تاریخ رفت</h2>
+          <div className="mx-4 flex-1 border-t-[1px] border-solid border-slate-200"></div>
+        </div>
+        <div className="mx-auto w-max">
+          <Calendar
+            calendar={calendar}
+            weekDays={weekDays}
+            locale={locale}
+            minDate={new Date()}
+            onChange={handleGoDate}
+            className="calendar"
+          />
+        </div>
+        <div className="flex w-full items-center px-4">
+          <h2 className="font-medium">تاریخ برگشت</h2>
+          <div className="mx-4 flex-1 border-t-[1px] border-solid border-slate-200"></div>
+        </div>
+        <div ref={sectionRef} className="mx-auto w-max">
+          <Calendar
+            calendar={calendar}
+            weekDays={weekDays}
+            locale={locale}
+            minDate={minBackDate || new Date()}
+            onChange={handleBackDate}
+            className="calendar"
+          />
+        </div>
       </div>
     </div>
   );

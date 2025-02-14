@@ -1,7 +1,7 @@
 "use client";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Mabda from "../icon/Mabda";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SwichKey from "../icon/SwichKey";
 import Location from "../icon/Location";
 import { ITravelInfo } from "@/types/componentsProps";
@@ -23,6 +23,7 @@ function ChooseDestination({ type, way }: ITravelInfo) {
   // استیت مربوط به تقویم
   const [selectDate, setSelectDate] = useState<boolean>(false); //رفتن برا صفحه تقویم
   const [userDate, setUserDate] = useState<IDate>({ go: "", back: "" });
+  const [dateName, setDateName] = useState<string>("");
 
   const [switchValue, setSwitchValue] = useState<boolean>(false); // سنجش کلیک روی دکمه سوییچ
   const [step, setStep] = useState<number>(0); // مراحل خرید بلیط
@@ -66,6 +67,12 @@ function ChooseDestination({ type, way }: ITravelInfo) {
       setUserOrigin("");
     }
   }, [type]);
+
+  const showDateHandler = (name: string) => {
+    setSelectDate(true);
+    setDateName(name);
+    setStep(3);
+  };
 
   return (
     <div className="mx-5 flex flex-col">
@@ -122,26 +129,22 @@ function ChooseDestination({ type, way }: ITravelInfo) {
         </span>
         <div className="flex items-center">
           <input
-            onClick={() => {
-              setSelectDate(true);
-              setStep(3);
-            }}
+            onClick={() => showDateHandler("رفت")}
             type="text"
-            value={userDestination}
+            value={userDate.go}
             readOnly={true}
             placeholder="رفت"
             className="mr-1 w-1/2 bg-transparent text-black focus:outline-none"
           />
           {way === "یک طرفه" ? (
-            <span>{`برگشت (اختیاری)`}</span>
+            <span
+              onClick={() => showDateHandler("برگشت")}
+            >{`برگشت (اختیاری)`}</span>
           ) : (
             <input
-              onClick={() => {
-                setSelectDate(true);
-                setStep(3);
-              }}
+              onClick={() => showDateHandler("برگشت")}
               type="text"
-              value={userDestination}
+              value={userDate.back}
               readOnly={true}
               placeholder="برگشت"
               className="w-1/2 bg-transparent text-black focus:outline-none"
@@ -157,13 +160,16 @@ function ChooseDestination({ type, way }: ITravelInfo) {
           selectOrigin ? "translate-x-0" : "translate-x-full"
         } absolute right-0 top-0 z-30 h-screen w-screen bg-white transition-transform duration-700 ease-in-out`}
       >
-        {step === 1 && selectOrigin ? (
+        {step === 1 || selectOrigin ? (
           <ChooseOrigin
             originName={originName}
             setUserOrigin={setUserOrigin}
+            selectOrigin={selectOrigin}
             setSelectOrigin={setSelectOrigin}
             type={type}
             step={step}
+            selectDestination={selectDestination}
+            setSelectDestination={setSelectDestination}
             setStep={setStep}
           />
         ) : null}
@@ -178,11 +184,14 @@ function ChooseDestination({ type, way }: ITravelInfo) {
           <ChooseTarget
             destinationName={destinationName}
             setUserDestination={setUserDestination}
+            selectDestination={selectDestination}
             setSelectDestination={setSelectDestination}
+            selectOrigin={selectOrigin}
             setSelectOrigin={setSelectOrigin}
             type={type}
             step={step}
             setStep={setStep}
+            setSelectDate={setSelectDate}
           />
         ) : null}
       </div>
@@ -194,9 +203,19 @@ function ChooseDestination({ type, way }: ITravelInfo) {
       >
         {step === 3 || selectDate ? (
           <ChooseDate
+            setSelectDate={setSelectDate}
+            dateName={dateName}
+            setSelectDestination={setSelectDestination}
+            setSelectOrigin={setSelectOrigin}
+            step={step}
+            setStep={setStep}
             go={userDate.go}
             back={userDate.back}
             setUserDate={setUserDate}
+            selectDestination={selectDestination}
+            selectOrigin={selectOrigin}
+            selectDate={selectDate}
+            way={way}
           />
         ) : null}
       </div>

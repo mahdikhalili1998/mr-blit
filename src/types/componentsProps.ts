@@ -16,18 +16,21 @@ export interface IOriginPage {
   type?: string;
   setStep?: any;
   step?: number;
+  back?: string;
+  go?: string;
+  setUserDate?: any;
+  setSelectDate?: any;
   destinationName?: string;
   setUserDestination?: any;
   setSelectDestination?: any;
+  selectDestination?: boolean;
+  selectOrigin?: boolean;
+  selectDate?: boolean;
+  dateName: string;
+  way: string;
 }
 
 export interface ISearch {
   name: string;
   location: string;
-}
-
-export interface IChooseDate {
-  go: string;
-  back: string;
-  setUserDate: any;
 }

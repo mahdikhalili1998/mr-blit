@@ -11,6 +11,7 @@ function ChooseOrigin({
   originName,
   setUserOrigin,
   setSelectOrigin,
+  setSelectDestination,
   type,
   step,
   setStep,
@@ -54,6 +55,7 @@ function ChooseOrigin({
 
   const originValueHandler = (location: string) => {
     setUserOrigin(location);
+    setSelectDestination(true);
     setStep(2);
   };
 
