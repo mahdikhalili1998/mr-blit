@@ -24,6 +24,7 @@ const ChooseDate: FC<IOriginPage> = ({
   selectDestination,
   selectOrigin,
   selectDate,
+  setSelectedType,
 }) => {
   const [selectedGo, setSelectedGo] = useState(go);
   const [selectedBack, setSelectedBack] = useState<string | null>(back || null);
@@ -111,13 +112,16 @@ const ChooseDate: FC<IOriginPage> = ({
     if (way === "رفت و برگشت" && !back) {
       setWayValidation(true);
     }
+    if (back) {
+      setSelectedType((e: any) => ({ ...e, way: "رفت و برگشت" }));
+    }
     closeHandler();
   };
 
   return (
     <div>
       {/* هدر بالا */}
-      <div className="flex items-center justify-around bg-blue py-5 text-white">
+      <div className="flex items-center justify-around bg-blue px-4 py-6 text-white">
         <span onClick={backHandler} className="p-2">
           <BackArrow width={19} height={22} color="currentColor" />
         </span>

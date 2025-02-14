@@ -15,3 +15,10 @@ export interface IDate {
   go: string;
   back: string;
 }
+
+export interface IPassengerNum {
+  older12: number;
+  middle12_2: number;
+  baby: number;
+
+}

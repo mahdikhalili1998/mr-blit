@@ -7,6 +7,7 @@ export interface ITypeOfTravel {
 export interface ITravelInfo {
   type: string;
   way: string;
+  setSelectedType: any;
 }
 
 export interface IOriginPage {
@@ -28,6 +29,14 @@ export interface IOriginPage {
   selectDate?: boolean;
   dateName?: string;
   way?: string;
+  setSelectedType?: any;
+  setSelectNumber?: any;
+  older12?: number;
+  middle12_2?: number;
+  baby?: number;
+  selectNumber?: boolean;
+  setpassengerNum?: any;
+
 }
 
 export interface ISearch {

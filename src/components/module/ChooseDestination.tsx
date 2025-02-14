@@ -8,10 +8,12 @@ import { ITravelInfo } from "@/types/componentsProps";
 import ChooseOrigin from "./ChooseOrigin";
 import ChooseTarget from "./ChooseTarget";
 import Clender from "../icon/Clender";
-import { IDate } from "@/types/generalType";
+import { IDate, IPassengerNum } from "@/types/generalType";
 import ChooseDate from "./ChooseDate";
+import DownArrow from "../icon/DownArrow";
+import ChooseNumber from "./ChooseNumber";
 
-function ChooseDestination({ type, way }: ITravelInfo) {
+function ChooseDestination({ type, way, setSelectedType }: ITravelInfo) {
   // استیت مربوط به مبدا
   const [originName, setOriginName] = useState<string>(""); // اسم مبدا
   const [selectOrigin, setSelectOrigin] = useState<boolean>(false); // رفتن برای اتنخاب مبدا
@@ -24,6 +26,15 @@ function ChooseDestination({ type, way }: ITravelInfo) {
   const [selectDate, setSelectDate] = useState<boolean>(false); //رفتن برا صفحه تقویم
   const [userDate, setUserDate] = useState<IDate>({ go: "", back: "" });
   const [dateName, setDateName] = useState<string>("");
+  //استیت مربوط به انتخاب مسافر
+  const [selectNumber, setSelectNumber] = useState<boolean>(false);
+  const [passengerNum, setpassengerNum] = useState<IPassengerNum>({
+    older12: 1,
+    middle12_2: 0,
+    baby: 0,
+  });
+  const { older12, middle12_2, baby } = passengerNum;
+  const finalNumber = `${older12 + middle12_2 + baby} مسافر`;
 
   const [switchValue, setSwitchValue] = useState<boolean>(false); // سنجش کلیک روی دکمه سوییچ
   const [step, setStep] = useState<number>(0); // مراحل خرید بلیط
@@ -152,6 +163,24 @@ function ChooseDestination({ type, way }: ITravelInfo) {
           )}
         </div>
       </div>
+      {/* تعداد مسافر */}
+      <div
+        onClick={() => {
+          setSelectNumber(true);
+          setStep(4);
+        }}
+        className="mt-3 flex items-center justify-between rounded-lg bg-slate-200 p-3 px-4 font-semibold text-black"
+      >
+        <input
+          type="text"
+          value={finalNumber}
+          className="bg-transparent focus:outline-none"
+          readOnly
+        />
+        <span>
+          <DownArrow width={16} height={22} color="currentColor" />
+        </span>
+      </div>
 
       {/* --------- صفحات ----------- */}
       {/*  صفحه انتخاب مبدا*/}
@@ -216,6 +245,32 @@ function ChooseDestination({ type, way }: ITravelInfo) {
             selectOrigin={selectOrigin}
             selectDate={selectDate}
             way={way}
+            setSelectedType={setSelectedType}
+          />
+        ) : null}
+      </div>
+      {/* صفحه انتخاب مسافر */}
+      <div
+        className={`${
+          selectNumber || step === 4 ? "translate-x-0" : "translate-x-full"
+        } absolute right-0 top-0 z-40 h-screen w-screen bg-white transition-transform duration-700 ease-in-out`}
+      >
+        {" "}
+        {step === 4 || selectNumber ? (
+          <ChooseNumber
+            setSelectDate={setSelectDate}
+            setSelectDestination={setSelectDestination}
+            setSelectOrigin={setSelectOrigin}
+            setSelectNumber={setSelectNumber}
+            middle12_2={middle12_2}
+            baby={baby}
+            older12={older12}
+            setStep={setStep}
+            selectDate={selectDate}
+            selectDestination={selectDestination}
+            selectOrigin={selectOrigin}
+            selectNumber={selectNumber}
+            setpassengerNum={setpassengerNum}
           />
         ) : null}
       </div>

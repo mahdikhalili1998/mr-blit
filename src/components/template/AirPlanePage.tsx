@@ -17,7 +17,11 @@ function AirPlanePage() {
         way={selectedType.way}
         setSelectedType={setSelectedType}
       />
-      <ChooseDestination type={selectedType.type} way={selectedType.way} />
+      <ChooseDestination
+        type={selectedType.type}
+        way={selectedType.way}
+        setSelectedType={setSelectedType}
+      />
     </div>
   );
 }
