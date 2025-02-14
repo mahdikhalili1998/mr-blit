@@ -26,8 +26,8 @@ export interface IOriginPage {
   selectDestination?: boolean;
   selectOrigin?: boolean;
   selectDate?: boolean;
-  dateName: string;
-  way: string;
+  dateName?: string;
+  way?: string;
 }
 
 export interface ISearch {
