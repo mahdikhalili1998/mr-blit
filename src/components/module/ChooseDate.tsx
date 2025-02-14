@@ -169,7 +169,7 @@ const ChooseDate: FC<IOriginPage> = ({
       <div className="mt-6 space-y-14 pb-20">
         <div className="mt-4 flex w-full items-center px-4">
           <h2 className="font-medium">تاریخ رفت</h2>
-          <div className="mx-4 flex-1 border-t-[1px] border-solid border-slate-200"></div>
+          <div className="mx-4 mt-[3px] flex-1 border-t-[1px] border-solid border-slate-200"></div>
         </div>
         <div className="mx-auto w-max">
           <Calendar
@@ -183,7 +183,7 @@ const ChooseDate: FC<IOriginPage> = ({
         </div>
         <div className="flex w-full items-center px-4">
           <h2 className="font-medium">تاریخ برگشت</h2>
-          <div className="mx-4 flex-1 border-t-[1px] border-solid border-slate-200"></div>
+          <div className="mx-4 mt-[3px] flex-1 border-t-[1px] border-solid border-slate-200"></div>
         </div>
         <div ref={sectionRef} className="mx-auto w-max">
           <Calendar
