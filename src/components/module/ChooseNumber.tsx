@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BackArrow from "../icon/BackArrow";
 import Cancle from "../icon/Cancle";
 import { IOriginPage } from "@/types/componentsProps";
 import Mines from "../icon/Mines";
 import Plus from "../icon/Plus";
 import { passengerNumData } from "@/constant/passengerNumberDate";
+import { IErrorType } from "@/types/generalType";
 
 function ChooseNumber({
   setSelectDestination,
@@ -21,13 +22,22 @@ function ChooseNumber({
   middle12_2,
   baby,
   setpassengerNum,
+  calculateNum,
+  sum,
 }: IOriginPage) {
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<IErrorType>({
+    isError: false,
+    number: 0,
+  });
   const passengerCounts: Record<string, number> = {
     older12: older12 ?? 0,
     middle12_2: middle12_2 ?? 0,
     baby: baby ?? 0,
   };
+
+  useEffect(() => {
+    calculateNum();
+  }, [older12, middle12_2, baby]);
 
   const minesHandler = (id: string) => {
     setpassengerNum((prevState: any) => ({
@@ -44,12 +54,14 @@ function ChooseNumber({
   };
 
   const submitHandler = () => {
-    // if (finall > 9) {
-    //   setError(true);
-    // } else {
-    //   setpassengerNum((e: any) => ({ ...e, total: finall }));
-    //   closeHandler();
-    // }
+    if (sum && sum > 9) {
+      setError(() => ({ isError: true, number: 9 }));
+    } else if (sum === 0) {
+      setError(() => ({ isError: true, number: 0 }));
+    } else {
+      closeHandler();
+      setError(() => ({ isError: false, number: 0 }));
+    }
   };
 
   const backHandler = () => {
@@ -104,11 +116,16 @@ function ChooseNumber({
         ))}
       </ul>
       {/* پیام ارور */}
-      {error && (
+      {error.isError && error.number === 9 ? (
         <span className="mr-6 mt-6 block text-sm font-medium text-red-500">
           _ تعداد مسافران نباید بیشتر از 9 باشد
         </span>
-      )}
+      ) : null}
+      {error.isError && error.number === 0 ? (
+        <span className="mr-6 mt-6 block text-sm font-medium text-red-500">
+          _ تعداد مسافران نباید صفر باشد
+        </span>
+      ) : null}
 
       <button
         onClick={submitHandler}

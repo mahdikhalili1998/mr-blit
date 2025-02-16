@@ -36,7 +36,8 @@ export interface IOriginPage {
   baby?: number;
   selectNumber?: boolean;
   setpassengerNum?: any;
-
+  sum?: number;
+  calculateNum?: any;
 }
 
 export interface ISearch {

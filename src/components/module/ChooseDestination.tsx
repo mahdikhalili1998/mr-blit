@@ -34,7 +34,10 @@ function ChooseDestination({ type, way, setSelectedType }: ITravelInfo) {
     baby: 0,
   });
   const { older12, middle12_2, baby } = passengerNum;
-  const finalNumber = `${older12 + middle12_2 + baby} مسافر`;
+  const [sum, setSum] = useState<number>(1);
+  const calculateNum = () => {
+    setSum(older12 + middle12_2 + baby);
+  };
 
   const [switchValue, setSwitchValue] = useState<boolean>(false); // سنجش کلیک روی دکمه سوییچ
   const [step, setStep] = useState<number>(0); // مراحل خرید بلیط
@@ -171,12 +174,15 @@ function ChooseDestination({ type, way, setSelectedType }: ITravelInfo) {
         }}
         className="mt-3 flex items-center justify-between rounded-lg bg-slate-200 p-3 px-4 font-semibold text-black"
       >
-        <input
-          type="text"
-          value={finalNumber}
-          className="bg-transparent focus:outline-none"
-          readOnly
-        />
+        <div className="flex items-center">
+          <input
+            type="text"
+            value={sum}
+            className="w-5 bg-transparent focus:outline-none"
+            readOnly
+          />
+          <span className="font-medium">مسافر</span>
+        </div>
         <span>
           <DownArrow width={16} height={22} color="currentColor" />
         </span>
@@ -271,6 +277,8 @@ function ChooseDestination({ type, way, setSelectedType }: ITravelInfo) {
             selectOrigin={selectOrigin}
             selectNumber={selectNumber}
             setpassengerNum={setpassengerNum}
+            calculateNum={calculateNum}
+            sum={sum}
           />
         ) : null}
       </div>
