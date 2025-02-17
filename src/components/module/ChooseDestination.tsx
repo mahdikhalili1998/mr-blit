@@ -187,6 +187,10 @@ function ChooseDestination({ type, way, setSelectedType }: ITravelInfo) {
           <DownArrow width={16} height={22} color="currentColor" />
         </span>
       </div>
+      {/* دکمه ی جستجو */}
+      <button className="mt-3 rounded-lg bg-blue p-3 font-semibold text-white">
+        جستجو
+      </button>
 
       {/* --------- صفحات ----------- */}
       {/*  صفحه انتخاب مبدا*/}

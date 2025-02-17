@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
-      <body className="font-iranSans">
+      <body className="bg-gray-200 font-iranSans">
         <Layout>{children}</Layout>
       </body>
     </html>

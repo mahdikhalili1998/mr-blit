@@ -11,7 +11,7 @@ function AirPlanePage() {
   });
 
   return (
-    <div>
+    <div className="bg-white my-2 pb-5">
       <TypeOfTravel
         type={selectedType.type}
         way={selectedType.way}

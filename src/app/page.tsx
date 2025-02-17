@@ -1,8 +1,11 @@
-import { redirect } from "next/navigation";
+import MainPage from "@/components/template/HomePage";
 
 function HomePage() {
-  redirect("/airPlane");
-  return <h1>تست فونت 1234</h1>;
+  return (
+    <div>
+      <MainPage />
+    </div>
+  );
 }
 
 export default HomePage;
