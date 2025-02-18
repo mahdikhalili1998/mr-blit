@@ -8,6 +8,10 @@ export interface ITravelInfo {
   type: string;
   way: string;
   setSelectedType: any;
+  userOrigin: string;
+  setUserOrigin: any;
+  userDestination: string;
+  setUserDestination: any;
 }
 
 export interface IOriginPage {
@@ -43,4 +47,9 @@ export interface IOriginPage {
 export interface ISearch {
   name: string;
   location: string;
+}
+
+export interface ISearchResult {
+  userOrigin: string;
+  userDestination: string;
 }

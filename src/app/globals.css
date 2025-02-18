@@ -6,3 +6,9 @@
   transform: scale(1.3); /* تقویم را ۱۰ درصد بزرگ‌تر می‌کند */
   margin-top: 3rem;
 }
+
+@layer base {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}

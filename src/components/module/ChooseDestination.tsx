@@ -13,15 +13,23 @@ import ChooseDate from "./ChooseDate";
 import DownArrow from "../icon/DownArrow";
 import ChooseNumber from "./ChooseNumber";
 
-function ChooseDestination({ type, way, setSelectedType }: ITravelInfo) {
+function ChooseDestination({
+  type,
+  way,
+  setSelectedType,
+  setUserDestination,
+  setUserOrigin,
+  userDestination,
+  userOrigin,
+}: ITravelInfo) {
   // استیت مربوط به مبدا
   const [originName, setOriginName] = useState<string>(""); // اسم مبدا
   const [selectOrigin, setSelectOrigin] = useState<boolean>(false); // رفتن برای اتنخاب مبدا
-  const [userOrigin, setUserOrigin] = useState<string>(""); // مبدا انتخاب شده توسط کاربر
+
   // استیت مربوط به مقصد
   const [destinationName, setDestinationName] = useState<string>(""); // اسم مقصد
   const [selectDestination, setSelectDestination] = useState<boolean>(false); // رفتن ب انتخاب مقصد
-  const [userDestination, setUserDestination] = useState<string>(""); //مقصد انتخاب شده کاربر
+
   // استیت مربوط به تقویم
   const [selectDate, setSelectDate] = useState<boolean>(false); //رفتن برا صفحه تقویم
   const [userDate, setUserDate] = useState<IDate>({ go: "", back: "" });
@@ -81,7 +89,7 @@ function ChooseDestination({ type, way, setSelectedType }: ITravelInfo) {
       setUserOrigin("");
     }
   }, [type]);
-
+  // مربوط به تقویم
   const showDateHandler = (name: string) => {
     setSelectDate(true);
     setDateName(name);
@@ -188,9 +196,6 @@ function ChooseDestination({ type, way, setSelectedType }: ITravelInfo) {
         </span>
       </div>
       {/* دکمه ی جستجو */}
-      <button className="mt-3 rounded-lg bg-blue p-3 font-semibold text-white">
-        جستجو
-      </button>
 
       {/* --------- صفحات ----------- */}
       {/*  صفحه انتخاب مبدا*/}
@@ -291,20 +296,3 @@ function ChooseDestination({ type, way, setSelectedType }: ITravelInfo) {
 }
 
 export default ChooseDestination;
-
-//   {/* انتخاب مقصد*/}
-//   <div
-//   className={`${
-//     selectDestination ? "translate-x-0" : "translate-x-full"
-//   } absolute right-0 top-0 z-40 h-screen w-screen bg-white transition-transform duration-700 ease-in-out`}
-// >
-//   {step === 2 || selectDestination ? (
-//     <ChooseOrigin
-//       destinationName={destinationName}
-//       setUserDestination={setUserDestination}
-//       setSelectDestination={setSelectDestination}
-//       step={step}
-//       setStep={setStep}
-//     />
-//   ) : null}
-// </div>

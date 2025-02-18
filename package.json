@@ -12,7 +12,9 @@
     "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-multi-date-picker": "^4.5.2"
+    "react-hot-toast": "^2.5.2",
+    "react-multi-date-picker": "^4.5.2",
+    "react-spinners": "^0.15.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

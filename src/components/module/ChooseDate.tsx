@@ -119,7 +119,7 @@ const ChooseDate: FC<IOriginPage> = ({
   };
 
   return (
-    <div>
+    <div className="bg-white">
       {/* هدر بالا */}
       <div className="flex items-center justify-around bg-blue px-4 py-6 text-white">
         <span onClick={backHandler} className="p-2">
