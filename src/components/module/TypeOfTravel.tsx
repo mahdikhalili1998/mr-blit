@@ -26,7 +26,7 @@ const TypeOfTravel: FC<ITypeOfTravel> = ({ type, way, setSelectedType }) => {
   }, [openModal]);
 
   return (
-    <div className=" flex items-center justify-between">
+    <div className=" flex items-center py-4 mx-5 justify-between">
       {/* رادیو باتن ها */}
       <ul className="flex items-center gap-1">
         <li

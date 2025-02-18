@@ -9,6 +9,7 @@ import { ISearchResult } from "@/types/componentsProps";
 import SmallPlane from "../icon/SmallPlane";
 import Bell from "../icon/Bell";
 import Saeqe from "../icon/Saeqe";
+import PlusBell from "../icon/PlusBell";
 
 function SearchResult({ userDestination, userOrigin }: ISearchResult) {
   const [data, setData] = useState<object[]>([]);
@@ -22,7 +23,7 @@ function SearchResult({ userDestination, userOrigin }: ISearchResult) {
   }, []);
 
   return (
-    <div className="overflow-y-hidden">
+    <div className="mb-24 overflow-y-hidden">
       {!data.length ? (
         <div className="mx-auto mt-[7rem] w-max">
           <RotateLoader color="#0f84fa" />
@@ -30,7 +31,7 @@ function SearchResult({ userDestination, userOrigin }: ISearchResult) {
       ) : (
         <div className="mx-2 mt-5 space-y-5">
           {data.map((item: any) => (
-            <div className="rounded-xl bg-white px-2 py-1" key={item.id}>
+            <div className="rounded-xl bg-white p-2" key={item.id}>
               <span className="rounded-xl bg-yellow-200 px-2 text-right text-xs font-bold text-yellow-800">
                 {item.name}
               </span>
@@ -79,7 +80,7 @@ function SearchResult({ userDestination, userOrigin }: ISearchResult) {
               {/* دیو آیکون زنگوله صاعقه قیمت */}
 
               {item.available ? (
-                <div className="m-3">
+                <div className="m-3 flex items-center justify-between">
                   <div className="flex items-center gap-2 text-blue">
                     <Bell width={20} height={20} color="currentColor" />
                     <Saeqe width={20} height={20} color="currentColor" />
@@ -89,10 +90,16 @@ function SearchResult({ userDestination, userOrigin }: ISearchResult) {
                       {item.capicity} صندلی
                     </span>
                   </div>
+                  <span className="font-medium text-blue">
+                    {item.price.toLocaleString("en-US")} تومان
+                  </span>
                 </div>
               ) : (
-                <div className="m-3">
-                  <h2>موجود شد خبرم کن</h2>
+                <div className="m-3 flex items-center text-blue gap-2">
+                  <span>
+                    <PlusBell width={20} height={20} color="currentColor" />
+                  </span>
+                  <h2 className="text-sm font-medium">موجود شد خبرم کن</h2>
                 </div>
               )}
             </div>
