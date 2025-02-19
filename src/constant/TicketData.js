@@ -47,9 +47,10 @@ export const hotelList = [
     ],
     name: "هتل ساسان",
     star: 2,
-    rate: 8.6 / 10,
+    rate: 7.8,
     info: "قیمت یک شب اتاق دو تخته",
     price: 1444000,
+    location: "خیابان ساسانی",
     off: 31,
   },
   {
@@ -61,10 +62,11 @@ export const hotelList = [
     ],
     name: "هتل چمران",
     star: 5,
-    rate: 9.85 / 10,
+    rate: 4.98,
     info: "قیمت یک شب اتاق دو تخته",
     price: 1944000,
-    off: 20,
+    location: "خیابان شهید چمران",
+    off: 0,
   },
   {
     imageSrc: [
@@ -75,9 +77,10 @@ export const hotelList = [
     ],
     name: "هتل پارسیان",
     star: 3,
-    rate: 6.2 / 10,
+    rate: 8.5,
     info: "قیمت یک شب اتاق دو تخته",
     price: 1244000,
+    location: "خیایان زند",
     off: 27,
   },
 ];

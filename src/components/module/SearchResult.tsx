@@ -10,10 +10,14 @@ import Bell from "../icon/Bell";
 import Saeqe from "../icon/Saeqe";
 import PlusBell from "../icon/PlusBell";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { calculateTotalPrice } from "@/helper/function";
 // استایل‌های موردنیاز
 import "swiper/css";
 import "swiper/css/pagination";
+import Star from "../icon/Star";
+import Location from "../icon/Location";
+import UpRate from "../icon/UpRate";
+import LowRate from "../icon/LowRate";
 
 function SearchResult({ userDestination, userOrigin }: ISearchResult) {
   const [data, setData] = useState<object[]>([]);
@@ -39,6 +43,7 @@ function SearchResult({ userDestination, userOrigin }: ISearchResult) {
           {categoryName === "hotel" &&
             data.map((item: any, index: number) => (
               <div className="rounded-xl bg-white p-2" key={index}>
+                {/* swiper  و اسلایدر عکس هتل */}
                 <div>
                   <Swiper
                     slidesPerView={"auto"}
@@ -56,11 +61,98 @@ function SearchResult({ userDestination, userOrigin }: ISearchResult) {
                           width={200}
                           height={200}
                           priority
-                          className="w-24"
+                          className="rounded-lg"
                         />
                       </SwiperSlide>
                     ))}
                   </Swiper>
+                </div>
+                <h2 className="mt-4 text-lg font-semibold text-black">
+                  {item.name}
+                </h2>
+                {/* دیو مربوط به ستاره و موقعیت */}
+                <div className="mt-4 flex items-center text-yellow-500">
+                  {Array.from({ length: item.star }, (_, index) => (
+                    <Star
+                      key={index}
+                      width={15}
+                      height={15}
+                      color="currentColor"
+                    />
+                  ))}
+                  <span className="mr-2 text-black">{item.star} ستاره</span>
+                  <div className="mr-5 flex items-center gap-2">
+                    <span className="text-xs text-gray-400">
+                      <Location width={12} height={15} color="currentColor" />
+                    </span>
+                    <span className="text-xs font-semibold text-black">
+                      {userOrigin} / {item.location}
+                    </span>
+                  </div>
+                </div>
+                {/* پیشنهاد و تخفیف نوروزی */}
+                <div className="mt-4 flex items-center gap-2">
+                  <span className="rounded-xl bg-red-300 px-2 py-1 text-xs font-medium text-red-800">
+                    پیشنهاد ویژه
+                  </span>
+                  <span className="rounded-xl bg-red-300 px-2 py-1 text-xs font-medium text-red-800">
+                    تخفیف
+                  </span>
+                </div>
+                {/* امتیاز */}
+                <div className={`mt-2 flex items-center gap-1`}>
+                  <span>
+                    {item.rate >= 5 ? (
+                      <UpRate width={16} height={16} color="#22c55e" />
+                    ) : (
+                      <LowRate width={16} height={16} color="#f97316" />
+                    )}
+                  </span>
+                  <span
+                    className={`${item.rate >= 5 ? "text-green-500" : "text-orange-500"} mt-[4px] text-xs font-semibold`}
+                  >
+                    {" "}
+                    {item.rate}/10
+                  </span>
+                </div>
+                {/* خط جدا کننده */}
+                <div className="my-5 border-[1px] border-solid border-slate-200"></div>
+                {/* قیمت */}
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xs font-medium text-slate-400">
+                    {item.info}
+                  </h3>
+                  {item.off > 0 ? (
+                    <div>
+                      {/* تخفیف و قیمت قبل تخفیف */}
+                      <div className="flex items-center gap-2">
+                        <span className="text-gray-400 line-through">
+                          {item.price.toLocaleString("en-US")}
+                        </span>
+                        <span className="rounded-xl bg-green-600 px-2 text-white">
+                          {item.off} %
+                        </span>
+                      </div>
+                      {/* قیمت نهایی */}
+                      <div className="flex items-end justify-center gap-1 text-blue">
+                        <span className="text-lg font-semibold">
+                          {calculateTotalPrice(
+                            1,
+                            item.price,
+                            item.off,
+                          ).toLocaleString("en-US")}{" "}
+                        </span>
+                        <span className="text-sm"> تومان</span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex items-end justify-center gap-1 text-blue">
+                      <span className="text-lg font-semibold">
+                        {item.price.toLocaleString("en-US")}
+                      </span>
+                      <span className="text-sm"> تومان</span>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
