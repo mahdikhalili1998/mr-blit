@@ -14,7 +14,8 @@
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.5.2",
     "react-multi-date-picker": "^4.5.2",
-    "react-spinners": "^0.15.0"
+    "react-spinners": "^0.15.0",
+    "swiper": "^11.2.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

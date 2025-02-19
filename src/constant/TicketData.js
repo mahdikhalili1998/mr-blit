@@ -1,4 +1,3 @@
-
 export const planeTicket = [
   {
     id: 1,
@@ -35,5 +34,50 @@ export const planeTicket = [
     available: true,
     capicity: 2,
     price: 4402500,
+  },
+];
+
+export const hotelList = [
+  {
+    imageSrc: [
+      "/image/hotel1.jpg",
+      "/image/hotel2.jpg",
+      "/image/hotel3.jpg",
+      "/image/hotel4.jpg",
+    ],
+    name: "هتل ساسان",
+    star: 2,
+    rate: 8.6 / 10,
+    info: "قیمت یک شب اتاق دو تخته",
+    price: 1444000,
+    off: 31,
+  },
+  {
+    imageSrc: [
+      "/image/chamran1.jpg",
+      "/image/chamran2.jpg",
+      "/image/chamran3.jpg",
+      "/image/chamran4.jpg",
+    ],
+    name: "هتل چمران",
+    star: 5,
+    rate: 9.85 / 10,
+    info: "قیمت یک شب اتاق دو تخته",
+    price: 1944000,
+    off: 20,
+  },
+  {
+    imageSrc: [
+      "/image/parsian1.jpg",
+      "/image/parsian2.jpg",
+      "/image/parsian3.jpg",
+      "/image/parsian4.jpg",
+    ],
+    name: "هتل پارسیان",
+    star: 3,
+    rate: 6.2 / 10,
+    info: "قیمت یک شب اتاق دو تخته",
+    price: 1244000,
+    off: 27,
   },
 ];

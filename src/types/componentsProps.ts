@@ -1,17 +1,17 @@
 export interface ITypeOfTravel {
-  type: string;
-  way: string;
-  setSelectedType: any;
+  type?: string;
+  way?: string;
+  setSelectedType?: any;
 }
 
 export interface ITravelInfo {
   type: string;
-  way: string;
-  setSelectedType: any;
+  way?: string;
+  setSelectedType?: any;
   userOrigin: string;
   setUserOrigin: any;
-  userDestination: string;
-  setUserDestination: any;
+  userDestination?: string;
+  setUserDestination?: any;
 }
 
 export interface IOriginPage {

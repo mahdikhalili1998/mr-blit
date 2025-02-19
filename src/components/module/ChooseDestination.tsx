@@ -118,32 +118,36 @@ function ChooseDestination({
         />
       </div>
       {/* کلید سوییچ */}
-      <button
-        onClick={switchHandler}
-        disabled={!userDestination && !userOrigin}
-        className={`${switchValue ? "rotate-[270deg]" : "rotate-90"} ml-3 mr-auto inline-block w-max rotate-90 text-blue transition-transform duration-500 ease-in-out disabled:text-gray-400`}
-      >
-        <SwichKey width={18} height={16} color="currentColor" />
-      </button>
+      {categoryName === "hotel" ? null : (
+        <button
+          onClick={switchHandler}
+          disabled={!userDestination && !userOrigin}
+          className={`${switchValue ? "rotate-[270deg]" : "rotate-90"} ml-3 mr-auto inline-block w-max rotate-90 text-blue transition-transform duration-500 ease-in-out disabled:text-gray-400`}
+        >
+          <SwichKey width={18} height={16} color="currentColor" />
+        </button>
+      )}
       {/* مقصد*/}
-      <div
-        onClick={() => {
-          setSelectDestination(true);
-          setStep(2);
-        }}
-        className="flex items-center gap-4 rounded-lg bg-slate-200 p-3 text-gray-400"
-      >
-        <span>
-          <Location width={13} height={18} color="currentColor" />
-        </span>
-        <input
-          type="text"
-          value={userDestination}
-          readOnly={true}
-          placeholder={destinationName}
-          className="bg-transparent text-black focus:outline-none"
-        />
-      </div>
+      {categoryName === "hotel" ? null : (
+        <div
+          onClick={() => {
+            setSelectDestination(true);
+            setStep(2);
+          }}
+          className="flex items-center gap-4 rounded-lg bg-slate-200 p-3 text-gray-400"
+        >
+          <span>
+            <Location width={13} height={18} color="currentColor" />
+          </span>
+          <input
+            type="text"
+            value={userDestination}
+            readOnly={true}
+            placeholder={destinationName}
+            className="bg-transparent text-black focus:outline-none"
+          />
+        </div>
+      )}
       {/* تقویم */}
       <div className="mt-3 flex items-center gap-4 rounded-lg bg-slate-200 p-3 text-gray-400">
         <span>
@@ -175,27 +179,28 @@ function ChooseDestination({
         </div>
       </div>
       {/* تعداد مسافر */}
-      <div
-        onClick={() => {
-          setSelectNumber(true);
-          setStep(4);
-        }}
-        className="mt-3 flex items-center justify-between rounded-lg bg-slate-200 p-3 px-4 font-semibold text-black"
-      >
-        <div className="flex items-center">
-          <input
-            type="text"
-            value={sum}
-            className="w-5 bg-transparent focus:outline-none"
-            readOnly
-          />
-          <span className="font-medium">مسافر</span>
+      {categoryName === "hotel" ? null : (
+        <div
+          onClick={() => {
+            setSelectNumber(true);
+            setStep(4);
+          }}
+          className="mt-3 flex items-center justify-between rounded-lg bg-slate-200 p-3 px-4 font-semibold text-black"
+        >
+          <div className="flex items-center">
+            <input
+              type="text"
+              value={sum}
+              className="w-5 bg-transparent focus:outline-none"
+              readOnly
+            />
+            <span className="font-medium">مسافر</span>
+          </div>
+          <span>
+            <DownArrow width={16} height={22} color="currentColor" />
+          </span>
         </div>
-        <span>
-          <DownArrow width={16} height={22} color="currentColor" />
-        </span>
-      </div>
-      {/* دکمه ی جستجو */}
+      )}
 
       {/* --------- صفحات ----------- */}
       {/*  صفحه انتخاب مبدا*/}
@@ -206,6 +211,7 @@ function ChooseDestination({
       >
         {step === 1 || selectOrigin ? (
           <ChooseOrigin
+            setSelectDate={setSelectDate}
             originName={originName}
             setUserOrigin={setUserOrigin}
             selectOrigin={selectOrigin}
@@ -219,26 +225,30 @@ function ChooseDestination({
         ) : null}
       </div>
       {/* صفحه انتخاب مقصد */}
-      <div
-        className={`${
-          selectDestination || step === 2 ? "translate-x-0" : "translate-x-full"
-        } absolute right-0 top-0 z-40 h-screen w-screen bg-white transition-transform duration-700 ease-in-out`}
-      >
-        {step === 2 || selectDestination ? (
-          <ChooseTarget
-            destinationName={destinationName}
-            setUserDestination={setUserDestination}
-            selectDestination={selectDestination}
-            setSelectDestination={setSelectDestination}
-            selectOrigin={selectOrigin}
-            setSelectOrigin={setSelectOrigin}
-            type={type}
-            step={step}
-            setStep={setStep}
-            setSelectDate={setSelectDate}
-          />
-        ) : null}
-      </div>
+      {categoryName === "hotel" ? null : (
+        <div
+          className={`${
+            selectDestination || step === 2
+              ? "translate-x-0"
+              : "translate-x-full"
+          } absolute right-0 top-0 z-40 h-screen w-screen bg-white transition-transform duration-700 ease-in-out`}
+        >
+          {step === 2 || selectDestination ? (
+            <ChooseTarget
+              destinationName={destinationName}
+              setUserDestination={setUserDestination}
+              selectDestination={selectDestination}
+              setSelectDestination={setSelectDestination}
+              selectOrigin={selectOrigin}
+              setSelectOrigin={setSelectOrigin}
+              type={type}
+              step={step}
+              setStep={setStep}
+              setSelectDate={setSelectDate}
+            />
+          ) : null}
+        </div>
+      )}
       {/* صفخه انتخاب تاریخ */}
       <div
         className={`${

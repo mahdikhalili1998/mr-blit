@@ -10,6 +10,7 @@ import Cancle from "../icon/Cancle";
 import { Calendar } from "react-multi-date-picker";
 import Plus from "../icon/Plus";
 import { IOriginPage } from "@/types/componentsProps";
+import { usePathname } from "next/navigation";
 
 const ChooseDate: FC<IOriginPage> = ({
   go,
@@ -36,6 +37,9 @@ const ChooseDate: FC<IOriginPage> = ({
   const [wayValidation, setWayValidation] = useState<boolean>(false);
   const weekDays = ["شنبه", "یک", "دو", "سه", "چهار", "پنج", "جمعه"];
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  const params = usePathname();
+  const categoryName = params.split("/").pop();
 
   const handleScroll = () => {
     if (sectionRef.current) {
@@ -90,6 +94,10 @@ const ChooseDate: FC<IOriginPage> = ({
   }, [selectedGo, selectedBack]);
 
   const backHandler = () => {
+    if (categoryName === "hotel") {
+      setSelectOrigin(true);
+      setStep(1);
+    }
     if (!selectDestination && !selectOrigin && selectDate) {
       setSelectDate(false);
       setStep(0);

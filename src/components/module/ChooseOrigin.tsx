@@ -6,6 +6,7 @@ import Search from "../icon/Search";
 import { useEffect, useState } from "react";
 import { airportNameFa, airportNameEn } from "../../constant/AirportName";
 import LocationStroke from "../icon/LocationStroke";
+import { usePathname } from "next/navigation";
 
 function ChooseOrigin({
   originName,
@@ -15,10 +16,14 @@ function ChooseOrigin({
   type,
   step,
   setStep,
+  setSelectDate,
 }: IOriginPage) {
   const [searchValue, setSearchValue] = useState<string>("");
   const [filteredLocations, setFilteredLocations] = useState<ISearch[]>([]);
   const [country, setCountry] = useState<ISearch[]>([]);
+
+  const params = usePathname();
+  const categoryName = params.split("/").pop();
 
   useEffect(() => {
     if (type === "inside") {
@@ -54,6 +59,10 @@ function ChooseOrigin({
   };
 
   const originValueHandler = (location: string) => {
+    if (categoryName === "hotel") {
+      setSelectDate(true);
+      setStep(3);
+    }
     setUserOrigin(location);
     setSelectDestination(true);
     setStep(2);
