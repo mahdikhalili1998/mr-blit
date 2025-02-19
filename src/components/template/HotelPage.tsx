@@ -14,7 +14,6 @@ function HotelPage() {
   // استیت مربوط به جستجو
   const [searchResult, setSearchResult] = useState<boolean>(false);
   const [userOrigin, setUserOrigin] = useState<string>(""); // مبدا انتخاب شده توسط کاربر
-  const [userDestination, setUserDestination] = useState<string>(""); //مقصد انتخاب شده کاربر
 
   // مربوط به دکمه جستجو
   const searchHandler = () => {
@@ -26,7 +25,7 @@ function HotelPage() {
   };
 
   return searchResult ? (
-    <SearchResult userDestination={userDestination} userOrigin={userOrigin} />
+    <SearchResult  userOrigin={userOrigin} />
   ) : (
     <div className="my-2 bg-white pb-5">
       <Toaster />

@@ -50,6 +50,6 @@ export interface ISearch {
 }
 
 export interface ISearchResult {
-  userOrigin: string;
-  userDestination: string;
+  userOrigin?: string;
+  userDestination?: string;
 }
