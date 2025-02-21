@@ -9,6 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css/pagination";
 import { ourSite, cityPhoto } from "@/constant/DataForMap";
+import Text from "./Text";
 
 function NineYears() {
   const [imageSrc, setImageSrc] = useState({
@@ -106,7 +107,7 @@ function NineYears() {
           >
             {cityPhoto.map((item, index) => (
               <SwiperSlide key={index} className={`${styles.citySlid}`}>
-                <div className="relative">
+                <div className="">
                   <Image
                     src={item.src}
                     width={150}
@@ -114,10 +115,10 @@ function NineYears() {
                     alt="citi photo"
                     objectFit="cover"
                     priority
-                    className="rounded-md"
+                    className="relative rounded-md"
                   />
                   {/* لایه رنگی */}
-                  <div className="to-blue absolute inset-0 rounded-lg bg-gradient-to-b from-transparent opacity-60"></div>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-b from-transparent via-blue/70 to-blue/100 opacity-60"></div>
                 </div>
                 <span className="absolute bottom-2 left-12 text-xs font-medium text-white">{`بیلط ${item.cityName}`}</span>
               </SwiperSlide>
@@ -148,6 +149,8 @@ function NineYears() {
           ))}
         </Swiper>
       </div>
+      {/* متن ها */}
+      <Text />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { IIcon } from "@/types/generalType";
 import React from "react";
 
-function Tajrobe({ width, height, color }: IIcon) {
+function Tajrobe({ width, height,  }: IIcon) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
