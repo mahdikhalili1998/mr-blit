@@ -2,10 +2,12 @@ export interface ITypeOfTravel {
   type?: string;
   way?: string;
   setSelectedType?: any;
+  checked?: boolean;
+  setChecked?: any;
 }
 
 export interface ITravelInfo {
-  type: string;
+  type?: string;
   way?: string;
   setSelectedType?: any;
   userOrigin: string;

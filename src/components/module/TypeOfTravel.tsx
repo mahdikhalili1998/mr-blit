@@ -5,9 +5,20 @@ import { FC, useEffect, useRef, useState } from "react";
 import DownArrow from "../icon/DownArrow";
 import { usePathname } from "next/navigation";
 
-const TypeOfTravel: FC<ITypeOfTravel> = ({ type, way, setSelectedType }) => {
+const TypeOfTravel: FC<ITypeOfTravel> = ({
+  type,
+  way,
+  setSelectedType,
+  checked,
+  setChecked,
+}) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const modalRef = useRef<HTMLUListElement | null>(null);
+
+  // مربوط به چک باکس قطار
+  const handleChange = () => {
+    setChecked(!checked);
+  };
 
   const params = usePathname();
   const categoryName = params.split("/").pop();
@@ -31,50 +42,93 @@ const TypeOfTravel: FC<ITypeOfTravel> = ({ type, way, setSelectedType }) => {
 
   return (
     <div className="mx-5 flex items-center justify-between py-4">
-      {/* رادیو باتن ها */}
-      <ul className="flex items-center gap-1">
-        {/* دکمه داخلی */}
-        <li
-          onClick={() =>
-            setSelectedType((other: any) => ({
-              ...other,
-              type: "inside",
-            }))
-          }
-          className="flex items-center gap-2 p-2 font-bold text-blue"
-        >
-          <span
-            className={`${type === "inside" ? "bg-blue" : "border-2 border-solid border-blue"} flex size-4 items-center justify-center rounded-full`}
+      {categoryName === "train" ? (
+        // چک باکس کوپه دربست
+        <div className="flex items-center gap-2">
+          <div className="relative">
+            <input
+              id="address-checkbox"
+              type="checkbox"
+              checked={checked}
+              onChange={handleChange}
+              className={`peer hidden`}
+            />
+            <div
+              onClick={handleChange}
+              className={`flex size-4 items-center justify-center rounded ${checked ? "bg-blue" : "border-2 border-blue bg-transparent"}`}
+            >
+              {checked && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                >
+                  <path
+                    d="M15 4.5L6.75 12.75L3 9"
+                    stroke="white"
+                    strokeWidth="1.25"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              )}
+            </div>
+          </div>
+          <label
+            htmlFor="address-checkbox"
+            className="cursor-pointer font-bold text-blue"
           >
-            <span
-              className={`${type === "inside" ? "block" : "hidden"} size-2 rounded-full bg-white`}
-            ></span>
-          </span>
-          <span>داخلی</span>
-        </li>
-        {/* دکمه خارجی */}
-        {categoryName === "hotel" ? null : (
+            کوپه در بست
+          </label>
+        </div>
+      ) : (
+        /* رادیو باتن ها */
+        <ul className="flex items-center gap-1">
+          {/* دکمه داخلی */}
           <li
             onClick={() =>
               setSelectedType((other: any) => ({
                 ...other,
-                type: "outside",
+                type: "inside",
               }))
             }
             className="flex items-center gap-2 p-2 font-bold text-blue"
           >
             <span
-              className={`${type === "outside" ? "bg-blue" : "border-2 border-solid border-blue"} flex size-4 items-center justify-center rounded-full`}
+              className={`${type === "inside" ? "bg-blue" : "border-2 border-solid border-blue"} flex size-4 items-center justify-center rounded-full`}
             >
-              {" "}
               <span
-                className={`${type === "outside" ? "block" : "hidden"} size-2 rounded-full bg-white`}
+                className={`${type === "inside" ? "block" : "hidden"} size-2 rounded-full bg-white`}
               ></span>
             </span>
-            <span>خارجی</span>
+            <span>داخلی</span>
           </li>
-        )}
-      </ul>
+          {/* دکمه خارجی */}
+          {categoryName === "hotel" ? null : (
+            <li
+              onClick={() =>
+                setSelectedType((other: any) => ({
+                  ...other,
+                  type: "outside",
+                }))
+              }
+              className="flex items-center gap-2 p-2 font-bold text-blue"
+            >
+              <span
+                className={`${type === "outside" ? "bg-blue" : "border-2 border-solid border-blue"} flex size-4 items-center justify-center rounded-full`}
+              >
+                {" "}
+                <span
+                  className={`${type === "outside" ? "block" : "hidden"} size-2 rounded-full bg-white`}
+                ></span>
+              </span>
+              <span>خارجی</span>
+            </li>
+          )}
+        </ul>
+      )}
       {/* سلکت باکس */}
       {categoryName === "hotel" ? null : (
         <div onClick={() => setOpenModal((e) => !e)} className="relative p-2">

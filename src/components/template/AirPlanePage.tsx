@@ -18,13 +18,17 @@ function AirPlanePage() {
 
   // مربوط به دکمه جستجو
   const searchHandler = () => {
+    if (userDestination && userOrigin && userDestination === userOrigin) {
+      toast.error("مبدا و مقصد نمیتوانند یکسان باشند");
+    }
     if (!userDestination && !userOrigin) {
       toast.error("مبدا و مقصد نباید خالی باشد");
     } else if (!userOrigin) {
       toast.error("لطفا مبدا رو انتخاب کنبد");
     } else if (!userDestination) {
       toast.error("لطفا مقصد رو انتخاب کنبد");
-    } else if (userDestination && userOrigin) {
+    }
+    if (userDestination && userOrigin && userOrigin !== userDestination) {
       setSearchResult(true);
     }
   };

@@ -4,7 +4,12 @@ import BackArrow from "../icon/BackArrow";
 import Cancle from "../icon/Cancle";
 import Search from "../icon/Search";
 import { useEffect, useState } from "react";
-import { airportNameFa, airportNameEn } from "../../constant/AirportName";
+import {
+  airportNameFa,
+  airportNameEn,
+  hotelName,
+  trainName,
+} from "../../constant/AirportName";
 import LocationStroke from "../icon/LocationStroke";
 import { usePathname } from "next/navigation";
 
@@ -21,14 +26,20 @@ function ChooseOrigin({
   const [searchValue, setSearchValue] = useState<string>("");
   const [filteredLocations, setFilteredLocations] = useState<ISearch[]>([]);
   const [country, setCountry] = useState<ISearch[]>([]);
-
   const params = usePathname();
   const categoryName = params.split("/").pop();
 
+  // یوزافکت اطلاعات نام اییستگاها
   useEffect(() => {
-    if (type === "inside") {
+    if (categoryName === "hotel") {
+      setCountry(hotelName);
+    }
+    if (categoryName === "train") {
+      setCountry(trainName);
+    }
+    if (categoryName === "airPlane" && type === "inside") {
       setCountry(airportNameFa);
-    } else if (type === "outside") {
+    } else if (categoryName === "airPlane" && type === "outside") {
       setCountry(airportNameEn);
     }
   }, []);

@@ -13,4 +13,23 @@ const airportNameEn = [
   { location: "عراق", name: "نجف" },
   { location: "گرجستان", name: "تفلیس" },
 ];
-export { airportNameFa, airportNameEn };
+
+const hotelName = [
+  { location: "تهران", name: "هتل ساسانی" },
+  { location: "تهران", name: "هتل چمران" },
+  { location: "مشهد", name: "هتل پارسیان" },
+  { location: "شیراز", name: "هتل مروارید" },
+  { location: "کیش", name: "هتل گرمابه" },
+  { location: "اهواز", name: "هتل اهواز" },
+];
+
+const trainName = [
+  { location: "تهران", name: "ایستگاه شهید قطاری" },
+  { location: "تهران", name: "ایستگاه چمران" },
+  { location: "مشهد", name: "ایستگاه فولاد شرق" },
+  { location: "شیراز", name: "ایستگاه دهقان فداکار" },
+  { location: "کیش", name: "ایستگاه شهید جانی دپ" },
+  { location: "اهواز", name: "ایستگاه شهید مکان آور" },
+];
+
+export { airportNameFa, airportNameEn, hotelName, trainName };

@@ -1,3 +1,5 @@
+import SmaillTrain from "@/components/icon/SmaillTrain";
+
 export const planeTicket = [
   {
     id: 1,
@@ -82,5 +84,44 @@ export const hotelList = [
     price: 1244000,
     location: "خیایان زند",
     off: 27,
+  },
+];
+
+export const trainTicket = [
+  {
+    id: 1,
+    name: "4 ستاره سالنی پردیس",
+    logo: "/image/rejaTrain.svg",
+    campony: "رجا",
+    icon: <SmaillTrain width={18} height={16} color="currentColor" />,
+    start: "00:45",
+    finish: "02:10",
+    available: true,
+    capicity: 9,
+    price: 3402500,
+  },
+  {
+    id: 2,
+    name: "5 ستاره اکونومی پلاس",
+    logo: "/image/trainFadak.svg",
+    campony: "فدک",
+    icon: <SmaillTrain width={18} height={16} color="currentColor" />,
+    start: "06:00",
+    finish: "07:25",
+    available: false,
+    capicity: 0,
+    price: 3402500,
+  },
+  {
+    id: 3,
+    name: "3 ستاره 6 تخته کویر",
+    logo: "/image/trainChopar.svg",
+    campony: "چوپار",
+    icon: <smallTrain width={18} height={16} color="currentColor" />,
+    start: "11:45",
+    finish: "13:10",
+    available: true,
+    capicity: 2,
+    price: 4402500,
   },
 ];
