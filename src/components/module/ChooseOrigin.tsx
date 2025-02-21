@@ -9,6 +9,9 @@ import {
   airportNameEn,
   hotelName,
   trainName,
+  busNameFa,
+  busNameEn,
+  taxiName,
 } from "../../constant/AirportName";
 import LocationStroke from "../icon/LocationStroke";
 import { usePathname } from "next/navigation";
@@ -31,18 +34,27 @@ function ChooseOrigin({
 
   // یوزافکت اطلاعات نام اییستگاها
   useEffect(() => {
+    if (categoryName === "taxi") {
+      setCountry(taxiName);
+    }
+    if (categoryName === "bus" && type === "inside") {
+      setCountry(busNameFa);
+    } else if (categoryName === "bus" && type === "outside") {
+      setCountry(busNameEn);
+    }
     if (categoryName === "hotel") {
       setCountry(hotelName);
     }
     if (categoryName === "train") {
       setCountry(trainName);
     }
+
     if (categoryName === "airPlane" && type === "inside") {
       setCountry(airportNameFa);
     } else if (categoryName === "airPlane" && type === "outside") {
       setCountry(airportNameEn);
     }
-  }, []);
+  }, [categoryName]);
 
   useEffect(() => {
     filterLocation();
@@ -69,12 +81,12 @@ function ChooseOrigin({
     setStep(0);
   };
 
-  const originValueHandler = (location: string) => {
+  const originValueHandler = (location: string, name: string) => {
     if (categoryName === "hotel") {
       setSelectDate(true);
       setStep(3);
     }
-    setUserOrigin(location);
+    setUserOrigin(`${location}/${name}`);
     setSelectDestination(true);
     setStep(2);
   };
@@ -127,10 +139,10 @@ function ChooseOrigin({
       <div>
         {/* //اگر سرچ نتیجه داشت */}
         {searchValue && filteredLocations.length > 0
-          ? filteredLocations.map((item) => (
+          ? filteredLocations.map((item, index) => (
               <div
-                key={item.name}
-                onClick={() => originValueHandler(item.location)}
+                key={index}
+                onClick={() => originValueHandler(item.location, item.name)}
                 className="mt-5 flex items-center gap-3 space-y-2 pr-5 text-15"
               >
                 <span className="text-blue">
@@ -147,10 +159,10 @@ function ChooseOrigin({
         ) : null}
         {/* اصلا سرچ نکرده */}
         {!searchValue &&
-          country.map((item) => (
+          country.map((item, index) => (
             <div
-              key={item.name}
-              onClick={() => originValueHandler(item.location)}
+              key={index}
+              onClick={() => originValueHandler(item.location, item.name)}
               className="mt-5 flex items-center gap-3 space-y-2 pr-5 text-15"
             >
               <span className="text-blue">

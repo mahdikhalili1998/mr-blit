@@ -271,6 +271,7 @@ function ChooseDestination({
             selectDate={selectDate}
             way={way}
             setSelectedType={setSelectedType}
+            setSelectNumber={setSelectNumber}
           />
         ) : null}
       </div>

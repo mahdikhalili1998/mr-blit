@@ -26,6 +26,7 @@ const ChooseDate: FC<IOriginPage> = ({
   selectOrigin,
   selectDate,
   setSelectedType,
+  setSelectNumber,
 }) => {
   const [selectedGo, setSelectedGo] = useState(go);
   const [selectedBack, setSelectedBack] = useState<string | null>(back || null);
@@ -98,11 +99,18 @@ const ChooseDate: FC<IOriginPage> = ({
       setSelectOrigin(true);
       setStep(1);
     }
+    // در صورتی کهکاربر بار اول باکس مربوطه را باز کند
     if (!selectDestination && !selectOrigin && selectDate) {
       setSelectDate(false);
       setStep(0);
     }
+    // در صورتی ک کاربر از مبدا مرحله به مرحله پیش امده باشد
     if (selectDestination && selectDate && selectOrigin) {
+      setStep(2);
+      setSelectDate(false);
+      setSelectDestination(true);
+    }
+    if (selectDestination && selectDate) {
       setStep(2);
       setSelectDate(false);
       setSelectDestination(true);
@@ -123,7 +131,10 @@ const ChooseDate: FC<IOriginPage> = ({
     if (back) {
       setSelectedType((e: any) => ({ ...e, way: "رفت و برگشت" }));
     }
-    closeHandler();
+    if (go || (go && back)) {
+      setStep(4);
+      setSelectNumber(true);
+    }
   };
 
   return (

@@ -69,6 +69,16 @@ function ChooseNumber({
       setSelectNumber(false);
       setStep(0);
     }
+    if (selectDestination && selectDate && selectOrigin && selectNumber) {
+      setStep(3);
+      setSelectNumber(false);
+      setSelectDate(true);
+    }
+    if (selectDate && selectNumber) {
+      setStep(3);
+      setSelectNumber(false);
+      setSelectDate(true);
+    }
   };
 
   const closeHandler = () => {

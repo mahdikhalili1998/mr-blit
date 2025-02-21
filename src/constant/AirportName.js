@@ -32,4 +32,39 @@ const trainName = [
   { location: "اهواز", name: "ایستگاه شهید مکان آور" },
 ];
 
-export { airportNameFa, airportNameEn, hotelName, trainName };
+const busNameFa = [
+  { location: "تهران", name: "ایستگاه دفاع اتوبوسی" },
+  { location: "تهران", name: "ایستگاه چمران" },
+  { location: "مشهد", name: "ایستگاه اتوبوس دوست" },
+  { location: "شیراز", name: "ایستگاه سیر و سفر" },
+  { location: "کیش", name: "ایستگاه ایران پیما" },
+  { location: "اهواز", name: "ایستگاه سفیر 98" },
+];
+
+const busNameEn = [
+  { location: "ایران", name: "تهران - پایانه بیهقی" },
+  { location: "استانبول", name: "همه پایانه ها" },
+  { location: "عراق", name: "نجف" },
+  { location: "گرجستان", name: "تفلیس" },
+  { location: "ایران", name: "گیلان - پایانه میراز کوچک خان" },
+  { location: "ارمنستان", name: "بالدر" },
+];
+
+const taxiName = [
+  { location: "تهران", name: "شمال تهران" },
+  { location: "تهران", name: "ایستگاه غرب" },
+  { location: "مشهد", name: "" },
+  { location: "شیراز", name: "" },
+  { location: "کیش", name: "" },
+  { location: "اهواز", name: "" },
+];
+
+export {
+  airportNameFa,
+  airportNameEn,
+  hotelName,
+  trainName,
+  busNameFa,
+  busNameEn,
+  taxiName,
+};

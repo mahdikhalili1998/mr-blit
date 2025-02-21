@@ -83,8 +83,7 @@ const TypeOfTravel: FC<ITypeOfTravel> = ({
             کوپه در بست
           </label>
         </div>
-      ) : (
-        /* رادیو باتن ها */
+      ) : categoryName === "taxi" ? null /* رادیو باتن ها */ : (
         <ul className="flex items-center gap-1">
           {/* دکمه داخلی */}
           <li
@@ -141,7 +140,7 @@ const TypeOfTravel: FC<ITypeOfTravel> = ({
           {openModal ? (
             <ul
               ref={modalRef}
-              className="absolute -right-16 top-9 z-20 flex w-[180px] flex-col justify-center rounded-lg bg-white p-3 text-base shadow-2xl"
+              className={`${categoryName === "taxi" ? "right-0" : "-right-16 top-9"} absolute -right-16 top-9 z-20 flex w-[180px] flex-col justify-center rounded-lg bg-white p-3 text-base shadow-2xl`}
             >
               <li
                 onClick={() =>

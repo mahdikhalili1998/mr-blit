@@ -9,3 +9,8 @@ export const calculateTotalPrice = (count, pricePerItem, discount) => {
   const discountedPrice = totalPrice - totalPrice * (discount / 100); // اعمال تخفیف
   return discountedPrice;
 };
+
+// جدا کننده اسم شهر از اسم ایستگاه
+export function extractTehran(str) {
+  return str.split("/")[0];
+}
