@@ -72,3 +72,15 @@ body {
 .swiper-slide:nth-child(3n) {
   width: 85%;
 }
+
+.swiper-pagination-bullet {
+  background-color: yellow !important; /* رنگ زرد */
+  width: 10px;
+  height: 10px;
+  opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: yellow !important;
+  opacity: 1;
+}

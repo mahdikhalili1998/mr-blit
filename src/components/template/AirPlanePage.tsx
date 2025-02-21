@@ -5,6 +5,7 @@ import TypeOfTravel from "../module/TypeOfTravel";
 import ChooseDestination from "../module/ChooseDestination";
 import SearchResult from "../module/SearchResult";
 import toast, { Toaster } from "react-hot-toast";
+import NineYears from "../module/NineYears";
 
 function AirPlanePage() {
   const [selectedType, setSelectedType] = useState({
@@ -36,29 +37,33 @@ function AirPlanePage() {
   return searchResult ? (
     <SearchResult userDestination={userDestination} userOrigin={userOrigin} />
   ) : (
-    <div className="my-2 bg-white pb-5">
-      <Toaster />
-      <TypeOfTravel
-        type={selectedType.type}
-        way={selectedType.way}
-        setSelectedType={setSelectedType}
-      />
-      <ChooseDestination
-        type={selectedType.type}
-        way={selectedType.way}
-        setSelectedType={setSelectedType}
-        userOrigin={userOrigin}
-        setUserOrigin={setUserOrigin}
-        userDestination={userDestination}
-        setUserDestination={setUserDestination}
-      />
+    <div>
+      {" "}
+      <div className="my-2 bg-white pb-5">
+        <Toaster />
+        <TypeOfTravel
+          type={selectedType.type}
+          way={selectedType.way}
+          setSelectedType={setSelectedType}
+        />
+        <ChooseDestination
+          type={selectedType.type}
+          way={selectedType.way}
+          setSelectedType={setSelectedType}
+          userOrigin={userOrigin}
+          setUserOrigin={setUserOrigin}
+          userDestination={userDestination}
+          setUserDestination={setUserDestination}
+        />
 
-      <div
-        onClick={searchHandler}
-        className="mx-5 mt-3 rounded-lg bg-blue p-3 text-center font-semibold text-white"
-      >
-        جستجو
+        <div
+          onClick={searchHandler}
+          className="mx-5 mt-3 rounded-lg bg-blue p-3 text-center font-semibold text-white"
+        >
+          جستجو
+        </div>
       </div>
+      <NineYears />
     </div>
   );
 }

@@ -42,7 +42,7 @@ function ChooseDestination({
     baby: 0,
   });
   const { older12, middle12_2, baby } = passengerNum;
-  const [sum, setSum] = useState<number>(1);
+  const [sum, setSum] = useState<number>(1); //تعداد نهایی مسافرین
   const calculateNum = () => {
     setSum(older12 + middle12_2 + baby);
   };

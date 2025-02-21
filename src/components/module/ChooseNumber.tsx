@@ -7,6 +7,7 @@ import Mines from "../icon/Mines";
 import Plus from "../icon/Plus";
 import { passengerNumData } from "@/constant/passengerNumberDate";
 import { IErrorType } from "@/types/generalType";
+import { usePathname } from "next/navigation";
 
 function ChooseNumber({
   setSelectDestination,
@@ -35,9 +36,19 @@ function ChooseNumber({
     baby: baby ?? 0,
   };
 
+  const params = usePathname();
+  const categoryName = params.split("/").pop();
+
   useEffect(() => {
     calculateNum();
-  }, [older12, middle12_2, baby]);
+    if (categoryName === "taxi" && sum && sum <= 4) {
+      setError(() => ({ isError: false, number: 0 }));
+    } else {
+      if (sum && sum < 9) {
+        setError(() => ({ isError: false, number: 0 }));
+      }
+    }
+  }, [older12, middle12_2, baby, sum]);
 
   const minesHandler = (id: string) => {
     setpassengerNum((prevState: any) => ({
@@ -54,13 +65,17 @@ function ChooseNumber({
   };
 
   const submitHandler = () => {
-    if (sum && sum > 9) {
-      setError(() => ({ isError: true, number: 9 }));
-    } else if (sum === 0) {
-      setError(() => ({ isError: true, number: 0 }));
+    if (categoryName === "taxi" && sum && sum > 4) {
+      setError(() => ({ isError: true, number: 4 }));
     } else {
-      closeHandler();
-      setError(() => ({ isError: false, number: 0 }));
+      if (sum && sum > 9) {
+        setError(() => ({ isError: true, number: 9 }));
+      } else if (sum === 0) {
+        setError(() => ({ isError: true, number: 0 }));
+      } else {
+        closeHandler();
+        setError(() => ({ isError: false, number: 0 }));
+      }
     }
   };
 
@@ -136,10 +151,16 @@ function ChooseNumber({
           _ تعداد مسافران نباید صفر باشد
         </span>
       ) : null}
+      {error.isError && error.number === 4 ? (
+        <span className="mr-6 mt-6 block text-sm font-medium text-red-500">
+          _ تعداد مسافران تاکسی نباید بیشتر از پنج باشد
+        </span>
+      ) : null}
 
       <button
+        disabled={error.isError}
         onClick={submitHandler}
-        className="fixed bottom-5 left-0 w-full rounded-xl bg-blue py-3 font-semibold text-white"
+        className="fixed bottom-5 left-0 w-full rounded-xl bg-blue py-3 font-semibold text-white disabled:opacity-50"
       >
         تایید
       </button>

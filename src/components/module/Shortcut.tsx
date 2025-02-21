@@ -2,7 +2,7 @@ import { shortcutData } from "@/constant/ShortcutData";
 
 function Shortcut() {
   return (
-    <ul className="fixed bottom-0 z-60 flex w-full items-center justify-between bg-white px-4 py-4">
+    <ul className="fixed bottom-0 z-50 flex w-full items-center justify-between bg-white px-4 py-4">
       {shortcutData.map((item: any) => (
         <li
           key={item.nameEn}
