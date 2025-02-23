@@ -13,6 +13,7 @@ import Text from "./Text";
 import AirLineSlider from "./AirLineSlider";
 import CommonQuestion from "./CommonQuestion";
 import BusyRoutes from "./BusyRoutes";
+import MobileApp from "./MobileApp";
 
 function NineYears() {
   const [imageSrc, setImageSrc] = useState({
@@ -170,6 +171,10 @@ function NineYears() {
           ارزان ترین و سریعترین مسیرها را با بیش از 500 شریک رسمی انتخاب کنید
         </p>
         <BusyRoutes />
+      </div>
+      {/* ئعرفی اپ موبایلی */}
+      <div className="bg-gray-200 py-10">
+        <MobileApp />
       </div>
     </div>
   );
