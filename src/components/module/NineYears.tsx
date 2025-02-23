@@ -10,6 +10,9 @@ import { Pagination } from "swiper/modules";
 import "swiper/css/pagination";
 import { ourSite, cityPhoto } from "@/constant/DataForMap";
 import Text from "./Text";
+import AirLineSlider from "./AirLineSlider";
+import CommonQuestion from "./CommonQuestion";
+import BusyRoutes from "./BusyRoutes";
 
 function NineYears() {
   const [imageSrc, setImageSrc] = useState({
@@ -151,6 +154,23 @@ function NineYears() {
       </div>
       {/* متن ها */}
       <Text />
+      {/* ایر لاین ها */}
+      <div className="py-10">
+        <AirLineSlider />
+      </div>
+      {/* سوالات متداول */}
+      <div className="py-10">
+        <h1 className="text-center text-xl font-bold">سوالات متداول</h1>
+        <CommonQuestion />
+      </div>
+      {/* مشیرهای پر تردد */}
+      <div className="my-10 bg-[#e8f1fa] py-5">
+        <h1 className="text-center text-xl font-semibold">مسیر های پر تردد</h1>
+        <p className="mt-2 w-max text-xs text-slate-500">
+          ارزان ترین و سریعترین مسیرها را با بیش از 500 شریک رسمی انتخاب کنید
+        </p>
+        <BusyRoutes />
+      </div>
     </div>
   );
 }

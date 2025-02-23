@@ -1,0 +1,15 @@
+.container p {
+  font-size: 14px;
+  line-height: 28px;
+  color: #475563;
+}
+.container h4 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  line-height: 36px;
+  font-weight: 700;
+}
+.container p strong {
+  color: black;
+}
