@@ -38,7 +38,6 @@ function AirPlanePage() {
     <SearchResult userDestination={userDestination} userOrigin={userOrigin} />
   ) : (
     <div>
-      {" "}
       <div className="my-2 bg-white pb-5">
         <Toaster />
         <TypeOfTravel

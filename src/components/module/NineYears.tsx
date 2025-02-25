@@ -12,8 +12,6 @@ import { ourSite, cityPhoto } from "@/constant/DataForMap";
 import Text from "./Text";
 import AirLineSlider from "./AirLineSlider";
 import CommonQuestion from "./CommonQuestion";
-import BusyRoutes from "./BusyRoutes";
-import MobileApp from "./MobileApp";
 
 function NineYears() {
   const [imageSrc, setImageSrc] = useState({
@@ -57,7 +55,7 @@ function NineYears() {
   }, [categoryName]);
 
   return (
-    <div className="mb-20 mt-6 bg-white">
+    <div className="mt-6 bg-white">
       <h1 className="py-6 text-center text-lg font-semibold text-slate-500">
         {imageSrc.title}
       </h1>
@@ -163,18 +161,6 @@ function NineYears() {
       <div className="py-10">
         <h1 className="text-center text-xl font-bold">سوالات متداول</h1>
         <CommonQuestion />
-      </div>
-      {/* مشیرهای پر تردد */}
-      <div className="my-10 bg-[#e8f1fa] py-5">
-        <h1 className="text-center text-xl font-semibold">مسیر های پر تردد</h1>
-        <p className="mt-2 w-max text-xs text-slate-500">
-          ارزان ترین و سریعترین مسیرها را با بیش از 500 شریک رسمی انتخاب کنید
-        </p>
-        <BusyRoutes />
-      </div>
-      {/* ئعرفی اپ موبایلی */}
-      <div className="bg-gray-200 py-10">
-        <MobileApp />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import Shortcut from "../module/Shortcut";
 import Header from "./Header";
-// import Footer from "./Footer";
+import Footer from "./Footer";
 import { LayoutProps } from "@/types/layoutProps";
 
 function Layout({ children }: LayoutProps) {
@@ -11,7 +11,7 @@ function Layout({ children }: LayoutProps) {
       <div>
         <Shortcut />
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

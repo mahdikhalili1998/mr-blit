@@ -43,3 +43,7 @@
 .airLine:nth-child(1n) {
   width: 38%;
 }
+
+.customSlidDocs:nth-child(1n) {
+  width: 27%;
+}
