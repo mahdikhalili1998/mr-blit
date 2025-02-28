@@ -5,6 +5,7 @@ import TypeOfTravel from "../module/TypeOfTravel";
 import ChooseDestination from "../module/ChooseDestination";
 import SearchResult from "../module/SearchResult";
 import toast, { Toaster } from "react-hot-toast";
+import NineYears from "../module/NineYears";
 
 function TrainPage() {
   const [selectedType, setSelectedType] = useState({
@@ -60,6 +61,7 @@ function TrainPage() {
       >
         جستجو
       </div>
+      <NineYears />
     </div>
   );
 }

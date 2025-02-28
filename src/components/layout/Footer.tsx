@@ -8,22 +8,33 @@ import styles from "@/css/Swiper.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
 
 import { document } from "@/constant/DataForMap";
 import Image from "next/image";
+import Twitter from "../icon/Twitter";
+import Telegram from "../icon/Telegram";
+import Instagram from "../icon/Instagram";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 function Footer() {
+  const params = usePathname();
+  const categoryName = params.split("/").pop();
+
   return (
     <div className="pb-10">
       {/* مشیرهای پر تردد */}
-      <div className="bg-[#e8f1fa] py-5">
-        <h1 className="text-center text-xl font-semibold">مسیر های پر تردد</h1>
-        <p className="mt-2 w-max text-xs text-slate-500">
-          ارزان ترین و سریعترین مسیرها را با بیش از 500 شریک رسمی انتخاب کنید
-        </p>
-        <BusyRoutes />
-      </div>
+      {categoryName === "train" ? null : (
+        <div className="bg-[#e8f1fa] py-5">
+          <h1 className="text-center text-xl font-semibold">
+            مسیر های پر تردد
+          </h1>
+          <p className="mt-2 w-max text-xs text-slate-500">
+            ارزان ترین و سریعترین مسیرها را با بیش از 500 شریک رسمی انتخاب کنید
+          </p>
+          <BusyRoutes />
+        </div>
+      )}
       {/* معرفی اپ موبایلی */}
       <div className="bg-gray-200 pb-4 pt-8">
         <MobileApp />
@@ -68,7 +79,7 @@ function Footer() {
         <MoreOPtion />
       </div>
       {/* اسلایدر مجوز ها */}
-      <div className="bg-white py-10 px-1">
+      <div className="bg-white px-1 pt-10">
         <Swiper
           slidesPerView={"auto"}
           spaceBetween={30}
@@ -90,6 +101,30 @@ function Footer() {
             </SwiperSlide>
           ))}
         </Swiper>
+        {/* خط جدا کننده */}
+        <div className="mx-3 border-b-[2px] border-solid border-slate-200 pt-5"></div>
+      </div>
+      {/* فوتر اصلی */}
+      <div className="bg-white pb-14 pt-5">
+        <div className="flex items-center justify-around text-blue">
+          <span className="font-semibold">salam@mrbilit.com</span>
+          {/* شبکه های اجتماعی */}
+          <div className="flex items-center gap-3">
+            <span>
+              <Twitter width={22} height={22} color="currentColor" />
+            </span>
+            <span>
+              <Telegram width={22} height={22} color="currentColor" />
+            </span>
+            <span>
+              <Instagram width={22} height={22} color="currentColor" />
+            </span>
+          </div>
+        </div>
+        <p className="mx-auto w-max pt-4 font-medium text-gray-400">
+          {" "}
+          تمامی حقوق برای شرکت عتیق گشت اصفهان محفوظ است.{" "}
+        </p>
       </div>
     </div>
   );

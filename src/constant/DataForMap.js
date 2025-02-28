@@ -40,19 +40,29 @@ export const cityPhoto = [
 ];
 
 export const airLineName = [
-  { src: "/image/iranAir.jpg", name: "ایران ایر" },
-  { src: "/image/iranTor.jpg", name: "ایران تور" },
-  { src: "/image/Aseman.jpg", name: "آسمان" },
-  { src: "/image/ata.jpg", name: "آتا" },
-  { src: "/image/caspian.jpg", name: "کاسپین" },
-  { src: "/image/karon.jpg", name: "کارون" },
-  { src: "/image/qeshm.jpg", name: "قشم" },
-  { src: "/image/meraj.jpg", name: "معراج" },
-  { src: "/image/persia.jpg", name: "پرشیا" },
-  { src: "/image/sepehran.jpg", name: "سپهران" },
+  { src: "/image/iranAir.jpg", name: "شرکت هواپیمایی ایران ایر" },
+  { src: "/image/iranTor.jpg", name: "شرکت هواپیمایی ایران تور" },
+  { src: "/image/Aseman.jpg", name: "شرکت هواپیمایی آسمان" },
+  { src: "/image/ata.jpg", name: "شرکت هواپیمایی آتا" },
+  { src: "/image/caspian.jpg", name: "شرکت هواپیمایی کاسپین" },
+  { src: "/image/karon.jpg", name: "شرکت هواپیمایی کارون" },
+  { src: "/image/qeshm.jpg", name: "شرکت هواپیمایی قشم" },
+  { src: "/image/meraj.jpg", name: "شرکت هواپیمایی معراج" },
+  { src: "/image/persia.jpg", name: "شرکت هواپیمایی پرشیا" },
+  { src: "/image/sepehran.jpg", name: "شرکت هواپیمایی سپهران" },
 ];
 
-export const commonQuestion = [
+export const trainStation = [
+  { src: "/image/raja.jpg", name: "رجا" },
+  { src: "/image/saba.jpg", name: "صبا" },
+  { src: "/image/noor.jpg", name: "نور" },
+  { src: "/image/mahtab.jpg", name: "مهتاب" },
+  { src: "/image/fadak.jpg", name: "فدک" },
+  { src: "/image/chopar.jpg", name: "چوپار" },
+  { src: "/image/bonreil.jpg", name: "بونریل" },
+];
+
+export const commonQuestionAirPlane = [
   { question: "شرایط و نرخ بلیط هواپیما برای کودکان و نوزادان چیست؟" },
   { question: "بلیط هواپیما را چند روز قبل از پرواز تهیه کنیم؟" },
   { question: "میزان بار مجاز برای هر پرواز چقدر است؟" },
@@ -70,6 +80,18 @@ export const commonQuestion = [
   },
   { question: "درصورتی‌که نام مسافر را اشتباه وارد کردیم چه کنیم؟" },
   { question: "آیا بلیط هواپیما شامل بیمه مسافر هم میشود؟" },
+];
+
+export const commonQuestiontrain = [
+  { question: "امکان خرید بلیط قطار برای سفر کودک تنها وجود دارد؟" },
+  { question: "خرید گروهی بلیط قطار به چه معناست؟" },
+  { question: "قطارهای فدک همراه با هتل چگونه است؟" },
+  { question: "تفاوت قطارهای فدک ویژه و فدک بیزینس چیست؟" },
+  { question: "چگونه می‌توانم بلیط‌ها را کنسل کنم؟" },
+  { question: "آیا می توان بلیط قطار را تغییر داد و یا جابجا کرد؟" },
+  { question: "حمل بار برای سفر با قطار چه شرایطی دارد؟" },
+  { question: "چگونه بلیط قطار برای خودرو خرید کنیم؟" },
+  { question: "درصد جریمه کنسلی بلیط حمل خودرو چگونه است؟" },
 ];
 
 export const busyRoutes = [

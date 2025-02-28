@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "@/css/text.module.css";
+
 function Text() {
   return (
     <div className={`${styles.container} px-2`}>

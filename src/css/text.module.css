@@ -13,3 +13,10 @@
 .container p strong {
   color: black;
 }
+
+.container li {
+  font-size: 14px;
+  line-height: 28px;
+  color: #475563;
+  margin-top: 20px;
+}

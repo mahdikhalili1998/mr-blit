@@ -3,16 +3,26 @@ import styles from "@/css/Swiper.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css/pagination";
-import { airLineName } from "@/constant/DataForMap";
+import { airLineName, trainStation } from "@/constant/DataForMap";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
-function AirLineSlider() {
-  // const params = usePathname();
-  // const categoryName = params.split("/").pop();
+function StationSlider() {
+  const [data, setData] = useState<{ src: string; name: string }[]>([]);
+  const params = usePathname();
+  const categoryName = params.split("/").pop();
+
+  useEffect(() => {
+    if (categoryName === "airPlane") {
+      setData(airLineName);
+    } else if (categoryName === "train") {
+      setData(trainStation);
+    }
+  }, []);
+
   return (
     <>
-      {" "}
       <Swiper
         slidesPerView={"auto"}
         spaceBetween={30}
@@ -21,7 +31,7 @@ function AirLineSlider() {
         }}
         className="mySwiper"
       >
-        {airLineName.map((item, index) => (
+        {data?.map((item, index) => (
           <SwiperSlide key={index} className={`${styles.airLine}`}>
             <div className="flex flex-col items-center justify-center">
               <Image
@@ -32,7 +42,7 @@ function AirLineSlider() {
                 priority
                 className="relative rounded-md"
               />
-              <span className="w-max text-xs font-medium">{`شرکت هواپیمایی ${item.name}`}</span>
+              <span className="w-max text-xs font-medium">{item.name}</span>
             </div>
           </SwiperSlide>
         ))}
@@ -41,4 +51,4 @@ function AirLineSlider() {
   );
 }
 
-export default AirLineSlider;
+export default StationSlider;

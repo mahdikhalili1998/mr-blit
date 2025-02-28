@@ -9,9 +9,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css/pagination";
 import { ourSite, cityPhoto } from "@/constant/DataForMap";
-import Text from "./Text";
-import AirLineSlider from "./AirLineSlider";
+import Text from "./AirPlaneText";
 import CommonQuestion from "./CommonQuestion";
+import TrainText from "./TrainText";
+import StationSlider from "./StationSlider";
 
 function NineYears() {
   const [imageSrc, setImageSrc] = useState({
@@ -152,10 +153,14 @@ function NineYears() {
         </Swiper>
       </div>
       {/* متن ها */}
-      <Text />
+      {categoryName === "airPlane" ? (
+        <Text />
+      ) : categoryName === "train" ? (
+        <TrainText />
+      ) : null}
       {/* ایر لاین ها */}
       <div className="py-10">
-        <AirLineSlider />
+        <StationSlider />
       </div>
       {/* سوالات متداول */}
       <div className="py-10">
