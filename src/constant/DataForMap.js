@@ -114,6 +114,13 @@ export const commonQuestionBus = [
   },
 ];
 
+export const commonQuestionTaxi = [
+  { question: "قیمت تاکسی بین شهر چگونه محاسبه می‌شود؟" },
+  { question: "چرا با تاکسی سفر کنیم؟" },
+  { question: "آیا فقط باید سواری را دربستی رزرو کنیم؟" },
+  { question: "سواری‌های غیردربستی ظرفیت چند مسافر را دارند؟" },
+];
+
 export const busyRoutes = [
   { name: "عسلویه" },
   { name: "تهران" },

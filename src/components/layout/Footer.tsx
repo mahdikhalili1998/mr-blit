@@ -24,18 +24,20 @@ function Footer() {
 
   useEffect(() => {
     if (categoryName === "airPlane") {
-      setName("هواپیما");
+      setName(" بلیط هواپیما");
     } else if (categoryName === "bus") {
-      setName("اتوبوس");
+      setName(" بلیط اتوبوس");
     } else if (categoryName === "train") {
-      setName("قطار");
+      setName(" بلیط قطار ");
+    } else if (categoryName === "taxi") {
+      setName("رزرو تاکسی");
     }
   }, [categoryName]);
 
   return (
     <div className="pb-10">
       {/* مشیرهای پر تردد */}
-      {categoryName === "train" ? null : (
+      {categoryName === "train" || categoryName === "taxi" ? null : (
         <div className="bg-[#e8f1fa] py-5">
           <h1 className="text-center text-xl font-semibold">
             مسیر های پر تردد
@@ -55,7 +57,7 @@ function Footer() {
           <span>
             <LeftIcon width={8} height={16} color=" currentColor" />
           </span>
-          <span className="text-black">بلیط {name}</span>
+          <span className="text-black">{name}</span>
         </p>
       </div>
       {/* پشتیبانی */}

@@ -6,6 +6,7 @@ import {
   commonQuestionAirPlane,
   commonQuestiontrain,
   commonQuestionBus,
+  commonQuestionTaxi,
 } from "@/constant/DataForMap";
 import Plus from "../icon/Plus";
 import { useEffect, useState } from "react";
@@ -24,6 +25,8 @@ function CommonQuestion() {
       setData(commonQuestiontrain);
     } else if (categoryName === "bus") {
       setData(commonQuestionBus);
+    } else if (categoryName === "taxi") {
+      setData(commonQuestionTaxi);
     }
   }, []);
 
