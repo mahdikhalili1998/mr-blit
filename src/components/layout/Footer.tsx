@@ -15,11 +15,22 @@ import Twitter from "../icon/Twitter";
 import Telegram from "../icon/Telegram";
 import Instagram from "../icon/Instagram";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Footer() {
+  const [name, setName] = useState<string>("");
   const params = usePathname();
   const categoryName = params.split("/").pop();
+
+  useEffect(() => {
+    if (categoryName === "airPlane") {
+      setName("هواپیما");
+    } else if (categoryName === "bus") {
+      setName("اتوبوس");
+    } else if (categoryName === "train") {
+      setName("قطار");
+    }
+  }, [categoryName]);
 
   return (
     <div className="pb-10">
@@ -44,7 +55,7 @@ function Footer() {
           <span>
             <LeftIcon width={8} height={16} color=" currentColor" />
           </span>
-          <span className="text-black">بلیط هواپیما</span>
+          <span className="text-black">بلیط {name}</span>
         </p>
       </div>
       {/* پشتیبانی */}

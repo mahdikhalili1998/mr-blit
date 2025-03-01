@@ -13,6 +13,7 @@ import Text from "./AirPlaneText";
 import CommonQuestion from "./CommonQuestion";
 import TrainText from "./TrainText";
 import StationSlider from "./StationSlider";
+import BusText from "./BusText";
 
 function NineYears() {
   const [imageSrc, setImageSrc] = useState({
@@ -157,8 +158,10 @@ function NineYears() {
         <Text />
       ) : categoryName === "train" ? (
         <TrainText />
+      ) : categoryName === "bus" ? (
+        <BusText />
       ) : null}
-      {/* ایر لاین ها */}
+      {/* لوگو شرکت ها*/}
       <div className="py-10">
         <StationSlider />
       </div>

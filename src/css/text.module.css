@@ -20,3 +20,7 @@
   color: #475563;
   margin-top: 20px;
 }
+
+.hiddenY {
+  overflow-y: hidden;
+}

@@ -104,7 +104,7 @@ function ChooseNumber({
     setStep(0);
   };
   return (
-    <div>
+    <div className="h-screen">
       {/* هدر بالا */}
       <div className="mb-1 flex items-center justify-between bg-blue px-4 py-6 text-white">
         <span onClick={backHandler} className="p-2">
@@ -142,17 +142,17 @@ function ChooseNumber({
       </ul>
       {/* پیام ارور */}
       {error.isError && error.number === 9 ? (
-        <span className="mr-6 mt-6 block text-sm font-medium text-red-500">
+        <span className="mr-6 h-1 mt-6 block text-sm font-medium text-red-500">
           _ تعداد مسافران نباید بیشتر از 9 باشد
         </span>
       ) : null}
       {error.isError && error.number === 0 ? (
-        <span className="mr-6 mt-6 block text-sm font-medium text-red-500">
+        <span className="mr-6 h-1 mt-6 block text-sm font-medium text-red-500">
           _ تعداد مسافران نباید صفر باشد
         </span>
       ) : null}
       {error.isError && error.number === 4 ? (
-        <span className="mr-6 mt-6 block text-sm font-medium text-red-500">
+        <span className="mr-6 mt-6 h-1 block text-sm font-medium text-red-500">
           _ تعداد مسافران تاکسی نباید بیشتر از پنج باشد
         </span>
       ) : null}
@@ -160,7 +160,7 @@ function ChooseNumber({
       <button
         disabled={error.isError}
         onClick={submitHandler}
-        className="fixed bottom-5 left-0 w-full rounded-xl bg-blue py-3 font-semibold text-white disabled:opacity-50"
+        className="w-full mt-9  rounded-xl bg-blue py-3 font-semibold text-white disabled:opacity-50"
       >
         تایید
       </button>

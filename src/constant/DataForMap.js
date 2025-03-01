@@ -62,6 +62,13 @@ export const trainStation = [
   { src: "/image/bonreil.jpg", name: "بونریل" },
 ];
 
+export const busStation = [
+  { src: "/image/hamSafar.jpg", name: "همسفر" },
+  { src: "/image/iranPeyma.jpg", name: "ایران پیما" },
+  { src: "/image/royalSafar.jpg", name: "رویال سفر" },
+  { src: "/image/seirOsafar.jpg", name: "سیر و سفر " },
+];
+
 export const commonQuestionAirPlane = [
   { question: "شرایط و نرخ بلیط هواپیما برای کودکان و نوزادان چیست؟" },
   { question: "بلیط هواپیما را چند روز قبل از پرواز تهیه کنیم؟" },
@@ -92,6 +99,19 @@ export const commonQuestiontrain = [
   { question: "حمل بار برای سفر با قطار چه شرایطی دارد؟" },
   { question: "چگونه بلیط قطار برای خودرو خرید کنیم؟" },
   { question: "درصد جریمه کنسلی بلیط حمل خودرو چگونه است؟" },
+];
+
+export const commonQuestionBus = [
+  { question: "چگونه می توانم بلیط ها را کنسل کنم؟" },
+  { question: "شرایط کنسلی بلیط اتوبوس خارجی چگونه است؟" },
+  { question: "آیا امکان سوار شدن در شهر بین راه وجود دارد؟" },
+  { question: "آیا می‌توان بلیط اتوبوس را تغییر داد و یا جابه جا کرد؟" },
+  { question: "آیا امکان سوار شدن در شهر بین راه وجود دارد؟" },
+  { question: "آیا می‌توان بلیط اتوبوس را تغییر داد و یا جابه جا کرد؟" },
+  {
+    question:
+      "در صورتی که حرکت توسط شرکت تعاونی کنسل شود چه اقدامی باید انجام دهیم؟",
+  },
 ];
 
 export const busyRoutes = [

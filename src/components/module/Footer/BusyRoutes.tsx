@@ -7,9 +7,12 @@ function BusyRoutes() {
   const [categoryName, setCategoryName] = useState("");
   const params = usePathname();
   const categoryNames = params.split("/").pop();
+
   useEffect(() => {
     if (categoryNames === "airPlane") {
       setCategoryName("بلیط هواپیمای ");
+    } else if (categoryNames === "bus") {
+      setCategoryName("بلیط اتوبوس");
     }
   }, [categoryNames]);
 

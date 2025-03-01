@@ -60,6 +60,22 @@ function ChooseDestination({
     setUserDestination(tempt);
   };
 
+  //  مربوط به اسکرول عمودی صفحات absolute
+  useEffect(() => {
+    if (selectOrigin || selectDestination || selectNumber) {
+      // غیرفعال کردن اسکرول عمودی صفحه
+      document.body.style.overflow = "hidden";
+    } else {
+      // فعال کردن اسکرول عمودی صفحه
+      document.body.style.overflow = "auto";
+    }
+
+    // Cleanup when the component unmounts or selectOrigin changes
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [selectOrigin, selectDestination, selectNumber]);
+
   useEffect(() => {
     if (categoryName === "airPlane") {
       setOriginName("فرودگاه مبدا");
@@ -281,7 +297,6 @@ function ChooseDestination({
           selectNumber || step === 4 ? "translate-x-0" : "translate-x-full"
         } absolute right-0 top-0 z-40 h-screen w-screen bg-white transition-transform duration-700 ease-in-out`}
       >
-        {" "}
         {step === 4 || selectNumber ? (
           <ChooseNumber
             setSelectDate={setSelectDate}

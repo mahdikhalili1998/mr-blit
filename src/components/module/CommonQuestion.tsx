@@ -5,10 +5,10 @@ import { usePathname } from "next/navigation";
 import {
   commonQuestionAirPlane,
   commonQuestiontrain,
+  commonQuestionBus,
 } from "@/constant/DataForMap";
 import Plus from "../icon/Plus";
 import { useEffect, useState } from "react";
-import { div } from "framer-motion/client";
 
 function CommonQuestion() {
   const [data, setData] = useState<{ question: string }[]>([]);
@@ -22,6 +22,8 @@ function CommonQuestion() {
       setData(commonQuestionAirPlane);
     } else if (categoryName === "train") {
       setData(commonQuestiontrain);
+    } else if (categoryName === "bus") {
+      setData(commonQuestionBus);
     }
   }, []);
 

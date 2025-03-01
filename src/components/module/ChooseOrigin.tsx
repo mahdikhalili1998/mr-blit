@@ -92,7 +92,7 @@ function ChooseOrigin({
   };
 
   return (
-    <div>
+    <div className="">
       {/* هدر بالا */}
       <div className="bg-blue pb-4">
         <div className="mb-1 flex items-center justify-between p-6 text-white">
