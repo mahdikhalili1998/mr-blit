@@ -155,3 +155,46 @@ export const document = [
   { src: "/image/samandehi.png" },
   { src: "/image/tnemad.jpg" },
 ];
+
+export const suggestHotel = [
+  {
+    imageSrc: "/image/spinasPlus.jpg",
+    name: "هتل اسپیناس پلاس ",
+    star: 6,
+    rate: 7.8,
+    price: 1444000,
+    location: "محله بهرود",
+  },
+  {
+    imageSrc: "/image/spino.jpg",
+    name: "هتل اسپینو",
+    star: 1,
+    rate: 6.6,
+    price: 216000,
+    location: "خیابان عنصری شرقی",
+  },
+  {
+    imageSrc: "/image/parsian.jpg",
+    name: "هتل پارسیان استقلال",
+    star: 5,
+    rate: 6.8,
+    price: 5868000,
+    location: "محله آرارات",
+  },
+  {
+    imageSrc: "/image/aramis.jpg",
+    name: "هتل آرامیس",
+    star: 4,
+    rate: 708,
+    price: 750000,
+    location: "کوچه خرابات شرقی ",
+  },
+  {
+    imageSrc: "/image/aryanaSpa.jpg",
+    name: "هتل آریانا اسپا",
+    star: 3,
+    rate: 5.6,
+    price: 150000,
+    location: "محله بی نوایان جنوب غرب",
+  },
+];

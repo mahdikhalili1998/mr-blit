@@ -15,6 +15,7 @@ import TrainText from "./TrainText";
 import StationSlider from "./StationSlider";
 import BusText from "./BusText";
 import TaxiText from "./TaxiText";
+import SuggestHotel from "./SuggestHotel";
 
 function NineYears() {
   const [imageSrc, setImageSrc] = useState({
@@ -60,10 +61,12 @@ function NineYears() {
   return (
     <div className="mt-6 bg-white">
       <h1 className="py-6 text-center text-lg font-semibold text-slate-500">
-        {imageSrc.title}
+        {categoryName === "hotel" ? "رزرو هتل " : imageSrc.title}
       </h1>
       {/* اسلایدر مربوط به 9 سال سابقه */}
-      {!imageSrc.first && !imageSrc.second ? (
+      {categoryName === "hotel" ? (
+        <SuggestHotel />
+      ) : !imageSrc.first && !imageSrc.second ? (
         <div className="mx-auto mt-[7rem] w-max">
           <RotateLoader color="#0f84fa" />
         </div>

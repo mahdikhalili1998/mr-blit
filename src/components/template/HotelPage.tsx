@@ -5,6 +5,7 @@ import TypeOfTravel from "../module/TypeOfTravel";
 import ChooseDestination from "../module/ChooseDestination";
 import SearchResult from "../module/SearchResult";
 import toast, { Toaster } from "react-hot-toast";
+import NineYears from "../module/NineYears";
 
 function HotelPage() {
   const [selectedType, setSelectedType] = useState({
@@ -25,7 +26,7 @@ function HotelPage() {
   };
 
   return searchResult ? (
-    <SearchResult  userOrigin={userOrigin} />
+    <SearchResult userOrigin={userOrigin} />
   ) : (
     <div className="my-2 bg-white pb-5">
       <Toaster />
@@ -43,6 +44,7 @@ function HotelPage() {
       >
         جستجو
       </div>
+      <NineYears />
     </div>
   );
 }

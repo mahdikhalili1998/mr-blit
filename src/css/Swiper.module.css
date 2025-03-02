@@ -47,3 +47,8 @@
 .customSlidDocs:nth-child(1n) {
   width: 27%;
 }
+
+.hotel:nth-child(1n) {
+  width: 85%;
+  
+}
