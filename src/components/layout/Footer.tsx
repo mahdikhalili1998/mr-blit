@@ -31,6 +31,8 @@ function Footer() {
       setName(" بلیط قطار ");
     } else if (categoryName === "taxi") {
       setName("رزرو تاکسی");
+    } else if (categoryName === "hotel") {
+      setName("رزرو هتل");
     }
   }, [categoryName]);
 

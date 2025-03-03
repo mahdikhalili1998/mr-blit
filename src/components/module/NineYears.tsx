@@ -16,6 +16,7 @@ import StationSlider from "./StationSlider";
 import BusText from "./BusText";
 import TaxiText from "./TaxiText";
 import SuggestHotel from "./SuggestHotel";
+import HotelText from "./HotelText";
 
 function NineYears() {
   const [imageSrc, setImageSrc] = useState({
@@ -102,38 +103,40 @@ function NineYears() {
           </SwiperSlide>
         </Swiper>
       )}
-      {/* اسلایدر شهر ها به جز هتل */}
-      {categoryName === "hotel" ? null : (
-        <div className="py-10">
-          <Swiper
-            slidesPerView={"auto"}
-            spaceBetween={30}
-            pagination={{
-              clickable: true,
-            }}
-            className="mySwiper"
-          >
-            {cityPhoto.map((item, index) => (
-              <SwiperSlide key={index} className={`${styles.citySlid}`}>
-                <div className="">
-                  <Image
-                    src={item.src}
-                    width={150}
-                    height={150}
-                    alt="citi photo"
-                    objectFit="cover"
-                    priority
-                    className="relative rounded-md"
-                  />
-                  {/* لایه رنگی */}
-                  <div className="absolute inset-0 rounded-lg bg-gradient-to-b from-transparent via-blue/70 to-blue/100 opacity-60"></div>
-                </div>
-                <span className="absolute bottom-2 left-12 text-xs font-medium text-white">{`بیلط ${item.cityName}`}</span>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      )}
+      {/* اسلایدر شهر ها */}
+      <div className="py-10">
+        <Swiper
+          slidesPerView={"auto"}
+          spaceBetween={30}
+          pagination={{
+            clickable: true,
+          }}
+          className="mySwiper"
+        >
+          {cityPhoto.map((item, index) => (
+            <SwiperSlide key={index} className={`${styles.citySlid}`}>
+              <div className="">
+                <Image
+                  src={item.src}
+                  width={150}
+                  height={150}
+                  alt="citi photo"
+                  priority
+                  className="relative rounded-md object-cover"
+                />
+                {/* لایه رنگی */}
+                <div className="absolute inset-0 rounded-lg bg-gradient-to-b from-transparent via-blue/70 to-blue/100 opacity-60"></div>
+              </div>
+              <span className="absolute bottom-2 left-12 text-xs font-medium text-white">
+                {categoryName === "hotel"
+                  ? `هتل ${item.cityName}`
+                  : `بیلط ${item.cityName}`}
+              </span>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+
       {/* اسلایدر مربوط به ویژگی های سایت */}
       <div className="py-10">
         <Swiper
@@ -166,6 +169,8 @@ function NineYears() {
         <BusText />
       ) : categoryName === "taxi" ? (
         <TaxiText />
+      ) : categoryName === "hotel" ? (
+        <HotelText />
       ) : null}
       {/* لوگو شرکت ها*/}
       {categoryName === "taxi" ? null : (

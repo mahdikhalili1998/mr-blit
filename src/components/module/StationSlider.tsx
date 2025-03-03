@@ -3,7 +3,12 @@ import styles from "@/css/Swiper.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css/pagination";
-import { airLineName, trainStation, busStation } from "@/constant/DataForMap";
+import {
+  airLineName,
+  trainStation,
+  busStation,
+  hotelStation,
+} from "@/constant/DataForMap";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -20,6 +25,8 @@ function StationSlider() {
       setData(trainStation);
     } else if (categoryName === "bus") {
       setData(busStation);
+    } else if (categoryName === "hotel") {
+      setData(hotelStation);
     }
   }, []);
 

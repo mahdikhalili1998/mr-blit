@@ -4,10 +4,11 @@ import Image from "next/image";
 import "swiper/css";
 import styles from "@/css/Swiper.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import "swiper/css/pagination";
 import Location from "../icon/Location";
 import Star from "../icon/Star";
+import LowRate from "../icon/LowRate";
+import UpRate from "../icon/UpRate";
 
 function SuggestHotel() {
   return (
@@ -21,7 +22,7 @@ function SuggestHotel() {
         {suggestHotel.map((item, index) => (
           <SwiperSlide
             key={index}
-            className={`${styles.hotel} rounded-md py-7 mb-5 shadow-xl shadow-slate-300`}
+            className={`${styles.hotel} mb-5 rounded-md py-7 shadow-xl shadow-slate-300`}
           >
             <Image
               src={item.imageSrc}
@@ -48,6 +49,31 @@ function SuggestHotel() {
                   {item.location}
                 </span>
               </div>
+            </div>
+            {/* امتیاز */}
+            <div className={`mt-2 mr-2 flex items-center gap-1`}>
+              <span>
+                {item.rate >= 5 ? (
+                  <UpRate width={16} height={16} color="#22c55e" />
+                ) : (
+                  <LowRate width={16} height={16} color="#f97316" />
+                )}
+              </span>
+              <span
+                className={`${item.rate >= 5 ? "text-green-500" : "text-orange-500"} mt-[4px] text-xs font-semibold`}
+              >
+                {item.rate}/10
+              </span>
+            </div>
+            {/* خط جدا کننده */}
+            <div className="mx-2 mt-4 border-b-[1.5px] border-solid border-slate-300"></div>
+            {/* قیمت */}
+            <div className="text-center font-medium mt-5">
+              <span className="text-sm">قیمت هر شب از </span>
+              <span className="font-semi-bold mx-2 text-xl text-blue">
+                {item.price.toLocaleString("en-US")}
+              </span>
+              <span className="text-sm">تومان</span>
             </div>
           </SwiperSlide>
         ))}

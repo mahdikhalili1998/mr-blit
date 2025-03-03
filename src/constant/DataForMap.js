@@ -69,6 +69,14 @@ export const busStation = [
   { src: "/image/seirOsafar.jpg", name: "سیر و سفر " },
 ];
 
+export const hotelStation = [
+  { src: "/image/persian.webp", name: "گروه هتل های پارسیان" },
+  { src: "/image/qasr.webp", name: "گروه هتل های قصر" },
+  { src: "/image/kosar.webp", name: "گروه هتل های کوثر" },
+  { src: "/image/homa.webp", name: "گروه هتل های هما" },
+  { src: "/image/espinas.webp", name: "گروه هتلهای اسپیناس" },
+];
+
 export const commonQuestionAirPlane = [
   { question: "شرایط و نرخ بلیط هواپیما برای کودکان و نوزادان چیست؟" },
   { question: "بلیط هواپیما را چند روز قبل از پرواز تهیه کنیم؟" },
@@ -119,6 +127,17 @@ export const commonQuestionTaxi = [
   { question: "چرا با تاکسی سفر کنیم؟" },
   { question: "آیا فقط باید سواری را دربستی رزرو کنیم؟" },
   { question: "سواری‌های غیردربستی ظرفیت چند مسافر را دارند؟" },
+];
+
+export const commonQuestionHotel = [
+  { question: "ساعت ورود و خروج هتل‌ها چه قوانینی دارد؟" },
+  { question: "نیم‌شارژ ورود یا خروج چیست؟" },
+  { question: "هزینه اقامت کودکان در هتل چگونه است؟" },
+  { question: "هزینه اقامت کودکان در هتل چگونه است؟" },
+  { question: "در «مستر بلیط» امکان رزرو چه اقامتگاه‌هایی وجود دارد؟" },
+  { question: "واچر هتل (تاییدیه رزرو هتل) چیست؟" },
+  { question: "تفاوت اتاق دو تختل دبل و توئین چیست" },
+  { question: "امکان کنسل کردن رزرو هتل و دریافت وجه وجود دارد؟" },
 ];
 
 export const busyRoutes = [
