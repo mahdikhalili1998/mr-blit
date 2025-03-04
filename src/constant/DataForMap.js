@@ -2,6 +2,11 @@ import MojodiKamel from "../components/icon/MojodiKamel";
 import Tajrobe from "../components/icon/Tajrobe";
 import Moshavereh from "../components/icon/Moshavereh";
 import TripSupport from "../components/icon/TripSupport";
+import ServicePlane from "@/components/icon/ServicePlane";
+import ServiceHotel from "@/components/icon/ServiceHotel";
+import ServiceTrain from "@/components/icon/ServiceTrain";
+import ServiceBus from "@/components/icon/ServiceBus";
+import ServiceTaxi from "@/components/icon/ServiceTaxi";
 
 export const ourSite = [
   {
@@ -215,5 +220,33 @@ export const suggestHotel = [
     rate: 5.6,
     price: 150000,
     location: "محله بی نوایان جنوب غرب",
+  },
+];
+
+export const ServicesOption = [
+  {
+    icon: <ServicePlane width={32} height={28} color="currentColor" />,
+    name: "بلیط هواپیما",
+    link: "/",
+  },
+  {
+    icon: <ServiceHotel width={32} height={28} color="currentColor" />,
+    name: "رزرو هتل",
+    link: "/hotel",
+  },
+  {
+    icon: <ServiceTrain width={32} height={28} color="currentColor" />,
+    name: "بلیط قطار",
+    link: "/train",
+  },
+  {
+    icon: <ServiceBus width={32} height={28} color="currentColor" />,
+    name: " بلیط اتوبوس",
+    link: "/bus",
+  },
+  {
+    icon: <ServiceTaxi width={32} height={28} color="currentColor" />,
+    name: "بلیط تاکسی",
+    link: "/taxi",
   },
 ];

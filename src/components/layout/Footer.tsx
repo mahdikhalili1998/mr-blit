@@ -40,15 +40,7 @@ function Footer() {
     <div className="pb-10">
       {/* مشیرهای پر تردد */}
       {categoryName === "train" || categoryName === "taxi" ? null : (
-        <div className="bg-[#e8f1fa] py-5">
-          <h1 className="text-center text-xl font-semibold">
-            مسیر های پر تردد
-          </h1>
-          <p className="mt-2 w-max text-xs text-slate-500">
-            ارزان ترین و سریعترین مسیرها را با بیش از 500 شریک رسمی انتخاب کنید
-          </p>
-          <BusyRoutes />
-        </div>
+        <BusyRoutes />
       )}
       {/* معرفی اپ موبایلی */}
       <div className="bg-gray-200 pb-4 pt-8">
