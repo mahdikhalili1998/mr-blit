@@ -15,6 +15,8 @@ function Shortcut() {
       setIsCheck({ click: true, value: "home" });
     } else if (categoryName === "services") {
       setIsCheck({ click: true, value: "newTrip" });
+    } else if (categoryName === "profile") {
+      setIsCheck({ click: true, value: "profile" });
     }
   }, [categoryName]);
 
@@ -25,6 +27,8 @@ function Shortcut() {
     } else if (value === "newTrip") {
       setIsCheck({ click: true, value });
       router.push("/services");
+    } else if (value === "profile") {
+      router.push("profile");
     }
   };
 

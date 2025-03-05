@@ -7,6 +7,15 @@ import ServiceHotel from "@/components/icon/ServiceHotel";
 import ServiceTrain from "@/components/icon/ServiceTrain";
 import ServiceBus from "@/components/icon/ServiceBus";
 import ServiceTaxi from "@/components/icon/ServiceTaxi";
+import MyThicket from "@/components/icon/MyThicket";
+import Saeqe from "@/components/icon/Saeqe";
+import Bell from "@/components/icon/Bell";
+import Support from "@/components/icon/Support";
+import TripServices from "@/components/icon/TripServices";
+import Solution from "@/components/icon/Solution";
+import SmallPlane from "@/components/icon/SmallPlane";
+import Telegram from "@/components/icon/Telegram";
+import Info from "@/components/icon/Info";
 
 export const ourSite = [
   {
@@ -248,5 +257,50 @@ export const ServicesOption = [
     icon: <ServiceTaxi width={32} height={28} color="currentColor" />,
     name: "بلیط تاکسی",
     link: "/taxi",
+  },
+];
+
+export const profileOption = [
+  {
+    icon: <MyThicket height={16} width={18} color="currentColor" />,
+    text: "بلیط های من",
+  },
+  {
+    icon: <Saeqe height={16} width={18} color="currentColor" />,
+    text: "مدیریت رززو خودکار",
+  },
+  {
+    icon: <Bell height={16} width={18} color="currentColor" />,
+    text: `لیست " خبرم کن " `,
+  },
+];
+
+export const profileOptionSecondSec = [
+  {
+    icon: <Support height={14} width={16} color="currentColor" />,
+    text: "پشتیبانی",
+  },
+  {
+    icon: <TripServices height={14} width={16} color="currentColor" />,
+    text: "خدمات سفر",
+  },
+  {
+    icon: <Solution height={14} width={16} color="currentColor" />,
+    text: `راهکار های سازمانی`,
+  },
+];
+
+export const profileOptionThirdSec = [
+  {
+    icon: <SmallPlane height={20} width={16} color="currentColor" />,
+    text: "اطلاعات پرواز",
+  },
+  {
+    icon: <Telegram height={20} width={16} color="currentColor" />,
+    text: "ربات تلگرام مستر بلیط",
+  },
+  {
+    icon: <Info height={20} width={16} color="currentColor" />,
+    text: `درباره ما`,
   },
 ];
