@@ -55,3 +55,9 @@ export interface ISearchResult {
   userOrigin?: string;
   userDestination?: string;
 }
+
+export interface IInsertOtp {
+  userNumber: string;
+  nextLevel: boolean;
+  setNextLevel: any;
+}

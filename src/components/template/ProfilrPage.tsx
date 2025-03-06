@@ -16,7 +16,10 @@ function ProfilrPage() {
         حساب کاربری
       </h1>
       {/* ورود به حشاب کاربری */}
-      <div className="mx-3 rounded-md border-[1px] border-solid border-slate-400">
+      <Link
+        href={"/login-modal"}
+        className="mx-3 inline-block rounded-md border-[1px] border-solid border-slate-400"
+      >
         <div className="flex items-center justify-start gap-4 p-2">
           <span className="rounded-md bg-blue p-2 text-white">
             <ProfileUSer width={15} height={18} color="currentColor" />
@@ -26,7 +29,7 @@ function ProfilrPage() {
         <p className="p-2 text-xs/6 text-slate-400">
           برای استفاده از تمام امکانات مِستربلیط، وارد حساب کاربری خود شوید.
         </p>
-      </div>
+      </Link>
       {/* اعنبار کاربری */}
       <div className="mx-5 mt-7 flex items-center justify-between">
         <p className="flex items-center gap-3 font-semibold">

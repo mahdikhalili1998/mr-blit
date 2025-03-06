@@ -33,6 +33,10 @@ function Footer() {
       setName("رزرو تاکسی");
     } else if (categoryName === "hotel") {
       setName("رزرو هتل");
+    } else if (categoryName === "login-modal") {
+      setName("صفحه ورود");
+    } else if (categoryName === "profile") {
+      setName("پروفایل من");
     }
   }, [categoryName]);
 
