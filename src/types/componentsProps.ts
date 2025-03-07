@@ -58,6 +58,6 @@ export interface ISearchResult {
 
 export interface IInsertOtp {
   userNumber: string;
-  nextLevel: boolean;
+  otp: string;
   setNextLevel: any;
 }

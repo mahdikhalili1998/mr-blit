@@ -1,30 +1,50 @@
 import { IInsertOtp } from "@/types/componentsProps";
-import React from "react";
+import React, { useState } from "react";
 import EditPen from "../icon/EditPen";
 import { useRef } from "react";
 
-function InsertOtp({ nextLevel, setNextLevel, userNumber }: IInsertOtp) {
+function InsertOtp({ otp, setNextLevel, userNumber }: IInsertOtp) {
+  console.log(otp);
+  const [otpValues, setOtpValues] = useState<string[]>(["", "", "", ""]);
   const inputRefs = [
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
   ];
+
   const handleInput = (
     index: number,
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const value = e.target.value;
-    if (value.length === 1 && index < inputRefs.length - 1) {
-      inputRefs[index + 1].current?.focus();
+    if (/^[0-9]?$/.test(value)) {
+      const newOtpValues = [...otpValues];
+      newOtpValues[index] = value;
+      setOtpValues(newOtpValues);
+
+      if (value.length === 1 && index < inputRefs.length - 1) {
+        inputRefs[index + 1].current?.focus();
+      }
     }
   };
+
   const handleKeyDown = (
     index: number,
     e: React.KeyboardEvent<HTMLInputElement>,
   ) => {
     if (e.key === "Backspace" && index > 0 && !e.currentTarget.value) {
       inputRefs[index - 1].current?.focus();
+    }
+  };
+
+  const sendOtpHandler = () => {
+    const enteredOtp = otpValues.join("");
+    if (enteredOtp === otp) {
+      alert("کد تایید صحیح است ✅");
+      setNextLevel(true);
+    } else {
+      alert("کد تایید اشتباه است ❌");
     }
   };
 
@@ -55,12 +75,16 @@ function InsertOtp({ nextLevel, setNextLevel, userNumber }: IInsertOtp) {
             className="focus:border-blue-500 h-12 w-12 rounded-lg border-2 border-gray-300 text-center text-xl focus:outline-none"
             onChange={(e) => handleInput(index, e)}
             onKeyDown={(e) => handleKeyDown(index, e)}
+            value={otpValues[index]}
           />
         ))}
       </div>
       {/* دکمه اراسال */}
       <div className="mx-3 mt-10">
-        <button className="w-full rounded-md bg-blue py-3 font-semibold text-white">
+        <button
+          onClick={() => sendOtpHandler()}
+          className="w-full rounded-md bg-blue py-3 font-semibold text-white"
+        >
           ارسال
         </button>
       </div>

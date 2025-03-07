@@ -1,5 +1,4 @@
 import { IIcon } from "@/types/generalType";
-import { col } from "framer-motion/client";
 import React from "react";
 
 function TripServices({ width, height, color }: IIcon) {

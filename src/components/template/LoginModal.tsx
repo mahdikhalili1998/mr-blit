@@ -13,7 +13,8 @@ import InsertOtp from "../module/InsertOtp";
 
 function LoginModal() {
   const [usernumber, setUserNumber] = useState<string>("");
-  const [nextLevel, setNextlevel] = useState<boolean>(true);
+  const [nextLevel, setNextlevel] = useState<boolean>(false);
+  const [otp, setOtp] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
@@ -31,7 +32,9 @@ function LoginModal() {
     await axios
       .post("/api/proxy", JSON.stringify(num), { headers })
       .then((res) => {
+        console.log(`لاگ ملی پیامک : ${res}`);
         if (res.status === 200) {
+          setOtp(res.data.code);
           setNextlevel(true);
         }
       })
@@ -61,7 +64,7 @@ function LoginModal() {
       {nextLevel ? (
         // قسمت وارد کردن رمز
         <InsertOtp
-          nextLevel={nextLevel}
+          otp={otp}
           setNextLevel={setNextlevel}
           userNumber={usernumber}
         />
