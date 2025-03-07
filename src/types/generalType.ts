@@ -26,3 +26,12 @@ export interface IErrorType {
   isError: boolean;
   number: number;
 }
+
+export interface IUserInfoForm {
+  gender: string;
+  name: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}

@@ -83,7 +83,8 @@ const TypeOfTravel: FC<ITypeOfTravel> = ({
             کوپه در بست
           </label>
         </div>
-      ) : categoryName === "taxi" ? null /* رادیو باتن ها */ : (
+      ) : categoryName === "taxi" ? null : (
+        /* رادیو باتن ها */
         <ul className="flex items-center gap-1">
           {/* دکمه داخلی */}
           <li

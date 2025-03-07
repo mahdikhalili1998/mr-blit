@@ -304,3 +304,11 @@ export const profileOptionThirdSec = [
     text: `درباره ما`,
   },
 ];
+
+export const userInfoFormInput = [
+  { value: "name", lab: "نام" },
+  { value: "lastName", lab: "نام خانوادگی" },
+  { value: "email", lab: "ایمیل ( اختیاری )" },
+  { value: "password", lab: "رمز" },
+  { value: "confirmPassword", lab: "تایید رمز" },
+];

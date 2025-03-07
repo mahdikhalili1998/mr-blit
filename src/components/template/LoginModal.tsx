@@ -12,9 +12,9 @@ import axios from "axios";
 import InsertOtp from "../module/InsertOtp";
 
 function LoginModal() {
-  const [usernumber, setUserNumber] = useState<string>("");
-  const [nextLevel, setNextlevel] = useState<boolean>(false);
-  const [otp, setOtp] = useState<string>("");
+  const [usernumber, setUserNumber] = useState<string>(""); // ذخیره شماره کاربر
+  const [nextLevel, setNextlevel] = useState<boolean>(true); // رفتن برای وارد کردن رمز
+  const [otp, setOtp] = useState<string>(""); // رمز پیامک شده اینجا ذخیره میشود
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
@@ -34,6 +34,7 @@ function LoginModal() {
       .then((res) => {
         console.log(`لاگ ملی پیامک : ${res}`);
         if (res.status === 200) {
+          toast.success("کد ارسال شد");
           setOtp(res.data.code);
           setNextlevel(true);
         }
