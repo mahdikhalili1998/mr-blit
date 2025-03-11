@@ -1,18 +1,44 @@
+"use client";
 import UserProfile from "@/components/template/UserProfile";
-import mrBlitUserInfo from "@/model/userInfo";
-import connectDB from "@/utils/ConnectDB";
+import axios from "axios";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-async function ProfilePage(params) {
-  const { userId } = await params;
-  if (!userId) {
-    return <div>شناسه کاربر یافت نشد!</div>;
-  }
-  await connectDB();
-  const fineUser = await mrBlitUserInfo.findOne({ _id: userId });
-  const { name, lastName, phoneNumber } = fineUser;
+function ProfilePage() {
+  const [userData, setUserData] = useState({
+    name: "",
+    lastName: "",
+    phoneNumber: "",
+  });
+
+  const params = useParams();
+  useEffect(() => {
+    const userId = params?.userId;
+    const fetchData = async () => {
+      await axios
+        .post("/api/find-user", { userId })
+        .then((res) => {
+          if (res.status === 200) {
+            setUserData({
+              name: res.data.userInfo.name,
+              lastName: res.data.userInfo.lastName,
+              phoneNumber: res.data.userInfo.phoneNumber,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    fetchData();
+  }, []);
 
   return (
-    <UserProfile name={name} lastName={lastName} phoneNumber={phoneNumber} />
+    <UserProfile
+      name={userData.name}
+      lastName={userData.lastName}
+      phoneNumber={userData.phoneNumber}
+    />
   );
 }
 

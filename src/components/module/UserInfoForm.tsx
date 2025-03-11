@@ -52,8 +52,8 @@ function UserInfoForm() {
       await axios
         .post("/api/auth", userInfo)
         .then((res) => {
-          console.log(res);
-          if (res.status === 200) {
+          // console.log(res);
+          if (res.status === 201) {
             if (typeof window !== "undefined") {
               localStorage.setItem("userId", res.data.userId);
             }

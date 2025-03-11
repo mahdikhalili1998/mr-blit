@@ -24,8 +24,8 @@ export async function POST(req: NextRequest) {
     console.log(user);
 
     return NextResponse.json(
-      { message: MESSAGE.SUCCSESS, userId: user._id },
-      { status: STATUS.SUCCSESS },
+      { message: MESSAGE.POST, userId: user._id },
+      { status: STATUS.POST },
     );
   } catch (error) {
     console.log(error);

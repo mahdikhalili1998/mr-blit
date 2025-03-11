@@ -4,6 +4,7 @@ import EditIcon from "../icon/EditIcon";
 import Image from "next/image";
 import LeftIcon from "../icon/LeftIcon";
 import Link from "next/link";
+import { RotateLoader } from "react-spinners";
 import {
   profileOption,
   profileOptionSecondSec,
@@ -17,13 +18,13 @@ function UserProfile({ name, lastName, phoneNumber }: IUserProfile) {
         حساب کاربری
       </h1>
       {/* اطلاعات حساب */}
-      <div className="mx-3 py-3 rounded-md border-[1px] border-solid border-slate-400">
+      <div className="mx-3 rounded-md border-[1px] border-solid border-slate-400 py-3">
         <div className="flex items-center justify-between px-3">
           {/* اسم و شماره */}
           <div className="flex flex-col items-start justify-start gap-2 p-2">
-            <h1 className="text-lg font-semibold">{`${name} ${lastName}`}</h1>
+            <h1 className="text-lg font-semibold">{`${!name ? "در حال بارگذاری" : name} ${lastName}`}</h1>
             <span className="text-sm font-semibold text-slate-400">
-              {phoneNumber}
+              {!phoneNumber ? "در حال بارگذاری..." : phoneNumber}
             </span>
           </div>
           <span className="text-slate-400">

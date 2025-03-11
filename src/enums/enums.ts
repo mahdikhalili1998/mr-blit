@@ -1,10 +1,13 @@
 export enum MESSAGE {
   SERVER_ERROR = "server error , try again later",
-  SUCCSESS = "succsessfully user added",
+  POST = "succsessfully user added",
+  GET = "succsessfully user found",
+  NOT_FOUND = "user not founded",
 }
 
 export enum STATUS {
   ERROR = 500,
-  SUCCSESS = 200,
-  SUCCSESS2 = 203,
+  POST = 201,
+  GET = 200,
+  NOT_FOUND = 404,
 }

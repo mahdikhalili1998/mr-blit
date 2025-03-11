@@ -30,16 +30,29 @@ function LoginModal() {
     }
     setLoading(true);
     await axios
-      .post("/api/proxy", JSON.stringify(num), { headers })
+      .post("/api/find-user", { phone: usernumber })
       .then((res) => {
-        console.log(`لاگ ملی پیامک : ${res}`);
         if (res.status === 200) {
-          toast.success("کد ارسال شد");
-          setOtp(res.data.code);
-          setNextlevel(true);
+          localStorage.setItem("userNumber", res.data.userInfo.phoneNumber);
+          localStorage.setItem("userId", res.data.userInfo._id);
+          router.push(`/profile/${res.data.userInfo._id}`);
         }
       })
-      .catch((error) => console.log(error));
+      .catch(async (error) => {
+        if (error.status === 404) {
+          await axios
+            .post("/api/proxy", JSON.stringify(num), { headers })
+            .then((res) => {
+              // console.log(`لاگ ملی پیامک : ${res}`);
+              if (res.status === 200) {
+                toast.success("کد ارسال شد");
+                setOtp(res.data.code);
+                setNextlevel(true);
+              }
+            })
+            .catch((error) => console.log(error));
+        }
+      });
   };
 
   return (
