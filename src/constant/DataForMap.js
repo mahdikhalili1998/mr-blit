@@ -183,7 +183,6 @@ export const document = [
   { src: "/image/CAO.png" },
   { src: "/image/ICHTO.png" },
   { src: "/image/qr.png" },
-  { src: "/image/RAI.png" },
   { src: "/image/rmto.png" },
   { src: "/image/samandehi.png" },
   { src: "/image/tnemad.jpg" },
