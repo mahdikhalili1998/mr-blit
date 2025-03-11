@@ -28,7 +28,9 @@ function Shortcut() {
       setIsCheck({ click: true, value });
       router.push("/services");
     } else if (value === "profile") {
-      router.push("profile");
+      router.push("/profile");
+    } else if (value === "my-ticket") {
+      router.push("/my-ticket");
     }
   };
 

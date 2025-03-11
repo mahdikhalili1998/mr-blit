@@ -13,7 +13,7 @@ import InsertOtp from "../module/InsertOtp";
 
 function LoginModal() {
   const [usernumber, setUserNumber] = useState<string>(""); // ذخیره شماره کاربر
-  const [nextLevel, setNextlevel] = useState<boolean>(true); // رفتن برای وارد کردن رمز
+  const [nextLevel, setNextlevel] = useState<boolean>(false); // رفتن برای وارد کردن رمز
   const [otp, setOtp] = useState<string>(""); // رمز پیامک شده اینجا ذخیره میشود
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();

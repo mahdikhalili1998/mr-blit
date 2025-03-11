@@ -15,7 +15,7 @@ export const shortcutData = [
   },
   {
     icon: <MyThicket width={21} height={18} color="currentColor" />,
-    nameEn: "ticket",
+    nameEn: "my-ticket",
     nameFa: "بلیط های من",
   },
   {

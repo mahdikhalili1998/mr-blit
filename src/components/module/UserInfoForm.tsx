@@ -1,8 +1,10 @@
 "use client";
 import { IUserInfoForm } from "@/types/generalType";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { userInfoFormInput } from "@/constant/DataForMap";
 import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 function UserInfoForm() {
   const [userInfo, setUserInfo] = useState<IUserInfoForm>({
@@ -12,30 +14,58 @@ function UserInfoForm() {
     email: "",
     password: "",
     confirmPassword: "",
+    phoneNumber: "",
   });
   const [errors, setErrors] = useState<Record<string, boolean>>({});
 
-  const sendOtpHandler = () => {
+  const router = useRouter();
+
+  //   گرفتن شماره از لوکال استوریج
+  useEffect(() => {
+    const storedPhone = localStorage.getItem("userNumber");
+    if (storedPhone) {
+      setUserInfo((prev) => ({ ...prev, phoneNumber: storedPhone }));
+    }
+  }, []);
+
+  const sendOtpHandler = async () => {
     const { name, lastName, password, confirmPassword } = userInfo;
     const newErrors: Record<string, boolean> = {};
-
     if (!name) newErrors.name = true;
     if (!lastName) newErrors.lastName = true;
     if (!password) newErrors.password = true;
     if (!confirmPassword) newErrors.confirmPassword = true;
-
     setErrors(newErrors);
-
     if (Object.keys(newErrors).length > 0) {
       toast.error("لطفاً فیلدهای قرمز را پر کنید");
-    } else {
-      toast.success("اطلاعات با موفقیت ارسال شد!");
+    }
+    if (password !== confirmPassword) {
+      toast.error("رمزها باید یکسان باشند");
+    }
+    if (
+      name &&
+      lastName &&
+      password &&
+      confirmPassword &&
+      password === confirmPassword
+    ) {
+      await axios
+        .post("/api/auth", userInfo)
+        .then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            if (typeof window !== "undefined") {
+              localStorage.setItem("userId", res.data.userId);
+            }
+            router.push(`/profile/${res.data.userId}`);
+          }
+        })
+        .catch((err) => console.log(err));
     }
   };
 
   const handleInputChange = (field: string, value: string) => {
     setUserInfo((prev) => ({ ...prev, [field]: value }));
-
     // اگر مقدار وارد شد، خطای فیلد را حذف کن
     setErrors((prev) => ({ ...prev, [field]: value.trim() === "" }));
   };

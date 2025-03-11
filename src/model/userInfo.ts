@@ -7,6 +7,7 @@ const userSchema = new Schema<IUserInfo>(
     name: { type: String, required: true },
     lastName: { type: String, required: true },
     email: { type: String, required: false },
+    phoneNumber: { type: String, required: true },
     password: { type: String, required: true },
     createdAt: { type: Date, default: Date.now() }, // تاریخ ایجاد به صورت دستی
     updatedAt: { type: Date, default: Date.now() },

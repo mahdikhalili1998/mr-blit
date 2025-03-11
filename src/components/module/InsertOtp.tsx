@@ -6,7 +6,7 @@ import UserInfoForm from "./UserInfoForm";
 
 function InsertOtp({ otp, setNextLevel, userNumber }: IInsertOtp) {
   const [otpValues, setOtpValues] = useState<string[]>(["", "", "", ""]); // کد وارد شده کاربر
-  const [goToInfoForm, setGoToInfoForm] = useState<boolean>(true); // رفتن ب فرم اطلاعات
+  const [goToInfoForm, setGoToInfoForm] = useState<boolean>(false); // رفتن ب فرم اطلاعات
   const inputRefs = [
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),

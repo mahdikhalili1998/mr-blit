@@ -61,3 +61,15 @@ export interface IInsertOtp {
   otp: string;
   setNextLevel: any;
 }
+
+export interface IUserProfile {
+  name: string;
+  lastName: string;
+  phoneNumber: string;
+}
+
+export interface ProfilePageProps {
+  params: {
+    userId: string;
+  };
+}

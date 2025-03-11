@@ -1,60 +1,53 @@
-"use client";
-import React, { useEffect } from "react";
-import ProfileUSer from "../icon/ProfileUSer";
-import Wallet from "../icon/Wallet";
+import { IUserProfile } from "@/types/componentsProps";
+import React from "react";
+import EditIcon from "../icon/EditIcon";
+import Image from "next/image";
 import LeftIcon from "../icon/LeftIcon";
+import Link from "next/link";
 import {
   profileOption,
   profileOptionSecondSec,
   profileOptionThirdSec,
 } from "@/constant/DataForMap";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 
-function ProfilrPage() {
-  const router = useRouter();
-  useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    if (!userId) {
-      router.push("/profile");
-    } else {
-      router.push(`/profile/${userId}`);
-    }
-  }, []);
+function UserProfile({ name, lastName, phoneNumber }: IUserProfile) {
   return (
     <div className="bg-white">
       <h1 className="mb-5 pr-3 pt-3 text-right text-lg font-bold">
         حساب کاربری
       </h1>
-      {/* ورود به حشاب کاربری */}
-      <Link
-        href={"/login-modal"}
-        className="mx-3 inline-block rounded-md border-[1px] border-solid border-slate-400"
-      >
-        <div className="flex items-center justify-start gap-4 p-2">
-          <span className="rounded-md bg-blue p-2 text-white">
-            <ProfileUSer width={15} height={18} color="currentColor" />
+      {/* اطلاعات حساب */}
+      <div className="mx-3 py-3 rounded-md border-[1px] border-solid border-slate-400">
+        <div className="flex items-center justify-between px-3">
+          {/* اسم و شماره */}
+          <div className="flex flex-col items-start justify-start gap-2 p-2">
+            <h1 className="text-lg font-semibold">{`${name} ${lastName}`}</h1>
+            <span className="text-sm font-semibold text-slate-400">
+              {phoneNumber}
+            </span>
+          </div>
+          <span className="text-slate-400">
+            <EditIcon width={16} height={16} color="currentColor" />
           </span>
-          <h4 className="text-sm font-medium"> ورود به حساب کاربری </h4>
         </div>
-        <p className="p-2 text-xs/6 text-slate-400">
-          برای استفاده از تمام امکانات مِستربلیط، وارد حساب کاربری خود شوید.
-        </p>
-      </Link>
-      {/* اعنبار کاربری */}
-      <div className="mx-5 mt-7 flex items-center justify-between">
-        <p className="flex items-center gap-3 font-semibold">
-          <span className="rounded-md bg-slate-300 p-3 text-black">
-            <Wallet width={16} height={16} color="currentColor" />
+        {/* خط جداکننده */}
+        <div className="mx-3 border-[1px] border-solid border-slate-300"></div>
+        <div className="flex items-center justify-between px-3 py-2">
+          <Image
+            src="/image/level1.png"
+            width={100}
+            height={100}
+            alt="level 1"
+            priority
+            className="size-[1.5rem]"
+          />
+          <span className="font-bold">مستر بلیط کلاب</span>
+          <span className="text-slate-400">سطح برنزی | 0 امتیاز</span>
+          <span className="text-slate-700">
+            <LeftIcon width={22} height={22} color="currentColor" />
           </span>
-          اعتبار کاربری
-        </p>
-        <span className="text-black">
-          <LeftIcon width={16} height={22} color="currentColor" />
-        </span>
+        </div>
       </div>
-      {/* خط جدا کننده */}
-      <div className="mx-5 mt-4 border-[1px] border-solid border-slate-300"></div>
       {/* بقیه ی موارد */}
       <div className="mx-5 mt-7 space-y-4 font-semibold">
         {profileOption.map((item, index) => (
@@ -114,4 +107,4 @@ function ProfilrPage() {
   );
 }
 
-export default ProfilrPage;
+export default UserProfile;
