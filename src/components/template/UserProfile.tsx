@@ -4,7 +4,6 @@ import EditIcon from "../icon/EditIcon";
 import Image from "next/image";
 import LeftIcon from "../icon/LeftIcon";
 import Link from "next/link";
-import { RotateLoader } from "react-spinners";
 import {
   profileOption,
   profileOptionSecondSec,
