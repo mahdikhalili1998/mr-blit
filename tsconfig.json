@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/profile/[userId]/page.jsx", "src/app/api/find-user/route.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/profile/[userId]/page.jsx", "src/app/api/find-user/route.ts"],
   "exclude": ["node_modules"]
 }
