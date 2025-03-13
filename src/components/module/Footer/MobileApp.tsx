@@ -34,7 +34,7 @@ function MobileApp() {
           <span>امکانات بیشتر برای سفر به صرفه</span>
         </div>
       </div>
-      <div className="relative mt-5 w-max">
+      <div className="relative mt-5 w-max md:mx-auto">
         <Image
           src="/image/phone.png"
           alt="phone"

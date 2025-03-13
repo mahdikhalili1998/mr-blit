@@ -16,6 +16,9 @@ export default {
         sd: "10px",
         15: "15px",
       },
+      screens: {
+        600: "600px",
+      },
     },
   },
   plugins: [],

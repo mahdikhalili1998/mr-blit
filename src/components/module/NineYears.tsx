@@ -114,7 +114,10 @@ function NineYears() {
           className="mySwiper"
         >
           {cityPhoto.map((item, index) => (
-            <SwiperSlide key={index} className={`${styles.citySlid}`}>
+            <SwiperSlide
+              key={index}
+              className={`${styles.citySlid} md:w-[8rem]`}
+            >
               <div className="">
                 <Image
                   src={item.src}
@@ -122,12 +125,12 @@ function NineYears() {
                   height={150}
                   alt="citi photo"
                   priority
-                  className="relative rounded-md object-cover"
+                  className="relative rounded-md object-cover md:w-[6rem]"
                 />
                 {/* لایه رنگی */}
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-b from-transparent via-blue/70 to-blue/100 opacity-60"></div>
               </div>
-              <span className="absolute bottom-2 left-12 text-xs font-medium text-white">
+              <span className="600:left-8 absolute bottom-2 left-12 text-xs font-medium text-white sm:left-10">
                 {categoryName === "hotel"
                   ? `هتل ${item.cityName}`
                   : `بیلط ${item.cityName}`}
@@ -144,6 +147,12 @@ function NineYears() {
           spaceBetween={30}
           pagination={{
             clickable: true,
+          }}
+          breakpoints={{
+            768: {
+              slidesPerView: 3, // برای عرض 768px دو اسلاید نشون بده
+              spaceBetween: 5, // فاصله کمتر بین اسلایدها
+            },
           }}
           className="mySwiper"
         >

@@ -35,7 +35,7 @@ function Shortcut() {
   };
 
   return (
-    <ul className="fixed bottom-0 z-50 flex w-full items-center justify-between bg-white px-4 py-4">
+    <ul className="md:px-20 fixed bottom-0 z-50 flex w-full items-center justify-between bg-white px-4 py-4 sm:px-10">
       {shortcutData.map((item: any) => (
         <li
           onClick={() => clickHandler(item.nameEn)}

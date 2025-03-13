@@ -39,16 +39,81 @@
   width: 40%;
   overflow: visible;
 }
+@media screen and (min-width: 410px) {
+  .citySlid:nth-child(1n) {
+    width: 30%;
+    overflow: visible;
+  }
+}
+@media screen and (min-width: 527px) {
+  .citySlid:nth-child(1n) {
+    width: 25%;
+    overflow: visible;
+  }
+}
+@media screen and (min-width: 600px) {
+  .citySlid:nth-child(1n) {
+    width: 19%;
+    overflow: visible;
+  }
+}
+@media screen and (min-width: 769px) {
+  .citySlid:nth-child(1n) {
+    width: 18%;
+    overflow: visible;
+  }
+}
 
 .airLine:nth-child(1n) {
   width: 38%;
+}
+@media screen and (min-width: 560px) {
+  .airLine:nth-child(1n) {
+    width: 30%;
+    overflow: visible;
+  }
+}
+@media screen and (min-width: 645px) {
+  .airLine:nth-child(1n) {
+    width: 25%;
+    overflow: visible;
+  }
+}
+@media screen and (min-width: 768px) {
+  .airLine:nth-child(1n) {
+    width: 18%;
+    overflow: visible;
+  }
 }
 
 .customSlidDocs:nth-child(1n) {
   width: 27%;
 }
+@media screen and (min-width: 440px) {
+  .customSlidDocs:nth-child(1n) {
+    width: 21%;
+    overflow: visible;
+  }
+}
+@media screen and (min-width: 540px) {
+  .customSlidDocs:nth-child(1n) {
+    width: 17%;
+    overflow: visible;
+  }
+}
+@media screen and (min-width: 700px) {
+  .customSlidDocs:nth-child(1n) {
+    width: 14%;
+    overflow: visible;
+  }
+}
+@media screen and (min-width: 769px) {
+  .customSlidDocs:nth-child(1n) {
+    width: 14%;
+    overflow: visible;
+  }
+}
 
 .hotel:nth-child(1n) {
   width: 85%;
-  
 }

@@ -38,6 +38,12 @@ function StationSlider() {
         pagination={{
           clickable: true,
         }}
+        breakpoints={{
+          768: {
+            slidesPerView: 4, // برای عرض 768px دو اسلاید نشون بده
+            spaceBetween: 25, // فاصله کمتر بین اسلایدها
+          },
+        }}
         className="mySwiper"
       >
         {data?.map((item, index) => (
