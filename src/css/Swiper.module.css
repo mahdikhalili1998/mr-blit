@@ -117,3 +117,21 @@
 .hotel:nth-child(1n) {
   width: 85%;
 }
+@media screen and (min-width: 440px) {
+  .hotel:nth-child(1n) {
+    width: 80%;
+    overflow: visible;
+  }
+}
+@media screen and (min-width: 583px) {
+  .hotel:nth-child(1n) {
+    width: 70%;
+    overflow: visible;
+  }
+}
+@media screen and (min-width: 700px) {
+  .hotel:nth-child(1n) {
+    width: 60%;
+    overflow: visible;
+  }
+}

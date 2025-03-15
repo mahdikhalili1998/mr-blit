@@ -13,11 +13,11 @@ import UpRate from "../icon/UpRate";
 function SuggestHotel() {
   return (
     <div className="">
-      <h1 className="text-right font-bold">هتل های پیشنهادی</h1>
+      <h1 className="text-right pr-2 font-bold">هتل های پیشنهادی</h1>
       <Swiper
         slidesPerView={"auto"}
         spaceBetween={30}
-        className={styles.swiperContainer}
+        className={`${styles.swiperContainer} mx-2`}
       >
         {suggestHotel.map((item, index) => (
           <SwiperSlide
@@ -51,7 +51,7 @@ function SuggestHotel() {
               </div>
             </div>
             {/* امتیاز */}
-            <div className={`mt-2 mr-2 flex items-center gap-1`}>
+            <div className={`mr-2 mt-2 flex items-center gap-1`}>
               <span>
                 {item.rate >= 5 ? (
                   <UpRate width={16} height={16} color="#22c55e" />
@@ -68,7 +68,7 @@ function SuggestHotel() {
             {/* خط جدا کننده */}
             <div className="mx-2 mt-4 border-b-[1.5px] border-solid border-slate-300"></div>
             {/* قیمت */}
-            <div className="text-center font-medium mt-5">
+            <div className="mt-5 text-center font-medium">
               <span className="text-sm">قیمت هر شب از </span>
               <span className="font-semi-bold mx-2 text-xl text-blue">
                 {item.price.toLocaleString("en-US")}
