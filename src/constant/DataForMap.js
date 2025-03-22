@@ -16,6 +16,11 @@ import Solution from "@/components/icon/Solution";
 import SmallPlane from "@/components/icon/SmallPlane";
 import Telegram from "@/components/icon/Telegram";
 import Info from "@/components/icon/Info";
+import AirPlaneDesktop from "@/components/icon/FlightDesktop";
+import HotelDesktop from "@/components/icon/HotelDesktop";
+import TrainDesktop from "@/components/icon/TrainDesktop";
+import BusDesktop from "@/components/icon/BusDesktop";
+import TaxiDesktop from "@/components/icon/TaxiDesktop";
 
 export const ourSite = [
   {
@@ -310,4 +315,32 @@ export const userInfoFormInput = [
   { value: "email", lab: "ایمیل ( اختیاری )" },
   { value: "password", lab: "رمز" },
   { value: "confirmPassword", lab: "تایید رمز" },
+];
+
+export const routeDesktop = [
+  {
+    icon: <AirPlaneDesktop height={40} width={40} color="currentColor" />,
+    text: "هواپیما",
+    name: "airPlane",
+  },
+  {
+    icon: <HotelDesktop height={40} width={40} color="currentColor" />,
+    text: "هتل",
+    name: "hotel",
+  },
+  {
+    icon: <TrainDesktop height={40} width={40} color="currentColor" />,
+    text: "قطار",
+    name: "train",
+  },
+  {
+    icon: <BusDesktop height={40} width={40} color="currentColor" />,
+    text: "اتوبوس",
+    name: "bus",
+  },
+  {
+    icon: <TaxiDesktop height={40} width={40} color="currentColor" />,
+    text: "تاکسی",
+    name: "taxi",
+  },
 ];

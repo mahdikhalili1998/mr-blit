@@ -20,7 +20,7 @@ function FirstSecH() {
   };
 
   return (
-    <div className="mx-2 flex justify-between bg-blue sm:mx-8">
+    <div className="mx-2 flex justify-between bg-blue sm:mx-8 lg:bg-transparent">
       {categoryData.map((item) => {
         return (
           <Link
