@@ -62,17 +62,25 @@ function ChooseDestination({
 
   //  مربوط به اسکرول عمودی صفحات absolute
   useEffect(() => {
-    if (selectOrigin || selectDestination || selectNumber) {
-      // غیرفعال کردن اسکرول عمودی صفحه
-      document.body.style.overflow = "hidden";
-    } else {
-      // فعال کردن اسکرول عمودی صفحه
-      document.body.style.overflow = "auto";
-    }
+    const handleScrollLock = () => {
+      if (window.innerWidth < 1024) {
+        if (selectOrigin || selectDestination || selectNumber) {
+          document.body.style.overflow = "hidden";
+        } else {
+          document.body.style.overflow = "auto";
+        }
+      } else {
+        document.body.style.overflow = "auto"; // اطمینان از اینکه اسکرول در دسکتاپ فعال می‌ماند
+      }
+    };
 
-    // Cleanup when the component unmounts or selectOrigin changes
+    handleScrollLock(); // اجرا هنگام اولین رندر
+
+    window.addEventListener("resize", handleScrollLock); // بررسی هنگام تغییر اندازه صفحه
+
     return () => {
-      document.body.style.overflow = "auto";
+      window.removeEventListener("resize", handleScrollLock);
+      document.body.style.overflow = "auto"; // اطمینان از ریست هنگام آنمونت شدن
     };
   }, [selectOrigin, selectDestination, selectNumber]);
 
@@ -105,6 +113,7 @@ function ChooseDestination({
       setUserOrigin("");
     }
   }, [type]);
+
   // مربوط به تقویم
   const showDateHandler = (name: string) => {
     setSelectDate(true);
@@ -113,209 +122,211 @@ function ChooseDestination({
   };
 
   return (
-    <div className="mx-5 flex flex-col">
-      {/* مبدا */}
-      <div
-        onClick={() => {
-          setSelectOrigin(true);
-          setStep(1);
-        }}
-        className="flex items-center gap-4 rounded-lg bg-slate-200 p-3 text-gray-400"
-      >
-        <span>
-          <Mabda width={12} height={18} color="currentColor" />
-        </span>
-        <input
-          type="text"
-          value={userOrigin}
-          readOnly={true}
-          placeholder={originName}
-          className="bg-transparent text-black focus:outline-none"
-        />
-      </div>
-      {/* کلید سوییچ */}
-      {categoryName === "hotel" ? null : (
-        <button
-          onClick={switchHandler}
-          disabled={!userDestination && !userOrigin}
-          className={`${switchValue ? "rotate-[270deg]" : "rotate-90"} ml-3 mr-auto inline-block w-max rotate-90 text-blue transition-transform duration-500 ease-in-out disabled:text-gray-400`}
-        >
-          <SwichKey width={18} height={16} color="currentColor" />
-        </button>
-      )}
-      {/* مقصد*/}
-      {categoryName === "hotel" ? null : (
+    <div className="mx-5">
+      <div className="flex flex-col lg:w-full lg:flex-row lg:items-center lg:gap-2">
+        {/* مبدا */}
         <div
           onClick={() => {
-            setSelectDestination(true);
-            setStep(2);
+            setSelectOrigin(true);
+            setStep(1);
           }}
-          className="flex items-center gap-4 rounded-lg bg-slate-200 p-3 text-gray-400"
+          className="flex items-center gap-4 rounded-lg bg-slate-200 p-3 text-gray-400 lg:w-1/4 lg:py-3"
         >
           <span>
-            <Location width={13} height={18} color="currentColor" />
+            <Mabda width={12} height={18} color="currentColor" />
           </span>
           <input
             type="text"
-            value={userDestination}
+            value={userOrigin}
             readOnly={true}
-            placeholder={destinationName}
+            placeholder={originName}
             className="bg-transparent text-black focus:outline-none"
           />
         </div>
-      )}
-      {/* تقویم */}
-      <div className="mt-3 flex items-center gap-4 rounded-lg bg-slate-200 p-3 text-gray-400">
-        <span>
-          <Clender width={15} height={18} color="currentColor" />
-        </span>
-        <div className="flex items-center">
-          <input
-            onClick={() => showDateHandler("رفت")}
-            type="text"
-            value={userDate.go}
-            readOnly={true}
-            placeholder="رفت"
-            className="mr-1 w-1/2 bg-transparent text-black focus:outline-none"
-          />
-          {way === "یک طرفه" ? (
-            <span
-              onClick={() => showDateHandler("برگشت")}
-            >{`برگشت (اختیاری)`}</span>
-          ) : (
+        {/* کلید سوییچ */}
+        {categoryName === "hotel" ? null : (
+          <button
+            onClick={switchHandler}
+            disabled={!userDestination && !userOrigin}
+            className={`${switchValue ? "rotate-[270deg] lg:rotate-[360deg]" : "rotate-90 lg:rotate-[180deg]"} ml-3 mr-auto inline-block w-max rotate-90 text-blue transition-transform duration-500 ease-in-out disabled:text-gray-400 lg:ml-0 lg:mr-0 lg:px-[2px]`}
+          >
+            <SwichKey width={18} height={16} color="currentColor" />
+          </button>
+        )}
+        {/* مقصد*/}
+        {categoryName === "hotel" ? null : (
+          <div
+            onClick={() => {
+              setSelectDestination(true);
+              setStep(2);
+            }}
+            className="flex items-center gap-4 rounded-lg bg-slate-200 p-3 text-gray-400 lg:w-1/4"
+          >
+            <span>
+              <Location width={13} height={18} color="currentColor" />
+            </span>
             <input
-              onClick={() => showDateHandler("برگشت")}
               type="text"
-              value={userDate.back}
+              value={userDestination}
               readOnly={true}
-              placeholder="برگشت"
-              className="w-1/2 bg-transparent text-black focus:outline-none"
+              placeholder={destinationName}
+              className="bg-transparent text-black focus:outline-none"
             />
-          )}
-        </div>
-      </div>
-      {/* تعداد مسافر */}
-      {categoryName === "hotel" ? null : (
-        <div
-          onClick={() => {
-            setSelectNumber(true);
-            setStep(4);
-          }}
-          className="mt-3 flex items-center justify-between rounded-lg bg-slate-200 p-3 px-4 font-semibold text-black"
-        >
+          </div>
+        )}
+        {/* تقویم */}
+        <div className="mt-3 flex items-center gap-4 rounded-lg bg-slate-200 p-3 text-gray-400 lg:mt-0 lg:w-1/4">
+          <span>
+            <Clender width={15} height={18} color="currentColor" />
+          </span>
           <div className="flex items-center">
             <input
+              onClick={() => showDateHandler("رفت")}
               type="text"
-              value={sum}
-              className="w-5 bg-transparent focus:outline-none"
-              readOnly
+              value={userDate.go}
+              readOnly={true}
+              placeholder="رفت"
+              className="mr-1 w-1/2 bg-transparent text-black focus:outline-none"
             />
-            <span className="font-medium">مسافر</span>
+            {way === "یک طرفه" ? (
+              <span
+                onClick={() => showDateHandler("برگشت")}
+              >{`برگشت(اختیاری)`}</span>
+            ) : (
+              <input
+                onClick={() => showDateHandler("برگشت")}
+                type="text"
+                value={userDate.back}
+                readOnly={true}
+                placeholder="برگشت"
+                className="w-1/2 bg-transparent text-black focus:outline-none"
+              />
+            )}
           </div>
-          <span>
-            <DownArrow width={16} height={22} color="currentColor" />
-          </span>
         </div>
-      )}
+        {/* تعداد مسافر */}
+        {categoryName === "hotel" ? null : (
+          <div
+            onClick={() => {
+              setSelectNumber(true);
+              setStep(4);
+            }}
+            className="mt-3 flex items-center justify-between rounded-lg bg-slate-200 p-3 px-4 font-semibold text-black lg:mt-0 lg:w-1/4 lg:gap-1"
+          >
+            <div className="flex items-center">
+              <input
+                type="text"
+                value={sum}
+                className="w-5 bg-transparent focus:outline-none"
+                readOnly
+              />
+              <span className="font-medium">مسافر</span>
+            </div>
+            <span>
+              <DownArrow width={16} height={22} color="currentColor" />
+            </span>
+          </div>
+        )}
 
-      {/* --------- صفحات ----------- */}
-      {/*  صفحه انتخاب مبدا*/}
-      <div
-        className={`${
-          selectOrigin ? "translate-x-0" : "translate-x-full"
-        } absolute right-0 top-0 z-30 h-screen w-screen bg-white transition-transform duration-700 ease-in-out`}
-      >
-        {step === 1 || selectOrigin ? (
-          <ChooseOrigin
-            setSelectDate={setSelectDate}
-            originName={originName}
-            setUserOrigin={setUserOrigin}
-            selectOrigin={selectOrigin}
-            setSelectOrigin={setSelectOrigin}
-            type={type}
-            step={step}
-            selectDestination={selectDestination}
-            setSelectDestination={setSelectDestination}
-            setStep={setStep}
-          />
-        ) : null}
-      </div>
-      {/* صفحه انتخاب مقصد */}
-      {categoryName === "hotel" ? null : (
+        {/* --------- صفحات ----------- */}
+        {/*  صفحه انتخاب مبدا*/}
         <div
           className={`${
-            selectDestination || step === 2
-              ? "translate-x-0"
-              : "translate-x-full"
-          } absolute right-0 top-0 z-40 h-screen w-screen bg-white transition-transform duration-700 ease-in-out`}
+            selectOrigin ? "translate-x-0" : "translate-x-full"
+          } absolute right-0 top-0 z-30 h-screen w-screen bg-white transition-transform duration-700 ease-in-out lg:hidden`}
         >
-          {step === 2 || selectDestination ? (
-            <ChooseTarget
-              destinationName={destinationName}
-              setUserDestination={setUserDestination}
-              selectDestination={selectDestination}
-              setSelectDestination={setSelectDestination}
+          {step === 1 || selectOrigin ? (
+            <ChooseOrigin
+              setSelectDate={setSelectDate}
+              originName={originName}
+              setUserOrigin={setUserOrigin}
               selectOrigin={selectOrigin}
               setSelectOrigin={setSelectOrigin}
               type={type}
               step={step}
+              selectDestination={selectDestination}
+              setSelectDestination={setSelectDestination}
               setStep={setStep}
-              setSelectDate={setSelectDate}
             />
           ) : null}
         </div>
-      )}
-      {/* صفخه انتخاب تاریخ */}
-      <div
-        className={`${
-          selectDate || step === 3 ? "translate-x-0" : "translate-x-full"
-        } absolute right-0 top-0 z-40 h-screen w-screen bg-white transition-transform duration-700 ease-in-out`}
-      >
-        {step === 3 || selectDate ? (
-          <ChooseDate
-            setSelectDate={setSelectDate}
-            dateName={dateName}
-            setSelectDestination={setSelectDestination}
-            setSelectOrigin={setSelectOrigin}
-            step={step}
-            setStep={setStep}
-            go={userDate.go}
-            back={userDate.back}
-            setUserDate={setUserDate}
-            selectDestination={selectDestination}
-            selectOrigin={selectOrigin}
-            selectDate={selectDate}
-            way={way}
-            setSelectedType={setSelectedType}
-            setSelectNumber={setSelectNumber}
-          />
-        ) : null}
-      </div>
-      {/* صفحه انتخاب مسافر */}
-      <div
-        className={`${
-          selectNumber || step === 4 ? "translate-x-0" : "translate-x-full"
-        } absolute right-0 top-0 z-40 h-screen w-screen bg-white transition-transform duration-700 ease-in-out`}
-      >
-        {step === 4 || selectNumber ? (
-          <ChooseNumber
-            setSelectDate={setSelectDate}
-            setSelectDestination={setSelectDestination}
-            setSelectOrigin={setSelectOrigin}
-            setSelectNumber={setSelectNumber}
-            middle12_2={middle12_2}
-            baby={baby}
-            older12={older12}
-            setStep={setStep}
-            selectDate={selectDate}
-            selectDestination={selectDestination}
-            selectOrigin={selectOrigin}
-            selectNumber={selectNumber}
-            setpassengerNum={setpassengerNum}
-            calculateNum={calculateNum}
-            sum={sum}
-          />
-        ) : null}
+        {/* صفحه انتخاب مقصد */}
+        {categoryName === "hotel" ? null : (
+          <div
+            className={`${
+              selectDestination || step === 2
+                ? "translate-x-0"
+                : "translate-x-full"
+            } absolute right-0 top-0 z-40 h-screen w-screen bg-white transition-transform duration-700 ease-in-out lg:hidden`}
+          >
+            {step === 2 || selectDestination ? (
+              <ChooseTarget
+                destinationName={destinationName}
+                setUserDestination={setUserDestination}
+                selectDestination={selectDestination}
+                setSelectDestination={setSelectDestination}
+                selectOrigin={selectOrigin}
+                setSelectOrigin={setSelectOrigin}
+                type={type}
+                step={step}
+                setStep={setStep}
+                setSelectDate={setSelectDate}
+              />
+            ) : null}
+          </div>
+        )}
+        {/* صفخه انتخاب تاریخ */}
+        <div
+          className={`${
+            selectDate || step === 3 ? "translate-x-0" : "translate-x-full"
+          } absolute right-0 top-0 z-40 h-screen w-screen bg-white transition-transform duration-700 ease-in-out lg:hidden`}
+        >
+          {step === 3 || selectDate ? (
+            <ChooseDate
+              setSelectDate={setSelectDate}
+              dateName={dateName}
+              setSelectDestination={setSelectDestination}
+              setSelectOrigin={setSelectOrigin}
+              step={step}
+              setStep={setStep}
+              go={userDate.go}
+              back={userDate.back}
+              setUserDate={setUserDate}
+              selectDestination={selectDestination}
+              selectOrigin={selectOrigin}
+              selectDate={selectDate}
+              way={way}
+              setSelectedType={setSelectedType}
+              setSelectNumber={setSelectNumber}
+            />
+          ) : null}
+        </div>
+        {/* صفحه انتخاب مسافر */}
+        <div
+          className={`${
+            selectNumber || step === 4 ? "translate-x-0" : "translate-x-full"
+          } absolute right-0 top-0 z-40 h-screen w-screen bg-white transition-transform duration-700 ease-in-out lg:hidden`}
+        >
+          {step === 4 || selectNumber ? (
+            <ChooseNumber
+              setSelectDate={setSelectDate}
+              setSelectDestination={setSelectDestination}
+              setSelectOrigin={setSelectOrigin}
+              setSelectNumber={setSelectNumber}
+              middle12_2={middle12_2}
+              baby={baby}
+              older12={older12}
+              setStep={setStep}
+              selectDate={selectDate}
+              selectDestination={selectDestination}
+              selectOrigin={selectOrigin}
+              selectNumber={selectNumber}
+              setpassengerNum={setpassengerNum}
+              calculateNum={calculateNum}
+              sum={sum}
+            />
+          ) : null}
+        </div>
       </div>
     </div>
   );

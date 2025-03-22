@@ -47,7 +47,7 @@ function Header() {
       </div>
       {/* مربوط به وسیله نقلیه ی دسکتاپ */}
       <span
-        className={`${categoryName === "hotel" ? "hidden" : "block"} ${categoryName === "airPlane" ? "top-[75px]" : null} ${categoryName === "train" ? "top-[105px]" : null} ${categoryName === "bus" ? "top-[88px]" : null} ${categoryName === "taxi" ? "top-[95px]" : null} absolute z-20 ${isChangeRoute ? "-translate-x-full opacity-0" : "-translate-x-20 opacity-100"} transition-all duration-500 ease-in-out`}
+        className={`${categoryName === "hotel" ? "hidden" : "block"} ${categoryName === "airPlane" ? "top-[75px]" : null} ${categoryName === "train" ? "top-[105px]" : null} ${categoryName === "bus" ? "top-[95px]" : null} ${categoryName === "taxi" ? "top-[100px]" : null} absolute z-20 ${isChangeRoute ? "-translate-x-full opacity-0" : "-translate-x-20 opacity-100"} hidden transition-all duration-500 ease-in-out lg:block`}
       >
         <Image
           src={`/image/${device}-desktop.svg`}
@@ -55,7 +55,7 @@ function Header() {
           width={400}
           height={400}
           priority
-          className={` ${categoryName === "taxi" ? "w-[11rem]" : "w-[22rem]"} ${categoryName === "bus" ? "w-[15rem]" : "w-[22rem]"}`}
+          className={` ${categoryName === "taxi" ? "w-[10rem]" : "w-[22rem]"} ${categoryName === "hotel" ? "hidden" : "block"} ${categoryName === "bus" ? "w-[14rem]" : "w-[22rem]"}`}
         />
       </span>
       {/* انتخاب مسیر در دستکتاپ */}

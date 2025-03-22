@@ -41,7 +41,7 @@ const TypeOfTravel: FC<ITypeOfTravel> = ({
   }, [openModal]);
 
   return (
-    <div className="mx-5 flex items-center justify-between py-4">
+    <div className="mx-5 flex items-center justify-between py-4 lg:justify-start lg:gap-2">
       {categoryName === "train" ? (
         // چک باکس کوپه دربست
         <div className="flex items-center gap-2">
@@ -131,43 +131,92 @@ const TypeOfTravel: FC<ITypeOfTravel> = ({
       )}
       {/* سلکت باکس */}
       {categoryName === "hotel" ? null : (
-        <div onClick={() => setOpenModal((e) => !e)} className="relative p-2">
-          <h1 className="flex items-center gap-3 text-base font-bold text-blue">
-            <span className="w-max"> {way}</span>
-            <span className={`${openModal ? "rotate-180" : ""} transition-all`}>
-              <DownArrow width={16} height={16} color="currentColor" />
-            </span>
-          </h1>
-          {openModal ? (
-            <ul
-              ref={modalRef}
-              className={`${categoryName === "taxi" ? "right-0" : "-right-16 top-9"} absolute -right-16 top-9 z-20 flex w-[180px] flex-col justify-center rounded-lg bg-white p-3 text-base shadow-2xl`}
+        <>
+          {/* /* مربوط به صفحه دسکتاپ از lg */}
+          <ul className="hidden items-center gap-1 border-r-2 border-solid border-gray-200 pr-2 lg:flex">
+            {/* دکمه یک طرفه */}
+            <li
+              onClick={() =>
+                setSelectedType((other: any) => ({
+                  ...other,
+                  way: "یک طرفه",
+                }))
+              }
+              className="flex items-center gap-2 p-2 font-bold text-blue"
             >
-              <li
-                onClick={() =>
-                  setSelectedType((other: any) => ({
-                    ...other,
-                    way: "یک طرفه",
-                  }))
-                }
-                className={`${way === "یک طرفه" ? "bg-[#c2e0ff]" : ""} rounded-lg p-3`}
+              <span
+                className={`${way === "یک طرفه" ? "bg-blue" : "border-2 border-solid border-blue"} flex size-4 items-center justify-center rounded-full`}
               >
-                یک طرفه
-              </li>
-              <li
-                onClick={() =>
-                  setSelectedType((other: any) => ({
-                    ...other,
-                    way: "رفت و برگشت",
-                  }))
-                }
-                className={`${way === "رفت و برگشت" ? "bg-[#c2e0ff]" : ""} rounded-lg p-3`}
+                <span
+                  className={`${way === "یک طرفه" ? "block" : "hidden"} size-2 rounded-full bg-white`}
+                ></span>
+              </span>
+              <span>یک طرفه</span>
+            </li>
+            {/* دکمه رفت و برگشت */}
+            <li
+              onClick={() =>
+                setSelectedType((other: any) => ({
+                  ...other,
+                  way: "رفت و برگشت",
+                }))
+              }
+              className="flex items-center gap-2 p-2 font-bold text-blue"
+            >
+              <span
+                className={`${way === "رفت و برگشت" ? "bg-blue" : "border-2 border-solid border-blue"} flex size-4 items-center justify-center rounded-full`}
               >
-                رفت و برگشت
-              </li>
-            </ul>
-          ) : null}
-        </div>
+                <span
+                  className={`${way === "رفت و برگشت" ? "block" : "hidden"} size-2 rounded-full bg-white`}
+                ></span>
+              </span>
+              <span>رفت و برگشت</span>
+            </li>
+          </ul>
+          {/* // مربوط به صفحه موبایل */}
+          <div
+            onClick={() => setOpenModal((e) => !e)}
+            className="relative p-2 lg:hidden"
+          >
+            <h1 className="flex items-center gap-3 text-base font-bold text-blue">
+              <span className="w-max"> {way}</span>
+              <span
+                className={`${openModal ? "rotate-180" : ""} transition-all`}
+              >
+                <DownArrow width={16} height={16} color="currentColor" />
+              </span>
+            </h1>
+            {openModal ? (
+              <ul
+                ref={modalRef}
+                className={`${categoryName === "taxi" ? "right-0" : "-right-16 top-9"} absolute -right-16 top-9 z-20 flex w-[180px] flex-col justify-center rounded-lg bg-white p-3 text-base shadow-2xl`}
+              >
+                <li
+                  onClick={() =>
+                    setSelectedType((other: any) => ({
+                      ...other,
+                      way: "یک طرفه",
+                    }))
+                  }
+                  className={`${way === "یک طرفه" ? "bg-[#c2e0ff]" : ""} rounded-lg p-3`}
+                >
+                  یک طرفه
+                </li>
+                <li
+                  onClick={() =>
+                    setSelectedType((other: any) => ({
+                      ...other,
+                      way: "رفت و برگشت",
+                    }))
+                  }
+                  className={`${way === "رفت و برگشت" ? "bg-[#c2e0ff]" : ""} rounded-lg p-3`}
+                >
+                  رفت و برگشت
+                </li>
+              </ul>
+            ) : null}
+          </div>
+        </>
       )}
     </div>
   );
