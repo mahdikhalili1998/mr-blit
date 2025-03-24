@@ -54,12 +54,13 @@ function AirPlanePage() {
           userDestination={userDestination}
           setUserDestination={setUserDestination}
         />
-
-        <div
-          onClick={searchHandler}
-          className="mx-5 mt-3 rounded-lg bg-blue p-3 text-center font-semibold text-white"
-        >
-          جستجو
+        <div className="flex justify-center mt-4">
+          <div
+            onClick={searchHandler}
+            className="mx-5 mt-3 w-1/4 rounded-lg bg-blue py-3 text-center font-semibold text-white"
+          >
+            جستجو
+          </div>
         </div>
       </div>
       <NineYears />

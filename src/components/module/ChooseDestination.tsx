@@ -13,6 +13,7 @@ import ChooseDate from "./ChooseDate";
 import DownArrow from "../icon/DownArrow";
 import ChooseNumber from "./ChooseNumber";
 import OriginPage from "../desktop/OriginPage";
+import TargetPage from "../desktop/TargetPage";
 
 function ChooseDestination({
   type,
@@ -39,6 +40,8 @@ function ChooseDestination({
       }
     };
     if (isOpen && boxName === "origin") {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else if (isOpen && boxName === "target") {
       document.addEventListener("mousedown", handleClickOutside);
     }
 
@@ -198,8 +201,9 @@ function ChooseDestination({
             onClick={() => {
               setSelectDestination(true);
               setStep(2);
+              setOpenBox({ isOpen: true, boxName: "target" });
             }}
-            className="flex items-center gap-4 rounded-lg bg-slate-200 p-3 text-gray-400 lg:w-1/4"
+            className="relative flex items-center gap-4 rounded-lg bg-slate-200 p-3 text-gray-400 lg:w-1/4"
           >
             <span>
               <Location width={13} height={18} color="currentColor" />
@@ -211,6 +215,19 @@ function ChooseDestination({
               placeholder={destinationName}
               className="bg-transparent text-black focus:outline-none"
             />
+            {/* صفحه انتخاب مقصد برای دسکتاپ */}
+            {isOpen && boxName === "target" ? (
+              <div
+                ref={boxRef}
+                className="absolute right-0 top-12 z-20 hidden w-full lg:block"
+              >
+                <TargetPage
+                  setUserDestination={setUserDestination}
+                  type={type}
+                  destinationName={destinationName}
+                />
+              </div>
+            ) : null}
           </div>
         )}
         {/* تقویم */}
