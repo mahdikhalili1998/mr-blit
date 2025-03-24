@@ -1,7 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import Mabda from "../icon/Mabda";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SwichKey from "../icon/SwichKey";
 import Location from "../icon/Location";
 import { ITravelInfo } from "@/types/componentsProps";
@@ -29,6 +29,23 @@ function ChooseDestination({
     boxName: "",
   });
   const { isOpen, boxName } = openBox;
+
+  // مربوط به باز و بسته شدن باکس های دستکتاپ وقتی بیرون محدوده باکس کلیک می‌شود
+  const boxRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (boxRef.current && !boxRef.current.contains(event.target as Node)) {
+        setOpenBox({ isOpen: false, boxName: "" });
+      }
+    };
+    if (isOpen && boxName === "origin") {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, boxName]);
 
   // استیت مربوط به مبدا
   const [originName, setOriginName] = useState<string>(""); // اسم مبدا
@@ -153,8 +170,15 @@ function ChooseDestination({
           />
           {/* صفحه انتخاب مبدا برای دسکتاپ */}
           {isOpen && boxName === "origin" ? (
-            <div className="absolute hidden lg:block">
-              <OriginPage />
+            <div
+              ref={boxRef}
+              className="absolute right-0 top-12 z-20 hidden w-full lg:block"
+            >
+              <OriginPage
+                setUserOrigin={setUserOrigin}
+                type={type}
+                originName={originName}
+              />
             </div>
           ) : null}
         </div>

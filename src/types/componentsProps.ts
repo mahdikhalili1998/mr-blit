@@ -19,6 +19,7 @@ export interface ITravelInfo {
 export interface IOriginPage {
   originName?: string;
   setUserOrigin?: any;
+  setOpenBox?: any;
   setSelectOrigin?: any;
   type?: string;
   setStep?: any;
