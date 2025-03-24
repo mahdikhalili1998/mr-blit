@@ -50,6 +50,10 @@ function ChooseTarget({
     } else if (categoryName === "airPlane" && type === "outside") {
       setCountry(airportNameEn);
     }
+    // اسکرول خودکار صفحه به بالا
+    if (window.innerWidth < 1024) {
+      window.scrollTo(0, 0);
+    }
   }, []);
 
   useEffect(() => {

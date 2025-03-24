@@ -8,10 +8,11 @@ import { ITravelInfo } from "@/types/componentsProps";
 import ChooseOrigin from "./ChooseOrigin";
 import ChooseTarget from "./ChooseTarget";
 import Clender from "../icon/Clender";
-import { IDate, IPassengerNum } from "@/types/generalType";
+import { IDate, IOpenBox, IPassengerNum } from "@/types/generalType";
 import ChooseDate from "./ChooseDate";
 import DownArrow from "../icon/DownArrow";
 import ChooseNumber from "./ChooseNumber";
+import OriginPage from "../desktop/OriginPage";
 
 function ChooseDestination({
   type,
@@ -22,6 +23,13 @@ function ChooseDestination({
   userDestination,
   userOrigin,
 }: ITravelInfo) {
+  // استیت مربوط به باز کردن باکس در حالت دسکتاپ
+  const [openBox, setOpenBox] = useState<IOpenBox>({
+    isOpen: false,
+    boxName: "",
+  });
+  const { isOpen, boxName } = openBox;
+
   // استیت مربوط به مبدا
   const [originName, setOriginName] = useState<string>(""); // اسم مبدا
   const [selectOrigin, setSelectOrigin] = useState<boolean>(false); // رفتن برای اتنخاب مبدا
@@ -64,7 +72,7 @@ function ChooseDestination({
   useEffect(() => {
     const handleScrollLock = () => {
       if (window.innerWidth < 1024) {
-        if (selectOrigin || selectDestination || selectNumber) {
+        if (selectOrigin || selectDestination) {
           document.body.style.overflow = "hidden";
         } else {
           document.body.style.overflow = "auto";
@@ -82,7 +90,7 @@ function ChooseDestination({
       window.removeEventListener("resize", handleScrollLock);
       document.body.style.overflow = "auto"; // اطمینان از ریست هنگام آنمونت شدن
     };
-  }, [selectOrigin, selectDestination, selectNumber]);
+  }, [selectOrigin, selectDestination]);
 
   useEffect(() => {
     if (categoryName === "airPlane") {
@@ -129,8 +137,9 @@ function ChooseDestination({
           onClick={() => {
             setSelectOrigin(true);
             setStep(1);
+            setOpenBox({ isOpen: true, boxName: "origin" });
           }}
-          className="flex items-center gap-4 rounded-lg bg-slate-200 p-3 text-gray-400 lg:w-1/4 lg:py-3"
+          className="flex items-center gap-4 rounded-lg bg-slate-200 p-3 text-gray-400 lg:relative lg:w-1/4 lg:py-3"
         >
           <span>
             <Mabda width={12} height={18} color="currentColor" />
@@ -142,6 +151,12 @@ function ChooseDestination({
             placeholder={originName}
             className="bg-transparent text-black focus:outline-none"
           />
+          {/* صفحه انتخاب مبدا برای دسکتاپ */}
+          {isOpen && boxName === "origin" ? (
+            <div className="absolute hidden lg:block">
+              <OriginPage />
+            </div>
+          ) : null}
         </div>
         {/* کلید سوییچ */}
         {categoryName === "hotel" ? null : (

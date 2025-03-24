@@ -63,6 +63,11 @@ const ChooseDate: FC<IOriginPage> = ({
     if (!go) {
       setUserDate((userData: any) => ({ ...userData, go: formattedToday }));
     }
+
+    // اسکرول خودکار صفحه به بالا
+    if (window.innerWidth < 1024) {
+      window.scrollTo(0, 0);
+    }
   }, []);
 
   //گرفتن تاریخ رفت
@@ -138,7 +143,7 @@ const ChooseDate: FC<IOriginPage> = ({
   };
 
   return (
-    <div className=" bg-white pb-40">
+    <div className="bg-white pb-40">
       {/* هدر بالا */}
       <div className="flex items-center justify-around bg-blue px-4 py-6 text-white">
         <span onClick={backHandler} className="p-2">

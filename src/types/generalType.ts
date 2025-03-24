@@ -36,3 +36,8 @@ export interface IUserInfoForm {
   confirmPassword: string;
   phoneNumber: string;
 }
+
+export interface IOpenBox {
+  isOpen: boolean;
+  boxName: string;
+}

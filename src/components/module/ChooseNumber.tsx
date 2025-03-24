@@ -50,6 +50,13 @@ function ChooseNumber({
     }
   }, [older12, middle12_2, baby, sum]);
 
+  // اسکرول خودکار صفحه به بالا
+  useEffect(() => {
+    if (window.innerWidth < 1024) {
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
   const minesHandler = (id: string) => {
     setpassengerNum((prevState: any) => ({
       ...prevState,
@@ -104,7 +111,7 @@ function ChooseNumber({
     setStep(0);
   };
   return (
-    <div className="h-screen">
+    <div className="bg-white pb-10">
       {/* هدر بالا */}
       <div className="mb-1 flex items-center justify-between bg-blue px-4 py-6 text-white">
         <span onClick={backHandler} className="p-2">
@@ -142,28 +149,32 @@ function ChooseNumber({
       </ul>
       {/* پیام ارور */}
       {error.isError && error.number === 9 ? (
-        <span className="mr-6 h-1 mt-6 block text-sm font-medium text-red-500">
+        <span className="mr-6 mt-6 block h-1 text-sm font-medium text-red-500">
           _ تعداد مسافران نباید بیشتر از 9 باشد
         </span>
       ) : null}
       {error.isError && error.number === 0 ? (
-        <span className="mr-6 h-1 mt-6 block text-sm font-medium text-red-500">
+        <span className="mr-6 mt-6 block h-1 text-sm font-medium text-red-500">
           _ تعداد مسافران نباید صفر باشد
         </span>
       ) : null}
       {error.isError && error.number === 4 ? (
-        <span className="mr-6 mt-6 h-1 block text-sm font-medium text-red-500">
+        <span className="mr-6 mt-6 block h-1 text-sm font-medium text-red-500">
           _ تعداد مسافران تاکسی نباید بیشتر از پنج باشد
         </span>
       ) : null}
-
-      <button
-        disabled={error.isError}
-        onClick={submitHandler}
-        className="w-full mt-9  rounded-xl bg-blue py-3 font-semibold text-white disabled:opacity-50"
-      >
-        تایید
-      </button>
+      <div className="flex justify-center">
+        {" "}
+        <div className="w-2/3">
+          <button
+            disabled={error.isError}
+            onClick={submitHandler}
+            className="mt-9 w-full rounded-xl bg-blue py-3 font-semibold text-white disabled:opacity-50"
+          >
+            تایید
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

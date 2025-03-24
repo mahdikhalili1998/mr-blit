@@ -60,6 +60,13 @@ function ChooseOrigin({
     filterLocation();
   }, [searchValue]);
 
+  // اسکرول خودکار صفحه به بالا
+  useEffect(() => {
+    if (window.innerWidth < 1024) {
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
   const filterLocation = () => {
     const result = country.filter((item) => {
       return (
