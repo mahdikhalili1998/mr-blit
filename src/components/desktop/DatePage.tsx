@@ -13,12 +13,13 @@ function DatePage({
   setUserDate,
   back,
   way,
+  setOpenBox,
   setSelectedType,
 }: IOriginPage) {
   const [nextLevel, setNextLevel] = useState<number>(0);
   const [calendar, setCalendar] = useState(shamsi); // پیش‌فرض شمسی
   const [locale, setLocale] = useState(shamsiFa); // زبان فارسی در شمسی
-  const [selectedBack, setSelectedBack] = useState<string | null>(back || null);
+  const [selectedBack, setSelectedBack] = useState<string | "">(back || "");
   const [selectedGo, setSelectedGo] = useState(go);
   const [minBackDate, setMinBackDate] = useState<DateObject | null>(null); // تاریخ حداقل برای تقویم برگشت
   const [wayValidation, setWayValidation] = useState<boolean>(false);
@@ -87,13 +88,16 @@ function DatePage({
     }
   };
 
-  const closeHandler = () => {
+  const closeHandler = (e) => {
+    e.stopPropagation();
     if (way === "رفت و برگشت" && !back) {
       setWayValidation(true);
     }
     if (back) {
       setSelectedType((e: any) => ({ ...e, way: "رفت و برگشت" }));
     }
+
+    setOpenBox({ isOpen: false, boxName: "" });
   };
 
   return (
@@ -172,7 +176,7 @@ function DatePage({
           {nextLevel === 0 ? "تایید تاریخ رفت" : "اصلاح تاریخ رفت"}
         </button>
         <button
-          onClick={() => closeHandler()}
+          onClick={(e) => closeHandler(e)}
           className={`${nextLevel === 0 ? "hidden" : "inline-block"} rounded-md bg-blue px-3 py-1 font-medium text-white`}
         >
           تایید

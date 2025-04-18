@@ -48,6 +48,7 @@ export interface IOriginPage {
   boxRef?: any;
   isOpen?: boolean;
   boxName?: string;
+
 }
 
 export interface ISearch {

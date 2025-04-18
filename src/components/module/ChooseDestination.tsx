@@ -31,7 +31,7 @@ function ChooseDestination({
     boxName: "",
   });
   const { isOpen, boxName } = openBox;
-
+  console.log(openBox);
   // مربوط به باز و بسته شدن باکس های دستکتاپ وقتی بیرون محدوده باکس کلیک می‌شود
   const boxRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -279,8 +279,6 @@ function ChooseDestination({
                 back={userDate.back}
                 way={way}
                 setUserDate={setUserDate}
-                isOpen={isOpen}
-                boxName={boxName}
                 setOpenBox={setOpenBox}
                 setSelectedType={setSelectedType}
               />

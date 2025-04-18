@@ -29,7 +29,7 @@ const ChooseDate: FC<IOriginPage> = ({
   setSelectNumber,
 }) => {
   const [selectedGo, setSelectedGo] = useState(go);
-  const [selectedBack, setSelectedBack] = useState<string | null>(back || null);
+  const [selectedBack, setSelectedBack] = useState<string | "">(back || "");
   const [calendar, setCalendar] = useState(shamsi); // پیش‌فرض شمسی
   const [locale, setLocale] = useState(shamsiFa); // زبان فارسی در شمسی
   const today = new DateObject({ calendar: calendar, locale: locale });
@@ -63,7 +63,9 @@ const ChooseDate: FC<IOriginPage> = ({
     if (!go) {
       setUserDate((userData: any) => ({ ...userData, go: formattedToday }));
     }
-
+    if (way === "رفت و برگشت") {
+      setUserDate({ back: "", go: formattedToday });
+    }
     // اسکرول خودکار صفحه به بالا
     if (window.innerWidth < 1024) {
       window.scrollTo(0, 0);
@@ -136,7 +138,11 @@ const ChooseDate: FC<IOriginPage> = ({
     if (back) {
       setSelectedType((e: any) => ({ ...e, way: "رفت و برگشت" }));
     }
-    if (go || (go && back && !wayValidation)) {
+    if (way === "رفت و برگشت" && back) {
+      setStep(4);
+      setSelectNumber(true);
+    }
+    if (way === "یک طرفه" && go) {
       setStep(4);
       setSelectNumber(true);
     }
@@ -170,7 +176,7 @@ const ChooseDate: FC<IOriginPage> = ({
           </span>
           <input
             type="text"
-            value={back || ""}
+            value={back ?? ""}
             readOnly
             placeholder={way === "یک طرفه" ? "برگشت (اختیاری)" : "برگشت"}
             className={`w-28 bg-transparent text-center font-semibold placeholder:text-sm placeholder:text-slate-400 focus:outline-none`}
