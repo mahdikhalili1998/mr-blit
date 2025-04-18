@@ -88,8 +88,8 @@ function DatePage({
     }
   };
 
-  const closeHandler = (e) => {
-    e.stopPropagation();
+  const closeHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     if (way === "رفت و برگشت" && !back) {
       setWayValidation(true);
     }
@@ -176,7 +176,7 @@ function DatePage({
           {nextLevel === 0 ? "تایید تاریخ رفت" : "اصلاح تاریخ رفت"}
         </button>
         <button
-          onClick={(e) => closeHandler(e)}
+          onClick={(event) => closeHandler(event)}
           className={`${nextLevel === 0 ? "hidden" : "inline-block"} rounded-md bg-blue px-3 py-1 font-medium text-white`}
         >
           تایید
