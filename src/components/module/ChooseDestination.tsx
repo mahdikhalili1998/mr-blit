@@ -15,6 +15,7 @@ import ChooseNumber from "./ChooseNumber";
 import OriginPage from "../desktop/OriginPage";
 import TargetPage from "../desktop/TargetPage";
 import DatePage from "../desktop/DatePage";
+import PassengerNum from "../desktop/PassengerNum";
 
 function ChooseDestination({
   type,
@@ -31,7 +32,7 @@ function ChooseDestination({
     boxName: "",
   });
   const { isOpen, boxName } = openBox;
-  console.log(openBox);
+
   // مربوط به باز و بسته شدن باکس های دستکتاپ وقتی بیرون محدوده باکس کلیک می‌شود
   const boxRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -45,6 +46,8 @@ function ChooseDestination({
     } else if (isOpen && boxName === "target") {
       document.addEventListener("mousedown", handleClickOutside);
     } else if (isOpen && boxName === "date") {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else if (isOpen && boxName === "passengerNumber") {
       document.addEventListener("mousedown", handleClickOutside);
     }
 
@@ -291,6 +294,7 @@ function ChooseDestination({
             onClick={() => {
               setSelectNumber(true);
               setStep(4);
+              setOpenBox({ isOpen: true, boxName: "passengerNumber" });
             }}
             className="mt-3 flex items-center justify-between rounded-lg bg-slate-200 p-3 px-4 font-semibold text-black lg:mt-0 lg:w-1/4 lg:gap-1"
           >
@@ -306,6 +310,22 @@ function ChooseDestination({
             <span>
               <DownArrow width={16} height={22} color="currentColor" />
             </span>
+            {/* صفحه ی انتخاب تعداد مسافر برای دسگتاپ */}
+            {isOpen && boxName === "passengerNumber" ? (
+              <div
+                ref={boxRef}
+                className="absolute left-[1rem] top-[25rem] z-20 hidden shadow-lg shadow-gray-400 lg:block"
+              >
+                <PassengerNum
+                  setpassengerNum={setpassengerNum}
+                  older12={older12}
+                  middle12_2={middle12_2}
+                  baby={baby}
+                  calculateNum={calculateNum}
+                  sum={sum}
+                />
+              </div>
+            ) : null}
           </div>
         )}
 

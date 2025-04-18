@@ -163,8 +163,8 @@ function ChooseNumber({
           _ تعداد مسافران تاکسی نباید بیشتر از پنج باشد
         </span>
       ) : null}
+
       <div className="flex justify-center">
-        {" "}
         <div className="w-2/3">
           <button
             disabled={error.isError}
