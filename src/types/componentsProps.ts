@@ -45,6 +45,9 @@ export interface IOriginPage {
   setpassengerNum?: any;
   sum?: number;
   calculateNum?: any;
+  boxRef?: any;
+  isOpen?: boolean;
+  boxName?: string;
 }
 
 export interface ISearch {

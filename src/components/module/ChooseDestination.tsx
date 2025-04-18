@@ -14,6 +14,7 @@ import DownArrow from "../icon/DownArrow";
 import ChooseNumber from "./ChooseNumber";
 import OriginPage from "../desktop/OriginPage";
 import TargetPage from "../desktop/TargetPage";
+import DatePage from "../desktop/DatePage";
 
 function ChooseDestination({
   type,
@@ -43,6 +44,8 @@ function ChooseDestination({
       document.addEventListener("mousedown", handleClickOutside);
     } else if (isOpen && boxName === "target") {
       document.addEventListener("mousedown", handleClickOutside);
+    } else if (isOpen && boxName === "date") {
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
@@ -61,6 +64,7 @@ function ChooseDestination({
   // استیت مربوط به تقویم
   const [selectDate, setSelectDate] = useState<boolean>(false); //رفتن برا صفحه تقویم
   const [userDate, setUserDate] = useState<IDate>({ go: "", back: "" });
+
   const [dateName, setDateName] = useState<string>("");
   //استیت مربوط به انتخاب مسافر
   const [selectNumber, setSelectNumber] = useState<boolean>(false);
@@ -231,7 +235,12 @@ function ChooseDestination({
           </div>
         )}
         {/* تقویم */}
-        <div className="mt-3 flex items-center gap-4 rounded-lg bg-slate-200 p-3 text-gray-400 lg:mt-0 lg:w-1/4">
+        <div
+          onClick={() => {
+            setOpenBox({ isOpen: true, boxName: "date" });
+          }}
+          className="mt-3 flex items-center gap-4 rounded-lg bg-slate-200 p-3 text-gray-400 lg:mt-0 lg:w-1/4"
+        >
           <span>
             <Clender width={15} height={18} color="currentColor" />
           </span>
@@ -244,7 +253,7 @@ function ChooseDestination({
               placeholder="رفت"
               className="mr-1 w-1/2 bg-transparent text-black focus:outline-none"
             />
-            {way === "یک طرفه" ? (
+            {way === "یک طرفه" && !userDate.back ? (
               <span
                 onClick={() => showDateHandler("برگشت")}
               >{`برگشت(اختیاری)`}</span>
@@ -259,6 +268,24 @@ function ChooseDestination({
               />
             )}
           </div>
+          {/* صفحه انتخاب تاریخ برای دسکتاپ */}
+          {isOpen && boxName === "date" ? (
+            <div
+              ref={boxRef}
+              className="absolute right-[33rem] top-[25rem] z-20 hidden lg:block"
+            >
+              <DatePage
+                go={userDate.go}
+                back={userDate.back}
+                way={way}
+                setUserDate={setUserDate}
+                isOpen={isOpen}
+                boxName={boxName}
+                setOpenBox={setOpenBox}
+                setSelectedType={setSelectedType}
+              />
+            </div>
+          ) : null}
         </div>
         {/* تعداد مسافر */}
         {categoryName === "hotel" ? null : (

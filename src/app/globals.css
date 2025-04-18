@@ -7,6 +7,10 @@
   margin-top: 3rem;
 }
 
+.calendarDesktop {
+  transform: scale(1); /* تقویم را ۱۰ درصد بزرگ‌تر می‌کند */
+}
+
 @layer base {
   ::-webkit-scrollbar {
     display: none;
