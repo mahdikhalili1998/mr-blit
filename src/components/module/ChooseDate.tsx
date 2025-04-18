@@ -136,7 +136,7 @@ const ChooseDate: FC<IOriginPage> = ({
     if (back) {
       setSelectedType((e: any) => ({ ...e, way: "رفت و برگشت" }));
     }
-    if (go || (go && back)) {
+    if (go || (go && back && !wayValidation)) {
       setStep(4);
       setSelectNumber(true);
     }
