@@ -1,6 +1,6 @@
 "use client";
 import { IOriginPage } from "@/types/componentsProps";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect } from "react";
 import Mines from "../icon/Mines";
 import Plus from "../icon/Plus";
 import { passengerNumData } from "@/constant/passengerNumberDate";
