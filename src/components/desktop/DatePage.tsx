@@ -7,6 +7,7 @@ import shamsiFa from "react-date-object/locales/persian_fa";
 import miladi from "react-date-object/calendars/gregorian";
 import miladiFa from "react-date-object/locales/gregorian_fa";
 import { IOriginPage } from "@/types/componentsProps";
+import { usePathname } from "next/navigation";
 
 function DatePage({
   go,
@@ -27,6 +28,9 @@ function DatePage({
   const formattedToday = today.format("DD MMMM");
   const weekDays = ["شنبه", "یک", "دو", "سه", "چهار", "پنج", "جمعه"];
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  const params = usePathname();
+  const categoryName = params.split("/").pop();
 
   useEffect(() => {
     if (!go) {
@@ -80,7 +84,11 @@ function DatePage({
   };
 
   // دکمه ی رفتن برای تاریخ برگشت
-  const dateLevelHandler = () => {
+  const dateLevelHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (categoryName === "hotel") {
+      event.stopPropagation();
+      setOpenBox({ isOpen: false, boxName: "" });
+    }
     if (nextLevel === 0) {
       setNextLevel(1);
     } else if (nextLevel === 1) {
@@ -106,7 +114,11 @@ function DatePage({
       <div className="mt-2 flex w-full items-end gap-2">
         <span className="w-1/4 border-t-[1px] border-solid border-blue pb-2"></span>
         <h2 className="w-3/4 text-lg font-semibold text-blue">
-          {nextLevel === 0 ? "انتخاب تاریخ رفت" : "انتخاب تاریخ برگشت"}
+          {categoryName === "hotel"
+            ? "انتخاب تاریخ حضور"
+            : nextLevel === 0
+              ? "انتخاب تاریخ رفت"
+              : "انتخاب تاریخ برگشت"}
         </h2>
       </div>
       {/* تاریخ انتخاب شده و دکمه تغیر مود تقویم */}
@@ -170,7 +182,7 @@ function DatePage({
       {/* دکمه ها */}
       <div className="flex items-center gap-3">
         <button
-          onClick={() => dateLevelHandler()}
+          onClick={(event) => dateLevelHandler(event)}
           className={`${nextLevel === 1 ? "bg-red-500" : "bg-blue"} rounded-md px-3 py-1 font-medium text-white`}
         >
           {nextLevel === 0 ? "تایید تاریخ رفت" : "اصلاح تاریخ رفت"}

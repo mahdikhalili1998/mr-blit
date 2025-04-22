@@ -16,6 +16,7 @@ import OriginPage from "../desktop/OriginPage";
 import TargetPage from "../desktop/TargetPage";
 import DatePage from "../desktop/DatePage";
 import PassengerNum from "../desktop/PassengerNum";
+import { IErrorType } from "@/types/generalType";
 
 function ChooseDestination({
   type,
@@ -81,6 +82,11 @@ function ChooseDestination({
   const calculateNum = () => {
     setSum(older12 + middle12_2 + baby);
   };
+  // مربوط به ارور تعداد مسافران
+  const [error, setError] = useState<IErrorType>({
+    isError: false,
+    number: 0,
+  });
 
   const [switchValue, setSwitchValue] = useState<boolean>(false); // سنجش کلیک روی دکمه سوییچ
   const [step, setStep] = useState<number>(0); // مراحل خرید بلیط
@@ -253,10 +259,15 @@ function ChooseDestination({
               type="text"
               value={userDate.go}
               readOnly={true}
-              placeholder="رفت"
-              className="mr-1 w-1/2 bg-transparent text-black focus:outline-none"
+              placeholder={
+                categoryName === "hotel"
+                  ? " تاریخ حضور (رزرو هتل )"
+                  : "تاریخ رفت"
+              }
+              className={`${categoryName === "hotel" ? "w-full" : "w-1/2"} mr-1bg-transparent bg-transparent text-black focus:outline-none`}
             />
-            {way === "یک طرفه" && !userDate.back ? (
+            {categoryName === "hotel" ? null : way === "یک طرفه" &&
+              !userDate.back ? (
               <span
                 onClick={() => showDateHandler("برگشت")}
               >{`برگشت(اختیاری)`}</span>
@@ -296,9 +307,9 @@ function ChooseDestination({
               setStep(4);
               setOpenBox({ isOpen: true, boxName: "passengerNumber" });
             }}
-            className="mt-3 flex items-center justify-between rounded-lg bg-slate-200 p-3 px-4 font-semibold text-black lg:mt-0 lg:w-1/4 lg:gap-1"
+            className={`${error.isError ? "border-2 border-solid border-red-500" : null} mt-3 flex items-center justify-between rounded-lg bg-slate-200 p-3 px-4 font-semibold text-black lg:mt-0 lg:w-1/4 lg:gap-1`}
           >
-            <div className="flex items-center">
+            <div className={`flex items-center`}>
               <input
                 type="text"
                 value={sum}
@@ -323,6 +334,9 @@ function ChooseDestination({
                   baby={baby}
                   calculateNum={calculateNum}
                   sum={sum}
+                  isError={error.isError}
+                  errorNumber={error.number}
+                  setError={setError}
                 />
               </div>
             ) : null}

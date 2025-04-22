@@ -17,6 +17,9 @@ export interface ITravelInfo {
 }
 
 export interface IOriginPage {
+  isError?: boolean;
+  errorNumber?: number;
+  setError?: any;
   originName?: string;
   setUserOrigin?: any;
   setOpenBox?: any;
@@ -48,7 +51,6 @@ export interface IOriginPage {
   boxRef?: any;
   isOpen?: boolean;
   boxName?: string;
-
 }
 
 export interface ISearch {

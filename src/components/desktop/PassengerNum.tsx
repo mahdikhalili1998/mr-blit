@@ -5,7 +5,6 @@ import Mines from "../icon/Mines";
 import Plus from "../icon/Plus";
 import { passengerNumData } from "@/constant/passengerNumberDate";
 import { usePathname } from "next/navigation";
-import { IErrorType } from "@/types/generalType";
 
 const PassengerNum: FC<IOriginPage> = ({
   setpassengerNum,
@@ -14,12 +13,10 @@ const PassengerNum: FC<IOriginPage> = ({
   baby,
   calculateNum,
   sum,
+  isError,
+  errorNumber,
+  setError,
 }) => {
-  const [error, setError] = useState<IErrorType>({
-    isError: false,
-    number: 0,
-  });
-
   const passengerCounts: Record<string, number> = {
     older12: older12 ?? 0,
     middle12_2: middle12_2 ?? 0,
@@ -91,18 +88,18 @@ const PassengerNum: FC<IOriginPage> = ({
         ))}
       </ul>
       {/* پیام ارور */}
-      {error.isError && error.number === 9 ? (
-        <span className="mt-5 pb-5 block h-1 text-sm font-medium text-red-500">
+      {isError && errorNumber === 9 ? (
+        <span className="mt-5 block h-1 pb-5 text-sm font-medium text-red-500">
           _ تعداد مسافران نباید بیشتر از 9 باشد
         </span>
       ) : null}
-      {error.isError && error.number === 0 ? (
-        <span className="mt-5 pb-5 block h-1 text-sm font-medium text-red-500">
+      {isError && errorNumber === 0 ? (
+        <span className="mt-5 block h-1 pb-5 text-sm font-medium text-red-500">
           _ تعداد مسافران نباید صفر باشد
         </span>
       ) : null}
-      {error.isError && error.number === 4 ? (
-        <span className="mt-5 pb-5 block h-1 text-sm font-medium text-red-500">
+      {isError && errorNumber === 4 ? (
+        <span className="mt-5 block h-1 pb-5 text-sm font-medium text-red-500">
           _ تعداد مسافران تاکسی نباید بیشتر از پنج باشد
         </span>
       ) : null}
