@@ -28,7 +28,7 @@ function Header() {
   return (
     <div className="relative">
       <div
-        className={`sticky top-0 z-30 bg-blue pb-4 lg:relative lg:bg-transparent ${categoryName === "hotel" ? "lg:h-[16rem] lg:bg-[url(/image/hotel-desktop.svg)]" : "lg:h-[13rem] lg:bg-[url(/image/mainDesktopbg.png)]"} lg:bg-[length:120%] lg:pb-40`}
+        className={`sticky top-0 z-30 bg-blue pb-4 lg:relative lg:bg-transparent ${categoryName === "hotel" ? "1200:h-[21rem] 1400:h-[23rem] 1120:h-[18rem] lg:h-[16rem] lg:bg-[url(/image/hotel-desktop.svg)]" : "1120:h-[16rem] lg:h-[13rem] lg:bg-[url(/image/mainDesktopbg.png)] xl:h-[17.8rem] 2xl:h-[21.1rem]"} lg:bg-[length:120%] lg:pb-40`}
       >
         <Link
           href={"/"}
@@ -47,7 +47,7 @@ function Header() {
       </div>
       {/* مربوط به وسیله نقلیه ی دسکتاپ */}
       <span
-        className={`${categoryName === "hotel" ? "hidden" : "block"} ${categoryName === "airPlane" ? "top-[75px]" : null} ${categoryName === "train" ? "top-[105px]" : null} ${categoryName === "bus" ? "top-[95px]" : null} ${categoryName === "taxi" ? "top-[100px]" : null} absolute z-20 ${isChangeRoute ? "-translate-x-full opacity-0" : "-translate-x-20 opacity-100"} hidden transition-all duration-500 ease-in-out lg:block`}
+        className={`${categoryName === "hotel" ? "hidden" : "block"} ${categoryName === "airPlane" ? "1090:top-[90px] 1155:top-[100px] 1230:top-[110px] 1292:top-[119px] 1292:right-7 1368:top-[130px] 1450:top-[140px] 1450:right-10 right-4 top-[80px]" : null} ${categoryName === "train" ? "1055:top-[120px] 1140:top-[135px] 1250:top-[145px] 1315:top-[160px] 1420:top-[175px] 1420:right-10 1510:top-[190px] right-2 top-[105px]" : null} ${categoryName === "bus" ? "top-[95px]" : null} ${categoryName === "taxi" ? "top-[100px]" : null} absolute z-20 ${isChangeRoute ? "-translate-x-full opacity-0" : "-translate-x-20 opacity-100"} hidden transition-all duration-500 ease-in-out lg:block`}
       >
         <Image
           src={`/image/${device}-desktop.svg`}
