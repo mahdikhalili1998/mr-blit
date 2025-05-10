@@ -8,7 +8,7 @@ function Layout({ children }: LayoutProps) {
     <div>
       <Header />
       <div>{children}</div>
-      <div>
+      <div className="lg:hidden">
         <Shortcut />
       </div>
       <Footer />

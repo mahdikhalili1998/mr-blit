@@ -132,6 +132,11 @@ function NineYears() {
         <Swiper
           slidesPerView={"auto"}
           spaceBetween={30}
+          breakpoints={{
+            1400: {
+              spaceBetween: 70, // در سایز 1280 پیکسل یا بیشتر
+            },
+          }}
           pagination={{
             clickable: true,
           }}

@@ -39,6 +39,10 @@ function StationSlider() {
           clickable: true,
         }}
         breakpoints={{
+          650: {
+            slidesPerView: 4, // برای عرض 768px دو اسلاید نشون بده
+            spaceBetween: 35, // فاصله کمتر بین اسلایدها
+          },
           768: {
             slidesPerView: 4, // برای عرض 768px دو اسلاید نشون بده
             spaceBetween: 25, // فاصله کمتر بین اسلایدها
@@ -51,13 +55,13 @@ function StationSlider() {
             <div className="flex flex-col items-center justify-center">
               <Image
                 src={item.src}
-                width={200}
-                height={200}
+                width={100}
+                height={100}
                 alt={item.name}
                 priority
-                className="relative rounded-md"
+                className={`rounded-m relative`}
               />
-              <span className="w-max text-xs font-medium">{item.name}</span>
+              <span className={`w-max text-xs font-medium`}>{item.name}</span>
             </div>
           </SwiperSlide>
         ))}

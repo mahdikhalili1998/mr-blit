@@ -2,15 +2,34 @@
 
 import Link from "next/link";
 import FirstSecH from "../module/Header/FirstSecH";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
-import { routeDesktop } from "@/constant/DataForMap";
+import { desktopSiteMap, routeDesktop } from "@/constant/DataForMap";
+
+import DownArrow from "../icon/DownArrow";
 
 function Header() {
   const [device, setDevice] = useState("");
   const [isChangeRoute, setIsChangeRoute] = useState(false);
-  // console.log(isChangeRoute);
+  // برای hover کردن روی گزینه ها
+  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
+  const closeTimer = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = (index: number) => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+    setHoverIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    closeTimer.current = setTimeout(() => {
+      setHoverIndex(null);
+    }, 300); // می‌تونی این عدد رو کمتر یا بیشتر کنی
+  };
+  // برای گرفتن نام مسیر فعلی
   const router = useRouter();
   const params = usePathname();
   const categoryName = params.split("/").pop() || "";
@@ -59,7 +78,7 @@ function Header() {
   return (
     <div className="relative">
       <div
-        className={`sticky top-0 z-30 bg-blue pb-4 lg:relative lg:bg-transparent ${categoryName === "hotel" ? "lg:h-[16rem] lg:bg-[url(/image/hotel-desktop.svg)] 1120:h-[18rem] 1200:h-[21rem] 1400:h-[23rem]" : "lg:h-[13rem] lg:bg-[url(/image/mainDesktopbg.png)] 1120:h-[16rem] xl:h-[17.8rem] 2xl:h-[21.1rem]"} lg:bg-[length:120%] lg:pb-40`}
+        className={`sticky top-0 z-30 bg-blue pb-4 lg:relative lg:bg-transparent ${categoryName === "hotel" ? "lg:h-[16rem] lg:bg-[url(/image/hotel-desktop.svg)] 1120:h-[18rem] 1200:h-[21rem] 1400:h-[23rem]" : "lg:h-[13rem] lg:bg-[url(/image/mainDesktopbg.png)] 1120:h-[16rem] xl:h-[17.8rem] 2xl:h-[21.1rem]"} lg:flex lg:items-start lg:justify-between lg:bg-[length:120%] lg:pb-40`}
       >
         <Link
           href={"/"}
@@ -72,13 +91,51 @@ function Header() {
             بلیط هواپیما و رزرو هتل
           </p>
         </Link>
+        {/* مربوط به گزینه های بیشتر در دستکتاپ */}
+        <div className="relative ml-14 hidden lg:mr-2 lg:mt-2 lg:flex lg:gap-14">
+          {desktopSiteMap.map((item, index) => (
+            <div
+              key={index}
+              className="relative"
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={handleMouseLeave}
+            >
+              <ul className="flex cursor-pointer items-center gap-1 font-medium text-white">
+                <li>{item.icon}</li>
+                <li>{item.name}</li>
+                <li>
+                  <DownArrow width={16} height={13} color="currentColor" />
+                </li>
+              </ul>
+
+              {hoverIndex === index && (
+                <div className="absolute left-0 top-full z-50 mt-2 min-w-[150px] rounded bg-green-600 p-2 shadow">
+                  <p className="p-1 text-white hover:bg-green-700">
+                    Additional 1
+                  </p>
+                  <p className="p-1 text-white hover:bg-green-700">
+                    Additional 2
+                  </p>
+                  <p className="p-1 text-white hover:bg-green-700">
+                    Additional 3
+                  </p>
+                  <p className="p-1 text-white hover:bg-green-700">
+                    Additional 4
+                  </p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* مربوط به اتخاب روت در موبایل */}
         <div className="sticky top-0 z-20 lg:hidden">
           <FirstSecH />
         </div>
       </div>
       {/* مربوط به وسیله نقلیه ی دسکتاپ */}
       <span
-        className={`${categoryName === "hotel" ? "hidden" : "block"} ${categoryName === "airPlane" ? "1350:right-12 right-4" : null} ${categoryName === "train" ? "1350:right-10 right-2 1120:right-6" : null} ${categoryName === "bus" ? `1120:right-4 1292:right-8 1510:right-14` : null} ${categoryName === "taxi" ? "right-3 1200:right-7 1400:right-10" : null} absolute z-20 ${isChangeRoute ? "-translate-x-full opacity-0" : "-translate-x-20 opacity-100"} hidden transition-all duration-500 ease-in-out lg:block`}
+        className={`${categoryName === "hotel" ? "hidden" : "block"} ${categoryName === "airPlane" ? "right-4 1350:right-12" : null} ${categoryName === "train" ? "right-2 1120:right-6 1350:right-10" : null} ${categoryName === "bus" ? `1120:right-4 1292:right-8 1510:right-14` : null} ${categoryName === "taxi" ? "right-3 1200:right-7 1400:right-10" : null} absolute z-20 ${isChangeRoute ? "-translate-x-full opacity-0" : "-translate-x-20 opacity-100"} hidden transition-all duration-500 ease-in-out lg:block`}
         style={
           categoryName === "bus"
             ? { top: `${topOffset}px` }
@@ -97,7 +154,7 @@ function Header() {
           width={400}
           height={400}
           priority
-          className={` ${categoryName === "taxi" ? "lg:w-[11rem] 1200:w-[13rem] 1400:w-[14rem]" : categoryName === "bus" ? "lg:w-[14rem] 1200:w-[16rem] 1400:w-[20rem]" : categoryName === "train" ? "lg:w-[22rem] 1120:w-[26rem] 1315:w-[30rem]" : categoryName === "airPlane" ? "1350:w-[22rem] lg:w-[20rem]" : "w-[22rem]"} ${categoryName === "hotel" ? "hidden" : "block"} `}
+          className={` ${categoryName === "taxi" ? "lg:w-[11rem] 1200:w-[13rem] 1400:w-[14rem]" : categoryName === "bus" ? "lg:w-[14rem] 1200:w-[16rem] 1400:w-[20rem]" : categoryName === "train" ? "lg:w-[22rem] 1120:w-[26rem] 1315:w-[30rem]" : categoryName === "airPlane" ? "lg:w-[20rem] 1350:w-[22rem]" : "w-[22rem]"} ${categoryName === "hotel" ? "hidden" : "block"} `}
         />
       </span>
       {/* انتخاب مسیر در دستکتاپ */}

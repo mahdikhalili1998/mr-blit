@@ -21,6 +21,9 @@ import HotelDesktop from "@/components/icon/HotelDesktop";
 import TrainDesktop from "@/components/icon/TrainDesktop";
 import BusDesktop from "@/components/icon/BusDesktop";
 import TaxiDesktop from "@/components/icon/TaxiDesktop";
+import DownArrow from "@/components/icon/DownArrow";
+import SupportTime from "@/components/icon/SupportTime";
+import Rahkar from "@/components/icon/Rahkar";
 
 export const ourSite = [
   {
@@ -342,5 +345,24 @@ export const routeDesktop = [
     icon: <TaxiDesktop height={40} width={40} color="currentColor" />,
     text: "تاکسی",
     name: "taxi",
+  },
+];
+
+export const desktopSiteMap = [
+  {
+    name: "خدمات سفر",
+    icon: null,
+  },
+  {
+    name: "راهکارهای سازمانی",
+    icon: <Rahkar height={18} width={20} color="currentColor" />,
+  },
+  {
+    name: "پشتیبانی",
+    icon: <SupportTime height={18} width={20} color="currentColor" />,
+  },
+  {
+    name: "پیگیری بلیط",
+    icon: <MyThicket height={18} width={20} color="currentColor" />,
   },
 ];

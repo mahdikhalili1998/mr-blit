@@ -40,7 +40,7 @@ function TrainText() {
           height={200}
           priority
           alt="planeTicket"
-          className="w-full rounded-lg"
+          className="w-full rounded-lg lg:mx-auto lg:w-[45rem]"
         />
       </div>
       <h4>خرید بلیط قطار</h4>
@@ -154,7 +154,7 @@ function TrainText() {
           height={200}
           priority
           alt="planeTicket"
-          className="w-full rounded-lg"
+          className="w-full rounded-lg lg:mx-auto lg:w-[45rem]"
         />
       </div>
       <h4>شرایط رزرو بلیط قطار</h4>

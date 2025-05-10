@@ -94,13 +94,18 @@ function Footer() {
         <Swiper
           slidesPerView={"auto"}
           spaceBetween={30}
+          breakpoints={{
+            1280: {
+              spaceBetween: 70, // در سایز 1280 پیکسل یا بیشتر
+            },
+          }}
           pagination={{
             clickable: true,
           }}
           className="mySwiper"
         >
           {document.map((item, index) => (
-            <SwiperSlide key={index} className={styles.customSlidDocs}>
+            <SwiperSlide key={index} className={`${styles.customSlidDocs}`}>
               <Image
                 src={item.src}
                 alt="logo"

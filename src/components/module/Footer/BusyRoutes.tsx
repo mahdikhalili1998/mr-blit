@@ -19,9 +19,9 @@ function BusyRoutes() {
   }, [categoryNames]);
 
   return categoryName ? (
-    <div className="mt-5 space-y-2 bg-[#e8f1fa] py-5">
+    <div className="mt-5 flex flex-col items-center justify-center gap-2 bg-[#e8f1fa] py-5">
       <h1 className="text-center text-xl font-semibold">مسیر های پر تردد</h1>
-      <p className="mt-2 w-max text-xs text-slate-500">
+      <p className="my-2 w-max text-xs text-slate-500">
         ارزان ترین و سریعترین مسیرها را با بیش از 500 شریک رسمی انتخاب کنید
       </p>
       {busyRoutes.map((item, index) => (
