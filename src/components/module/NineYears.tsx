@@ -72,36 +72,60 @@ function NineYears() {
           <RotateLoader color="#0f84fa" />
         </div>
       ) : (
-        <Swiper
-          modules={[Pagination]}
-          slidesPerView={"auto"}
-          spaceBetween={30}
-          pagination={{
-            clickable: true,
-          }}
-          className={styles.swiperContainer}
-        >
-          <SwiperSlide className={styles.swiperSlide}>
-            <Image
-              src={imageSrc.first}
-              alt="photo"
-              width={200}
-              height={200}
-              priority
-              className="rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className={styles.swiperSlide}>
+        <>
+          {/* // مربوط به اسکرین موبایل */}
+          <div className="lg:hidden">
+            <Swiper
+              modules={[Pagination]}
+              slidesPerView={"auto"}
+              spaceBetween={30}
+              pagination={{
+                clickable: true,
+              }}
+              className={styles.swiperContainer}
+            >
+              <SwiperSlide className={styles.swiperSlide}>
+                <Image
+                  src={imageSrc.first}
+                  alt="photo"
+                  width={200}
+                  height={200}
+                  priority
+                  className="rounded-lg"
+                />
+              </SwiperSlide>
+              <SwiperSlide className={styles.swiperSlide}>
+                <Image
+                  src={imageSrc.second}
+                  alt="photo"
+                  width={200}
+                  height={200}
+                  priority
+                  className="rounded-lg"
+                />
+              </SwiperSlide>
+            </Swiper>
+          </div>
+          {/* مربوط به اسکرین دستکتاپ */}
+          <div className="mx-2 hidden justify-around gap-4 lg:flex">
             <Image
               src={imageSrc.second}
               alt="photo"
-              width={200}
-              height={200}
+              width={550}
+              height={550}
               priority
               className="rounded-lg"
             />
-          </SwiperSlide>
-        </Swiper>
+            <Image
+              src={imageSrc.first}
+              alt="photo"
+              width={550}
+              height={550}
+              priority
+              className="rounded-lg"
+            />
+          </div>
+        </>
       )}
       {/* اسلایدر شهر ها */}
       <div className="py-10">
@@ -130,7 +154,7 @@ function NineYears() {
                 {/* لایه رنگی */}
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-b from-transparent via-blue/70 to-blue/100 opacity-60"></div>
               </div>
-              <span className="600:left-8 absolute bottom-2 left-12 text-xs font-medium text-white sm:left-10">
+              <span className="absolute bottom-2 left-12 text-xs font-medium text-white 600:left-8 sm:left-10">
                 {categoryName === "hotel"
                   ? `هتل ${item.cityName}`
                   : `بیلط ${item.cityName}`}

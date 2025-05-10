@@ -16,24 +16,32 @@ function Header() {
   const categoryName = params.split("/").pop() || "";
   // برای ریسپانسیو سازی موقعیت وسیله نقلیه ی درون هدر
   const [topOffset, setTopOffset] = useState(100); // مقدار اولیه top
-  console.log(topOffset);
+
   // برای گوس دادن ب اندازه صفحه کاربر
   useEffect(() => {
     const handleResize = () => {
       const screenWidth = window.innerWidth;
       const baseWidth = 1024;
-      const baseTop = 100;
-
+      let baseTop = 100;
+      if (categoryName === "train") {
+        baseTop = 108;
+      }
+      if (categoryName === "airPlane") {
+        baseTop = 85;
+      }
       const extra = screenWidth > baseWidth ? screenWidth - baseWidth : 0;
       const steps = Math.floor(extra / 36);
-      const newTop = baseTop + steps * 5;
-
+      let newTop = baseTop + steps * 4;
+      if (categoryName === "train") {
+        newTop = baseTop + steps * 5;
+      }
+      if (categoryName === "airPlane") {
+        newTop = baseTop + steps * 5;
+      }
       setTopOffset(newTop);
     };
-
     handleResize(); // مقدار اولیه
     window.addEventListener("resize", handleResize);
-
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -70,8 +78,18 @@ function Header() {
       </div>
       {/* مربوط به وسیله نقلیه ی دسکتاپ */}
       <span
-        className={`${categoryName === "hotel" ? "hidden" : "block"} ${categoryName === "airPlane" ? "right-4 top-[80px] 1090:top-[90px] 1155:top-[100px] 1230:top-[110px] 1292:right-7 1292:top-[119px] 1368:top-[130px] 1450:right-10 1450:top-[140px]" : null} ${categoryName === "train" ? "right-2 top-[105px] 1055:top-[120px] 1140:top-[135px] 1250:top-[145px] 1315:top-[160px] 1420:right-10 1420:top-[175px] 1510:top-[190px]" : null} ${categoryName === "bus" ? `1120:right-4 1292:right-8 1510:right-14` : null} ${categoryName === "taxi" ? "top-[100px]" : null} absolute z-20 ${isChangeRoute ? "-translate-x-full opacity-0" : "-translate-x-20 opacity-100"} hidden transition-all duration-500 ease-in-out lg:block`}
-        style={categoryName === "bus" ? { top: `${topOffset}px` } : undefined}
+        className={`${categoryName === "hotel" ? "hidden" : "block"} ${categoryName === "airPlane" ? "1350:right-12 right-4" : null} ${categoryName === "train" ? "1350:right-10 right-2 1120:right-6" : null} ${categoryName === "bus" ? `1120:right-4 1292:right-8 1510:right-14` : null} ${categoryName === "taxi" ? "right-3 1200:right-7 1400:right-10" : null} absolute z-20 ${isChangeRoute ? "-translate-x-full opacity-0" : "-translate-x-20 opacity-100"} hidden transition-all duration-500 ease-in-out lg:block`}
+        style={
+          categoryName === "bus"
+            ? { top: `${topOffset}px` }
+            : categoryName === "taxi"
+              ? { top: `${topOffset}px` }
+              : categoryName === "train"
+                ? { top: `${topOffset}px` }
+                : categoryName === "airPlane"
+                  ? { top: `${topOffset}px` }
+                  : undefined
+        }
       >
         <Image
           src={`/image/${device}-desktop.svg`}
@@ -79,7 +97,7 @@ function Header() {
           width={400}
           height={400}
           priority
-          className={` ${categoryName === "taxi" ? "w-[10rem]" : "w-[22rem]"} ${categoryName === "hotel" ? "hidden" : "block"} ${categoryName === "bus" ? "w-[13rem]" : "w-[22rem]"}`}
+          className={` ${categoryName === "taxi" ? "lg:w-[11rem] 1200:w-[13rem] 1400:w-[14rem]" : categoryName === "bus" ? "lg:w-[14rem] 1200:w-[16rem] 1400:w-[20rem]" : categoryName === "train" ? "lg:w-[22rem] 1120:w-[26rem] 1315:w-[30rem]" : categoryName === "airPlane" ? "1350:w-[22rem] lg:w-[20rem]" : "w-[22rem]"} ${categoryName === "hotel" ? "hidden" : "block"} `}
         />
       </span>
       {/* انتخاب مسیر در دستکتاپ */}
