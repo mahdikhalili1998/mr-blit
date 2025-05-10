@@ -21,7 +21,6 @@ import HotelDesktop from "@/components/icon/HotelDesktop";
 import TrainDesktop from "@/components/icon/TrainDesktop";
 import BusDesktop from "@/components/icon/BusDesktop";
 import TaxiDesktop from "@/components/icon/TaxiDesktop";
-import DownArrow from "@/components/icon/DownArrow";
 import SupportTime from "@/components/icon/SupportTime";
 import Rahkar from "@/components/icon/Rahkar";
 
