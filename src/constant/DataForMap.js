@@ -365,3 +365,31 @@ export const desktopSiteMap = [
     icon: <MyThicket height={18} width={20} color="currentColor" />,
   },
 ];
+
+export const desktopTravelOption = [
+  { text: "بلیط هواپیما", link: "airPlane" },
+  { text: "رزرو هتل ", link: "hotel" },
+  { text: "بلیط قطار", link: "train" },
+  { text: "بلیط اتوبوس", link: "bus" },
+  { text: "بیلط تاکسی", link: "taxi" },
+];
+
+export const desktopRahkarSazmani = [
+  { text: "بلیط سازمانی" },
+  { text: "سفر کارت" },
+  { text: "اتاق سازمانی" },
+  { text: "امکانات پرو مکس" },
+];
+
+export const desktopPeygiri = [
+  { text: "بررسی بلیط های فعلی" },
+  { text: "بررسی کنسلی ها" },
+  { text: "وضعیت  بلیط ها" },
+];
+
+export const desktopSupport = [
+  { text: "ارتباط با واحد فروش" },
+  { text: "ارتباط با واحد فنی" },
+  { text: "شماره تماس ما" },
+  { text: "ارتباط با مدیر" },
+];

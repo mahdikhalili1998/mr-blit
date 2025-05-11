@@ -5,7 +5,14 @@ import FirstSecH from "../module/Header/FirstSecH";
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
-import { desktopSiteMap, routeDesktop } from "@/constant/DataForMap";
+import {
+  desktopSiteMap,
+  routeDesktop,
+  desktopTravelOption,
+  desktopRahkarSazmani,
+  desktopPeygiri,
+  desktopSupport,
+} from "@/constant/DataForMap";
 
 import DownArrow from "../icon/DownArrow";
 
@@ -15,6 +22,21 @@ function Header() {
   // برای hover کردن روی گزینه ها
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const closeTimer = useRef<NodeJS.Timeout | null>(null);
+  // برای گرفتن اطلاعات گزینه های هاور شده
+  const [optionText, setOptionText] = useState<string>("");
+  const [optionList, setOptionList] = useState<object[]>([]);
+
+  useEffect(() => {
+    if (optionText === "خدمات سفر") {
+      setOptionList(desktopTravelOption);
+    } else if (optionText === "راهکارهای سازمانی") {
+      setOptionList(desktopRahkarSazmani);
+    } else if (optionText === "پیگیری بلیط") {
+      setOptionList(desktopPeygiri);
+    } else if (optionText === "پشتیبانی") {
+      setOptionList(desktopSupport);
+    }
+  }, [optionText]);
 
   const handleMouseEnter = (index: number) => {
     if (closeTimer.current) {
@@ -43,7 +65,7 @@ function Header() {
       const baseWidth = 1024;
       let baseTop = 100;
       if (categoryName === "train") {
-        baseTop = 108;
+        baseTop = 110;
       }
       if (categoryName === "airPlane") {
         baseTop = 85;
@@ -97,10 +119,13 @@ function Header() {
             <div
               key={index}
               className="relative"
-              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseEnter={() => {
+                handleMouseEnter(index);
+                setOptionText(item.name);
+              }}
               onMouseLeave={handleMouseLeave}
             >
-              <ul className="flex cursor-pointer items-center gap-1 font-medium text-white">
+              <ul className="flex cursor-pointer items-center gap-1 text-lg font-medium text-white">
                 <li>{item.icon}</li>
                 <li>{item.name}</li>
                 <li>
@@ -109,20 +134,16 @@ function Header() {
               </ul>
 
               {hoverIndex === index && (
-                <div className="absolute left-0 top-full z-50 mt-2 min-w-[150px] rounded bg-green-600 p-2 shadow">
-                  <p className="p-1 text-white hover:bg-green-700">
-                    Additional 1
-                  </p>
-                  <p className="p-1 text-white hover:bg-green-700">
-                    Additional 2
-                  </p>
-                  <p className="p-1 text-white hover:bg-green-700">
-                    Additional 3
-                  </p>
-                  <p className="p-1 text-white hover:bg-green-700">
-                    Additional 4
-                  </p>
-                </div>
+                <ul className="absolute left-0 top-full z-50 mt-2 min-w-[150px] space-y-4 rounded bg-white p-2 shadow">
+                  {optionList.map((item, index) => (
+                    <li
+                      className="rounded-md pr-3 font-medium text-black hover:bg-blue hover:text-white py-2"
+                      key={index}
+                    >
+                      {item.text}
+                    </li>
+                  ))}
+                </ul>
               )}
             </div>
           ))}
