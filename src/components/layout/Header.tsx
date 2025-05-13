@@ -16,6 +16,13 @@ import {
 
 import DownArrow from "../icon/DownArrow";
 
+import DesktopProfile from "../icon/DesktopProfile";
+
+interface IDesktop {
+  text?: string;
+  link?: string;
+}
+
 function Header() {
   const [device, setDevice] = useState("");
   const [isChangeRoute, setIsChangeRoute] = useState(false);
@@ -24,7 +31,7 @@ function Header() {
   const closeTimer = useRef<NodeJS.Timeout | null>(null);
   // برای گرفتن اطلاعات گزینه های هاور شده
   const [optionText, setOptionText] = useState<string>("");
-  const [optionList, setOptionList] = useState<object[]>([]);
+  const [optionList, setOptionList] = useState<IDesktop[]>([]);
 
   useEffect(() => {
     if (optionText === "خدمات سفر") {
@@ -137,7 +144,7 @@ function Header() {
                 <ul className="absolute left-0 top-full z-50 mt-2 min-w-[150px] space-y-4 rounded bg-white p-2 shadow">
                   {optionList.map((item, index) => (
                     <li
-                      className="rounded-md pr-3 font-medium text-black hover:bg-blue hover:text-white py-2"
+                      className="rounded-md py-2 pr-3 font-medium text-black hover:bg-blue hover:text-white"
                       key={index}
                     >
                       {item.text}
@@ -147,6 +154,30 @@ function Header() {
               )}
             </div>
           ))}
+          {/* مربوط به گزینه ی اکانت و یا اطالاعات حساب */}
+          <ul
+            onMouseEnter={() => {
+              handleMouseEnter(6);
+              setOptionText("account");
+            }}
+            onMouseLeave={handleMouseLeave}
+            className="flex cursor-pointer items-center gap-1 text-lg font-medium text-white"
+          >
+            <li>
+              <DesktopProfile width={22} height={19} color="currentColor" />
+            </li>
+            <li>ورود به حساب کاربری</li>
+            <li>
+              <DownArrow width={16} height={13} color="currentColor" />
+            </li>
+            {hoverIndex === 6 && (
+              <ul className="absolute left-0 top-full z-50 mt-2 min-w-[150px] space-y-4 rounded bg-white p-2 shadow">
+                <li className="rounded-md py-2 pr-3 font-medium text-black hover:bg-blue hover:text-white">
+                  ghjghjghj
+                </li>
+              </ul>
+            )}
+          </ul>
         </div>
 
         {/* مربوط به اتخاب روت در موبایل */}
