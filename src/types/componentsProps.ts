@@ -80,3 +80,7 @@ export interface ProfilePageProps {
     userId: string;
   };
 }
+
+export interface IDesktopSignUpModal {
+  setIsOpenModal: any;
+}

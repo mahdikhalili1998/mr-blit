@@ -39,6 +39,11 @@ export async function POST(req: NextRequest) {
           { status: STATUS.NOT_FOUND },
         );
       }
+    } else {
+      return NextResponse.json(
+        { message: "User ID or phone is required" },
+        { status: 400 },
+      );
     }
   } catch (error) {
     console.log(error);

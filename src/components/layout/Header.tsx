@@ -21,6 +21,7 @@ import DesktopProfile from "../icon/DesktopProfile";
 import axios from "axios";
 import { formatName } from "@/helper/function";
 import LeftIcon from "../icon/LeftIcon";
+import SignUp from "../desktop/SignUp";
 
 interface IDesktop {
   text?: string;
@@ -220,14 +221,8 @@ function Header() {
                   ></div>
 
                   {/* پنجره بازشو */}
-                  <div className="fixed right-10 top-20 z-50 w-64 rounded-lg bg-white p-4 shadow-lg">
-                    <p className="text-black">محتوای پنجره یا پروفایل کاربری</p>
-                    <button
-                      onClick={() => setIsOpenModal(false)}
-                      className="bg-blue-500 mt-4 rounded px-4 py-2 text-white"
-                    >
-                      بستن
-                    </button>
+                  <div className="fixed right-[25%] top-20 z-50 w-2/4 rounded-lg bg-white p-4 shadow-lg">
+                    <SignUp setIsOpenModal={setIsOpenModal} />
                   </div>
                 </div>
               )}
