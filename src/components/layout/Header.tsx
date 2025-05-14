@@ -21,7 +21,6 @@ import DesktopProfile from "../icon/DesktopProfile";
 import axios from "axios";
 import { formatName } from "@/helper/function";
 import LeftIcon from "../icon/LeftIcon";
-import { div } from "framer-motion/client";
 
 interface IDesktop {
   text?: string;
@@ -34,6 +33,10 @@ function Header() {
     lastName: "",
     phoneNumber: "",
   });
+  // برای زمانی که کاربر احراز هویت نکرده
+  const [userNotFound, setUserNotFound] = useState<boolean>(false);
+  // برای زمانی که کاربر در دستکتاپ میخاد احراز هویت بکنه
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [bioName, setBioName] = useState("");
   const [device, setDevice] = useState("");
   const [isChangeRoute, setIsChangeRoute] = useState(false);
@@ -123,8 +126,8 @@ function Header() {
             });
           }
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
+          setUserNotFound(true);
         });
     };
     fetchData();
@@ -133,8 +136,6 @@ function Header() {
   useEffect(() => {
     if (userData.phoneNumber) {
       setBioName(userData.name);
-    } else {
-      null;
     }
   }, [userData]);
 
@@ -196,82 +197,115 @@ function Header() {
             </div>
           ))}
           {/* مربوط به گزینه ی اکانت و یا اطالاعات حساب */}
-          <ul
-            onMouseEnter={() => {
-              handleMouseEnter(6);
-              setOptionText("account");
-            }}
-            onMouseLeave={handleMouseLeave}
-            className="flex cursor-pointer items-center gap-1 text-lg font-medium text-white"
-          >
-            <li>
-              <DesktopProfile width={22} height={19} color="currentColor" />
-            </li>
-            <li>
-              {!userData.phoneNumber ? (
-                "ورود به حساب "
-              ) : (
+          {userNotFound ? (
+            <>
+              <ul
+                onClick={() => setIsOpenModal(true)}
+                className="flex cursor-pointer items-center gap-1 text-lg font-medium text-white"
+              >
+                <li>
+                  <DesktopProfile width={22} height={19} color="currentColor" />
+                </li>
+                <li>ورود به حساب کاربری</li>
+                <li>
+                  <DownArrow width={16} height={13} color="currentColor" />
+                </li>
+              </ul>
+              {isOpenModal && (
+                <div className="z-[80]">
+                  {/* بک‌درپ تار */}
+                  <div
+                    onClick={() => setIsOpenModal(false)}
+                    className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm"
+                  ></div>
+
+                  {/* پنجره بازشو */}
+                  <div className="fixed right-10 top-20 z-50 w-64 rounded-lg bg-white p-4 shadow-lg">
+                    <p className="text-black">محتوای پنجره یا پروفایل کاربری</p>
+                    <button
+                      onClick={() => setIsOpenModal(false)}
+                      className="bg-blue-500 mt-4 rounded px-4 py-2 text-white"
+                    >
+                      بستن
+                    </button>
+                  </div>
+                </div>
+              )}
+            </>
+          ) : (
+            <ul
+              onMouseEnter={() => {
+                handleMouseEnter(6);
+                setOptionText("account");
+              }}
+              onMouseLeave={handleMouseLeave}
+              className="flex cursor-pointer items-center gap-1 text-lg font-medium text-white"
+            >
+              <li>
+                <DesktopProfile width={22} height={19} color="currentColor" />
+              </li>
+              <li>
                 <span className="flex items-center justify-center rounded-full border-2 border-solid border-white bg-blue px-[6px] py-1">
                   {formatName(bioName)}
                 </span>
-              )}
-            </li>
-            <li>
-              <DownArrow width={16} height={13} color="currentColor" />
-            </li>
-            {hoverIndex === 6 && (
-              <ul className="absolute left-0 top-full z-50 mt-2 min-w-[150px] space-y-4 rounded bg-white p-2 shadow">
-                {/* سطح برنزی */}
-                <li className="rounded-md bg-[#ffede2] px-1 py-2">
-                  <div className="flex items-center gap-1">
-                    <Image
-                      src="/image/level1.png"
-                      width={100}
-                      height={100}
-                      alt="level 1"
-                      priority
-                      className="size-[1.5rem]"
-                    />
-                    <span className="text-sm font-semibold text-black">
-                      مستر بلیط کلاب{" "}
-                    </span>
-                    <LeftIcon width={18} height={15} color="#000000" />
-                  </div>
-                  <span className="pr-3 text-xs font-semibold text-black">
-                    سطح برنزی |0 امتیاز{" "}
-                  </span>
-                </li>
-                {/* لیست گزینه ها */}
-                <li className="space-y-4">
-                  {desktopProfileOption.map((item, index) => (
-                    <div
-                      key={index}
-                      className="group flex items-center gap-2 p-1 hover:rounded-md hover:bg-blue hover:text-white"
-                    >
-                      <span
-                        className={`${
-                          index === desktopProfileOption.length - 1
-                            ? "text-red-500"
-                            : "text-blue"
-                        } group-hover:text-white`}
-                      >
-                        {item.icon}
+              </li>
+              <li>
+                <DownArrow width={16} height={13} color="currentColor" />
+              </li>
+              {hoverIndex === 6 && (
+                <ul className="absolute left-0 top-full z-50 mt-2 min-w-[150px] space-y-4 rounded bg-white p-2 shadow">
+                  {/* سطح برنزی */}
+                  <li className="rounded-md bg-[#ffede2] px-1 py-2">
+                    <div className="flex items-center gap-1">
+                      <Image
+                        src="/image/level1.png"
+                        width={100}
+                        height={100}
+                        alt="level 1"
+                        priority
+                        className="size-[1.5rem]"
+                      />
+                      <span className="text-sm font-semibold text-black">
+                        مستر بلیط کلاب{" "}
                       </span>
-                      <span
-                        className={`${
-                          index === desktopProfileOption.length - 1
-                            ? "text-red-500"
-                            : "text-black"
-                        } text-sm font-semibold group-hover:text-white`}
-                      >
-                        {item.text}
-                      </span>
+                      <LeftIcon width={18} height={15} color="#000000" />
                     </div>
-                  ))}
-                </li>
-              </ul>
-            )}
-          </ul>
+                    <span className="pr-3 text-xs font-semibold text-black">
+                      سطح برنزی |0 امتیاز{" "}
+                    </span>
+                  </li>
+                  {/* لیست گزینه ها */}
+                  <li className="space-y-4">
+                    {desktopProfileOption.map((item, index) => (
+                      <div
+                        key={index}
+                        className="group flex items-center gap-2 p-1 hover:rounded-md hover:bg-blue hover:text-white"
+                      >
+                        <span
+                          className={`${
+                            index === desktopProfileOption.length - 1
+                              ? "text-red-500"
+                              : "text-blue"
+                          } group-hover:text-white`}
+                        >
+                          {item.icon}
+                        </span>
+                        <span
+                          className={`${
+                            index === desktopProfileOption.length - 1
+                              ? "text-red-500"
+                              : "text-black"
+                          } text-sm font-semibold group-hover:text-white`}
+                        >
+                          {item.text}
+                        </span>
+                      </div>
+                    ))}
+                  </li>
+                </ul>
+              )}
+            </ul>
+          )}
         </div>
 
         {/* مربوط به اتخاب روت در موبایل */}
@@ -311,7 +345,7 @@ function Header() {
           <div
             onClick={() => routeHandler(item.name)}
             key={index}
-            className={`${categoryName === item.name ? "bg-yellow-300" : "bg-white"} z-30 flex flex-col items-center justify-center gap-2 rounded-md px-5 py-2`}
+            className={`${categoryName === item.name ? "bg-yellow-300" : "bg-white"} ${isOpenModal ? "hidden" : "flex"} z-30 flex-col items-center justify-center gap-2 rounded-md px-5 py-2`}
           >
             {item.icon}
             {item.text}
