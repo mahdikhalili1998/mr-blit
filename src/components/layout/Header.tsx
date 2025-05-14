@@ -12,11 +12,16 @@ import {
   desktopRahkarSazmani,
   desktopPeygiri,
   desktopSupport,
+  desktopProfileOption,
 } from "@/constant/DataForMap";
 
 import DownArrow from "../icon/DownArrow";
 
 import DesktopProfile from "../icon/DesktopProfile";
+import axios from "axios";
+import { formatName } from "@/helper/function";
+import LeftIcon from "../icon/LeftIcon";
+import { div } from "framer-motion/client";
 
 interface IDesktop {
   text?: string;
@@ -24,6 +29,12 @@ interface IDesktop {
 }
 
 function Header() {
+  const [userData, setUserData] = useState({
+    name: "",
+    lastName: "",
+    phoneNumber: "",
+  });
+  const [bioName, setBioName] = useState("");
   const [device, setDevice] = useState("");
   const [isChangeRoute, setIsChangeRoute] = useState(false);
   // برای hover کردن روی گزینه ها
@@ -97,6 +108,35 @@ function Header() {
   useEffect(() => {
     setDevice(categoryName); // تأخیر برای جلوگیری از فلیکر
   }, [categoryName]);
+  // مربوط به گرفتن اطالاعات کاربر در دستکتاپ
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    const fetchData = async () => {
+      await axios
+        .post("/api/find-user", { userId })
+        .then((res) => {
+          if (res.status === 200) {
+            setUserData({
+              name: res.data.userInfo.name,
+              lastName: res.data.userInfo.lastName,
+              phoneNumber: res.data.userInfo.phoneNumber,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (userData.phoneNumber) {
+      setBioName(userData.name);
+    } else {
+      null;
+    }
+  }, [userData]);
 
   const routeHandler = (route: string) => {
     setIsChangeRoute(true);
@@ -121,7 +161,7 @@ function Header() {
           </p>
         </Link>
         {/* مربوط به گزینه های بیشتر در دستکتاپ */}
-        <div className="relative ml-14 hidden lg:mr-2 lg:mt-2 lg:flex lg:gap-14">
+        <div className="relative ml-14 hidden pt-2 lg:mr-2 lg:mt-2 lg:flex lg:gap-14">
           {desktopSiteMap.map((item, index) => (
             <div
               key={index}
@@ -143,12 +183,13 @@ function Header() {
               {hoverIndex === index && (
                 <ul className="absolute left-0 top-full z-50 mt-2 min-w-[150px] space-y-4 rounded bg-white p-2 shadow">
                   {optionList.map((item, index) => (
-                    <li
-                      className="rounded-md py-2 pr-3 font-medium text-black hover:bg-blue hover:text-white"
+                    <Link
+                      href={item.link ? item.link : "#"}
+                      className="flex flex-col rounded-md py-2 pr-3 font-medium text-black hover:bg-blue hover:text-white"
                       key={index}
                     >
                       {item.text}
-                    </li>
+                    </Link>
                   ))}
                 </ul>
               )}
@@ -166,14 +207,67 @@ function Header() {
             <li>
               <DesktopProfile width={22} height={19} color="currentColor" />
             </li>
-            <li>ورود به حساب کاربری</li>
+            <li>
+              {!userData.phoneNumber ? (
+                "ورود به حساب "
+              ) : (
+                <span className="flex items-center justify-center rounded-full border-2 border-solid border-white bg-blue px-[6px] py-1">
+                  {formatName(bioName)}
+                </span>
+              )}
+            </li>
             <li>
               <DownArrow width={16} height={13} color="currentColor" />
             </li>
             {hoverIndex === 6 && (
               <ul className="absolute left-0 top-full z-50 mt-2 min-w-[150px] space-y-4 rounded bg-white p-2 shadow">
-                <li className="rounded-md py-2 pr-3 font-medium text-black hover:bg-blue hover:text-white">
-                  ghjghjghj
+                {/* سطح برنزی */}
+                <li className="rounded-md bg-[#ffede2] px-1 py-2">
+                  <div className="flex items-center gap-1">
+                    <Image
+                      src="/image/level1.png"
+                      width={100}
+                      height={100}
+                      alt="level 1"
+                      priority
+                      className="size-[1.5rem]"
+                    />
+                    <span className="text-sm font-semibold text-black">
+                      مستر بلیط کلاب{" "}
+                    </span>
+                    <LeftIcon width={18} height={15} color="#000000" />
+                  </div>
+                  <span className="pr-3 text-xs font-semibold text-black">
+                    سطح برنزی |0 امتیاز{" "}
+                  </span>
+                </li>
+                {/* لیست گزینه ها */}
+                <li className="space-y-4">
+                  {desktopProfileOption.map((item, index) => (
+                    <div
+                      key={index}
+                      className="group flex items-center gap-2 p-1 hover:rounded-md hover:bg-blue hover:text-white"
+                    >
+                      <span
+                        className={`${
+                          index === desktopProfileOption.length - 1
+                            ? "text-red-500"
+                            : "text-blue"
+                        } group-hover:text-white`}
+                      >
+                        {item.icon}
+                      </span>
+                      <span
+                        className={`${
+                          index === desktopProfileOption.length - 1
+                            ? "text-red-500"
+                            : "text-black"
+                        } text-sm font-semibold group-hover:text-white`}
+                      >
+                        {item.text}
+                      </span>
+                    </div>
+                  ))}
                 </li>
               </ul>
             )}

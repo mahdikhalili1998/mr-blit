@@ -18,3 +18,16 @@ export function extractTehran(str) {
 // تبدیل شماره فارسی به انگیلیسی
 export const p2e = (s) =>
   s.toString().replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
+
+
+// برای گرفتن حروف اول و دوم اسم برای پروفایل
+export function formatName(name) {
+    if (!name || name.length < 2) {
+        return "ورودی باید حداقل دو حرف داشته باشد.";
+    }
+
+    let firstChar = name.charAt(0).toUpperCase();
+    let secondChar = name.charAt(1).toLowerCase();
+
+    return firstChar + secondChar;
+}

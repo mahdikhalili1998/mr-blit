@@ -23,6 +23,10 @@ import BusDesktop from "@/components/icon/BusDesktop";
 import TaxiDesktop from "@/components/icon/TaxiDesktop";
 import SupportTime from "@/components/icon/SupportTime";
 import Rahkar from "@/components/icon/Rahkar";
+import Wallet from "@/components/icon/Wallet";
+import TwoPerson from "@/components/icon/TwoPerson";
+import SMS from "@/components/icon/SMS";
+import Exit from "@/components/icon/Exit";
 
 export const ourSite = [
   {
@@ -392,4 +396,31 @@ export const desktopSupport = [
   { text: "ارتباط با واحد فنی" },
   { text: "شماره تماس ما" },
   { text: "ارتباط با مدیر" },
+];
+
+export const desktopProfileOption = [
+  {
+    icon: <Wallet height={18} width={18} color="currentColor" />,
+    text: "اعتبار کاربری",
+  },
+  {
+    icon: <Saeqe height={18} width={18} color="currentColor" />,
+    text: "رضرو خودکار",
+  },
+  {
+    icon: <Bell height={18} width={18} color="currentColor" />,
+    text: "مدیریت رهگیری",
+  },
+  {
+    icon: <TwoPerson height={18} width={18} color="currentColor" />,
+    text: "مدیریت مسافران",
+  },
+  {
+    icon: <SMS height={18} width={18} color="currentColor" />,
+    text: "صندوق پیام",
+  },
+  {
+    icon: <Exit height={18} width={18} color="currentColor" />,
+    text: "خروج",
+  },
 ];
