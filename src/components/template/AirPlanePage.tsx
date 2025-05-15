@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TypeOfTravel from "../module/TypeOfTravel";
 import ChooseDestination from "../module/ChooseDestination";
 import SearchResult from "../module/SearchResult";
 import toast, { Toaster } from "react-hot-toast";
 import NineYears from "../module/NineYears";
+import { useRouter } from "next/navigation";
 
 function AirPlanePage() {
   const [selectedType, setSelectedType] = useState({
@@ -16,7 +17,7 @@ function AirPlanePage() {
   const [searchResult, setSearchResult] = useState<boolean>(false);
   const [userOrigin, setUserOrigin] = useState<string>(""); // مبدا انتخاب شده توسط کاربر
   const [userDestination, setUserDestination] = useState<string>(""); //مقصد انتخاب شده کاربر
-
+  const router = useRouter();
   // مربوط به دکمه جستجو
   const searchHandler = () => {
     if (userDestination && userOrigin && userDestination === userOrigin) {
@@ -33,6 +34,12 @@ function AirPlanePage() {
       setSearchResult(true);
     }
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      router.refresh();
+    }, 1000);
+  }, []);
 
   return searchResult ? (
     <SearchResult userDestination={userDestination} userOrigin={userOrigin} />
@@ -54,7 +61,7 @@ function AirPlanePage() {
           userDestination={userDestination}
           setUserDestination={setUserDestination}
         />
-        <div className="flex justify-center mt-4">
+        <div className="mt-4 flex justify-center">
           <div
             onClick={searchHandler}
             className="mx-5 mt-3 w-1/4 rounded-lg bg-blue py-3 text-center font-semibold text-white"

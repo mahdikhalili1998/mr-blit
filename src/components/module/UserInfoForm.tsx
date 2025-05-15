@@ -5,8 +5,11 @@ import { userInfoFormInput } from "@/constant/DataForMap";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+import Form from "@/lottie/Form.json";
+import { IDesktopSignUpModal } from "@/types/componentsProps";
 
-function UserInfoForm() {
+function UserInfoForm({ setIsOpenModal }: IDesktopSignUpModal) {
   const [userInfo, setUserInfo] = useState<IUserInfoForm>({
     gender: "man",
     name: "",
@@ -64,11 +67,50 @@ function UserInfoForm() {
     }
   };
 
+  const sendOtpHandlerDesktop = async () => {
+    const { name, lastName, password, confirmPassword } = userInfo;
+    const newErrors: Record<string, boolean> = {};
+    if (!name) newErrors.name = true;
+    if (!lastName) newErrors.lastName = true;
+    if (!password) newErrors.password = true;
+    if (!confirmPassword) newErrors.confirmPassword = true;
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) {
+      toast.error("لطفاً فیلدهای قرمز را پر کنید");
+    }
+    if (password !== confirmPassword) {
+      toast.error("رمزها باید یکسان باشند");
+    }
+    if (
+      name &&
+      lastName &&
+      password &&
+      confirmPassword &&
+      password === confirmPassword
+    ) {
+      await axios
+        .post("/api/auth", userInfo)
+        .then((res) => {
+          // console.log(res);
+          if (res.status === 201) {
+            if (typeof window !== "undefined") {
+              localStorage.setItem("userId", res.data.userId);
+            }
+            router.push(`/`);
+            setIsOpenModal(false);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
   const handleInputChange = (field: string, value: string) => {
     setUserInfo((prev) => ({ ...prev, [field]: value }));
     // اگر مقدار وارد شد، خطای فیلد را حذف کن
     setErrors((prev) => ({ ...prev, [field]: value.trim() === "" }));
   };
+
+  const Lottie = dynamic(() => import("react-lottie-player"), { ssr: false });
 
   return (
     <div>
@@ -114,30 +156,54 @@ function UserInfoForm() {
         </li>
       </ul>
 
-      {/* اینپوت ها */}
-      {userInfoFormInput.map((item, index) => (
-        <div key={index} className="mx-4">
-          <input
-            type="text"
-            value={userInfo[item.value as keyof IUserInfoForm] || ""}
-            onChange={(e) => handleInputChange(item.value, e.target.value)}
-            placeholder={item.lab}
-            className={`${
-              errors[item.value]
-                ? "border-red-500 bg-red-100"
-                : "border-gray-300"
-            } mt-6 w-full rounded-md border-[2px] border-solid px-2 py-3 placeholder:text-right focus:border-blue focus:bg-cyan-50 focus:outline-none`}
+      <div className="lg:flex lg:items-start lg:justify-between lg:gap-5">
+        {/* اینپوت ها */}
+        <div className="lg:grid lg:grid-cols-2 lg:gap-4">
+          {userInfoFormInput.map((item, index) => (
+            <div key={index} className="mx-4 w-full">
+              <input
+                type="text"
+                value={userInfo[item.value as keyof IUserInfoForm] || ""}
+                onChange={(e) => handleInputChange(item.value, e.target.value)}
+                placeholder={item.lab}
+                className={`${
+                  errors[item.value]
+                    ? "border-red-500 bg-red-100"
+                    : "border-gray-300"
+                } mt-6 w-full rounded-md border-[2px] border-solid px-2 py-3 placeholder:text-right focus:border-blue focus:bg-cyan-50 focus:outline-none`}
+              />
+            </div>
+          ))}
+        </div>
+
+        <div className="hidden lg:block">
+          <Lottie
+            animationData={Form}
+            loop
+            play
+            style={{
+              width: 180,
+              height: 280,
+            }}
           />
         </div>
-      ))}
+      </div>
 
       {/* دکمه ارسال */}
-      <div className="mx-4 mt-5">
+      <div className="mx-4 mt-5 lg:hidden">
         <button
           onClick={sendOtpHandler}
           className="w-full rounded-md bg-blue py-3 font-semibold text-white"
         >
           ارسال
+        </button>
+      </div>
+      <div className="mx-4 mt-5 hidden lg:block">
+        <button
+          onClick={sendOtpHandlerDesktop}
+          className="w-full rounded-md bg-blue py-3 font-semibold text-white"
+        >
+          ثبت اطلاعات
         </button>
       </div>
       <Toaster />

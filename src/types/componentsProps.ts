@@ -82,5 +82,5 @@ export interface ProfilePageProps {
 }
 
 export interface IDesktopSignUpModal {
-  setIsOpenModal: any;
+  setIsOpenModal?: any;
 }

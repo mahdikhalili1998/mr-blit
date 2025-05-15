@@ -55,7 +55,7 @@ function InsertOtp({ otp, setNextLevel, userNumber }: IInsertOtp) {
   return (
     <div>
       {goToInfoForm ? (
-        <UserInfoForm />
+        <UserInfoForm  />
       ) : (
         <>
           <div className="mx-3 mt-5">
