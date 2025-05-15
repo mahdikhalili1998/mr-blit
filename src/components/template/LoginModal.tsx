@@ -12,25 +12,25 @@ import axios from "axios";
 import InsertOtp from "../module/InsertOtp";
 
 function LoginModal() {
-  const [usernumber, setUserNumber] = useState<string>(""); // ذخیره شماره کاربر
+  const [userNumber, setUserNumber] = useState<string>(""); // ذخیره شماره کاربر
   const [nextLevel, setNextlevel] = useState<boolean>(false); // رفتن برای وارد کردن رمز
   const [otp, setOtp] = useState<string>(""); // رمز پیامک شده اینجا ذخیره میشود
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const sendNumberHandler = async () => {
-    const num = { to: usernumber };
+    const num = { to: userNumber };
     const headers = {
       "Content-Type": "application/json",
       Authorization: "Bearer your_auth_token",
     };
-    if (!regexInfo.phoneNumber.test(usernumber)) {
+    if (!regexInfo.phoneNumber.test(userNumber)) {
       toast.error("شماره با فرمت صحیح وارد کنید ");
       return;
     }
     setLoading(true);
     await axios
-      .post("/api/find-user", { phone: usernumber })
+      .post("/api/find-user", { phone: userNumber })
       .then((res) => {
         if (res.status === 200) {
           localStorage.setItem("userNumber", res.data.userInfo.phoneNumber);
@@ -80,7 +80,7 @@ function LoginModal() {
         <InsertOtp
           otp={otp}
           setNextLevel={setNextlevel}
-          userNumber={usernumber}
+          userNumber={userNumber}
         />
       ) : (
         // قسمت وارد کردن شماره
@@ -95,7 +95,7 @@ function LoginModal() {
           <div className="mx-3">
             <input
               type="number"
-              value={usernumber}
+              value={userNumber}
               onChange={(e) => setUserNumber(e.target.value)}
               placeholder="شماره موبایل"
               className="mt-6 w-full rounded-md px-2 py-3 placeholder:text-right focus:outline-none"
@@ -125,7 +125,7 @@ function LoginModal() {
             ) : (
               <button
                 onClick={() => sendNumberHandler()}
-                disabled={!regexInfo.phoneNumber.test(usernumber)}
+                disabled={!regexInfo.phoneNumber.test(userNumber)}
                 className={`w-full rounded-md bg-blue py-3 font-semibold text-white disabled:opacity-45`}
               >
                 ادامه و دریافت کد
