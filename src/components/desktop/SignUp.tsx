@@ -10,7 +10,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import EditPen from "../icon/EditPen";
 import dynamic from "next/dynamic";
-import Complete from "../../lottie/complete.json";
+import Complete from "../../lottie/Complete.json";
 import UserInfoForm from "../module/UserInfoForm";
 
 function SignUp({ setIsOpenModal }: IDesktopSignUpModal) {
