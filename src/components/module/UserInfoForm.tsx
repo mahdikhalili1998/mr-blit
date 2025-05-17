@@ -6,7 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
-import Form from "@/lottie/Form.json";
+import Form from "../../lottie/Form.json";
 import { IDesktopSignUpModal } from "@/types/componentsProps";
 
 function UserInfoForm({ setIsOpenModal }: IDesktopSignUpModal) {

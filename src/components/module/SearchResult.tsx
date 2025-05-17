@@ -26,7 +26,6 @@ import LowRate from "../icon/LowRate";
 import SmaillTrain from "../icon/SmaillTrain";
 import styles from "@/css/Swiper.module.css";
 import SmallBus from "../icon/SmallBus";
-import { span } from "framer-motion/client";
 
 function SearchResult({ userDestination, userOrigin }: ISearchResult) {
   const [data, setData] = useState<object[]>([]);
