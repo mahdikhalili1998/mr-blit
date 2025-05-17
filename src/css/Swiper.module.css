@@ -181,3 +181,19 @@
     overflow: visible;
   }
 }
+
+.hotelTicket:nth-child(1n) {
+  width: 85%;
+}
+@media screen and (min-width: 700px) {
+  .hotelTicket:nth-child(1n) {
+    width: 55%;
+    overflow: visible;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .hotelTicket:nth-child(1n) {
+    width: 45%;
+    overflow: visible;
+  }
+}

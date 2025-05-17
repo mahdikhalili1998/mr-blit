@@ -1,11 +1,12 @@
 import { IIcon } from "@/types/generalType";
 import React from "react";
 
-function Location({ width, height, color }: IIcon) {
+function Location({ width, height, color, className }: IIcon) {
   return (
     <svg
       width={width}
       height={height}
+      className={className}
       aria-hidden="true"
       focusable="false"
       data-prefix="fas"

@@ -2,6 +2,7 @@ export interface IIcon {
   width: number;
   height: number;
   color?: string;
+  className?: string;
 }
 
 export interface Icategory {
