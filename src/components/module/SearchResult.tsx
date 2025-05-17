@@ -301,34 +301,32 @@ function SearchResult({ userDestination, userOrigin }: ISearchResult) {
                 {item.available ? (
                   <div className="m-3 flex items-center justify-between">
                     <div className="flex items-center gap-2 text-blue">
-                      <div className="flex items-center gap-2">
-                        {/* برای موبایل */}
-                        <Bell
-                          width={20}
-                          className="lg:hidden"
-                          height={20}
-                          color="currentColor"
-                        />
-                        <Saeqe
-                          className="lg:hidden"
-                          width={20}
-                          height={20}
-                          color="currentColor"
-                        />
-                        {/* /* برای دسکتاپ */}
-                        <Bell
-                          className="hidden lg:block"
-                          width={23}
-                          height={23}
-                          color="currentColor"
-                        />
-                        <Saeqe
-                          className="hidden lg:block"
-                          width={23}
-                          height={23}
-                          color="currentColor"
-                        />
-                      </div>
+                      {/* برای موبایل */}
+                      <Bell
+                        width={20}
+                        className="lg:hidden"
+                        height={20}
+                        color="currentColor"
+                      />
+                      <Saeqe
+                        className="lg:hidden"
+                        width={20}
+                        height={20}
+                        color="currentColor"
+                      />
+                      {/* /* برای دسکتاپ */}
+                      <Bell
+                        className="hidden lg:block"
+                        width={23}
+                        height={23}
+                        color="currentColor"
+                      />
+                      <Saeqe
+                        className="hidden lg:block"
+                        width={23}
+                        height={23}
+                        color="currentColor"
+                      />
                       <span
                         className={`${item.capicity < 5 ? "text-red-500" : "text-gray-400"} mr-5 text-sm lg:text-base`}
                       >
@@ -352,11 +350,12 @@ function SearchResult({ userDestination, userOrigin }: ISearchResult) {
           {categoryName === "train" &&
             data.map((item: any) => (
               <div className="rounded-xl bg-white p-2" key={item.id}>
-                <span className="rounded-xl bg-yellow-200 px-2 text-right text-xs font-bold text-yellow-800">
+                {/* اتیکت زرد رنگ */}
+                <span className="rounded-xl bg-yellow-200 px-2 text-right text-xs font-bold text-yellow-800 lg:px-4 lg:py-1 lg:text-base">
                   {item.name}
                 </span>
                 {/* دیو مربوط به لوگو شرکت و ساعات */}
-                <div className="mt-5 flex items-center gap-5">
+                <div className="mt-5 flex items-center gap-5 lg:justify-around">
                   {/* لوگو */}
                   <div className="flex flex-col items-center justify-center">
                     <Image
@@ -365,34 +364,52 @@ function SearchResult({ userDestination, userOrigin }: ISearchResult) {
                       width={100}
                       height={100}
                       priority
-                      className="size-[24px]"
+                      className="size-[24px] lg:size-24"
                     />
-                    <span className="mt-2 w-max text-xs">{item.campony}</span>
+                    <span className="mt-2 w-max text-xs lg:text-base lg:font-medium">
+                      {item.campony}
+                    </span>
                   </div>
                   {/* ساعات */}
                   <ul className="flex items-center gap-9">
                     {/* ساعت رفت */}
-                    <li className="flex flex-col items-center justify-center text-xs">
-                      <span className="text-lg font-semibold text-black">
+                    <li className="flex flex-col items-center justify-center text-xs lg:text-base">
+                      <span className="text-lg font-semibold text-black lg:text-xl">
                         {item.start}
                       </span>
                       <span className="text-gray-500">
                         {extractTehran(userOrigin)}
                       </span>
                     </li>
-
+                    {/* عکس وسیله نقلیه از مبدا به مقثد */}
                     <li className="flex w-max items-center gap-2">
-                      <span className="size-[10px] rounded-full bg-gray-600"></span>
-                      <span className="font-semibold text-gray-600">
+                      <span className="size-[10px] rounded-full bg-gray-600 lg:size-5"></span>
+                      {/* خط چین موبایل */}
+                      <span className="font-semibold text-gray-600 lg:hidden">
                         - - - -
                       </span>
-                      <span className="">
-                        <SmaillTrain width={24} height={24} color=" #4b5563" />
+                      {/* خط چین دسکتاپ */}
+                      <span className="hidden font-semibold text-gray-600 lg:block">
+                        - - - - - - - - - - - -
                       </span>
+                      {/* آیکون موبایل */}
+                      <SmaillTrain
+                        className="rotate-180 lg:hidden"
+                        width={24}
+                        height={24}
+                        color=" #4b5563"
+                      />
+                      {/* آیکون دستکتاپ */}
+                      <SmaillTrain
+                        className="hidden rotate-180 lg:block"
+                        width={44}
+                        height={44}
+                        color=" #4b5563"
+                      />
                     </li>
                     {/* ساعت برگشت */}
-                    <li className="flex flex-col items-center justify-center text-xs">
-                      <span className="text-lg font-semibold text-black">
+                    <li className="flex flex-col items-center justify-center text-xs lg:text-base">
+                      <span className="text-lg font-semibold text-black lg:text-xl">
                         {item.finish}
                       </span>
                       <span className="text-gray-500">
@@ -408,15 +425,39 @@ function SearchResult({ userDestination, userOrigin }: ISearchResult) {
                 {item.available ? (
                   <div className="m-3 flex items-center justify-between">
                     <div className="flex items-center gap-2 text-blue">
-                      <Bell width={20} height={20} color="currentColor" />
-                      <Saeqe width={20} height={20} color="currentColor" />
+                      {/* برای موبایل */}
+                      <Bell
+                        width={20}
+                        className="lg:hidden"
+                        height={20}
+                        color="currentColor"
+                      />
+                      <Saeqe
+                        className="lg:hidden"
+                        width={20}
+                        height={20}
+                        color="currentColor"
+                      />
+                      {/* /* برای دسکتاپ */}
+                      <Bell
+                        className="hidden lg:block"
+                        width={23}
+                        height={23}
+                        color="currentColor"
+                      />
+                      <Saeqe
+                        className="hidden lg:block"
+                        width={23}
+                        height={23}
+                        color="currentColor"
+                      />
                       <span
-                        className={`${item.capicity < 5 ? "text-red-500" : "text-gray-400"} mr-5 text-sm`}
+                        className={`${item.capicity < 5 ? "text-red-500" : "text-gray-400"} mr-5 text-sm lg:text-base`}
                       >
                         {item.capicity} صندلی
                       </span>
                     </div>
-                    <span className="font-medium text-blue">
+                    <span className="font-medium text-blue lg:text-xl">
                       {item.price.toLocaleString("en-US")} تومان
                     </span>
                   </div>
@@ -433,11 +474,12 @@ function SearchResult({ userDestination, userOrigin }: ISearchResult) {
           {categoryName === "bus" &&
             data.map((item: any) => (
               <div className="rounded-xl bg-white p-2" key={item.id}>
-                <span className="rounded-xl bg-yellow-200 px-2 text-right text-xs font-bold text-yellow-800">
+                {/* اتیکت زرد رنگ */}
+                <span className="rounded-xl bg-yellow-200 px-2 text-right text-xs font-bold text-yellow-800 lg:px-4 lg:py-1 lg:text-base">
                   {item.name}
                 </span>
                 {/* دیو مربوط به لوگو شرکت و ساعات */}
-                <div className="mt-5 flex items-center gap-5">
+                <div className="mt-5 flex items-center gap-5 lg:justify-around">
                   {/* لوگو */}
                   <div className="flex flex-col items-center justify-center">
                     <Image
@@ -446,34 +488,52 @@ function SearchResult({ userDestination, userOrigin }: ISearchResult) {
                       width={100}
                       height={100}
                       priority
-                      className="size-[24px]"
+                      className="size-[24px] lg:size-24"
                     />
-                    <span className="mt-2 w-max text-xs">{item.campony}</span>
+                    <span className="mt-2 w-max text-xs lg:text-base lg:font-medium">
+                      {item.campony}
+                    </span>
                   </div>
                   {/* ساعات */}
                   <ul className="flex items-center gap-9">
                     {/* ساعت رفت */}
-                    <li className="flex flex-col items-center justify-center text-xs">
-                      <span className="text-lg font-semibold text-black">
+                    <li className="flex flex-col items-center justify-center text-xs lg:text-base">
+                      <span className="text-lg font-semibold text-black lg:text-xl">
                         {item.start}
                       </span>
                       <span className="text-gray-500">
                         {extractTehran(userOrigin)}
                       </span>
                     </li>
-
+                    {/* عکس وسیله نقلیه از مبدا به مقثد */}
                     <li className="flex w-max items-center gap-2">
-                      <span className="size-[10px] rounded-full bg-gray-600"></span>
-                      <span className="font-semibold text-gray-600">
+                      <span className="size-[10px] rounded-full bg-gray-600 lg:size-5"></span>
+                      {/* خط چین موبایل */}
+                      <span className="font-semibold text-gray-600 lg:hidden">
                         - - - -
                       </span>
-                      <span className="">
-                        <SmallBus width={24} height={24} color=" #4b5563" />
+                      {/* خط چین دسکتاپ */}
+                      <span className="hidden font-semibold text-gray-600 lg:block">
+                        - - - - - - - - - - - -
                       </span>
+                      {/* آیکون موبایل */}
+                      <SmallBus
+                        className="rotate-180 lg:hidden"
+                        width={24}
+                        height={24}
+                        color=" #4b5563"
+                      />
+                      {/* آیکون دستکتاپ */}
+                      <SmallBus
+                        className="hidden rotate-180 lg:block"
+                        width={44}
+                        height={44}
+                        color=" #4b5563"
+                      />
                     </li>
                     {/* ساعت برگشت */}
-                    <li className="flex flex-col items-center justify-center text-xs">
-                      <span className="text-lg font-semibold text-black">
+                    <li className="flex flex-col items-center justify-center text-xs lg:text-base">
+                      <span className="text-lg font-semibold text-black lg:text-xl">
                         {item.finish}
                       </span>
                       <span className="text-gray-500">
@@ -489,15 +549,39 @@ function SearchResult({ userDestination, userOrigin }: ISearchResult) {
                 {item.available ? (
                   <div className="m-3 flex items-center justify-between">
                     <div className="flex items-center gap-2 text-blue">
-                      <Bell width={20} height={20} color="currentColor" />
-                      <Saeqe width={20} height={20} color="currentColor" />
+                      {/* برای موبایل */}
+                      <Bell
+                        width={20}
+                        className="lg:hidden"
+                        height={20}
+                        color="currentColor"
+                      />
+                      <Saeqe
+                        className="lg:hidden"
+                        width={20}
+                        height={20}
+                        color="currentColor"
+                      />
+                      {/* /* برای دسکتاپ */}
+                      <Bell
+                        className="hidden lg:block"
+                        width={23}
+                        height={23}
+                        color="currentColor"
+                      />
+                      <Saeqe
+                        className="hidden lg:block"
+                        width={23}
+                        height={23}
+                        color="currentColor"
+                      />
                       <span
-                        className={`${item.capicity < 5 ? "text-red-500" : "text-gray-400"} mr-5 text-sm`}
+                        className={`${item.capicity < 5 ? "text-red-500" : "text-gray-400"} mr-5 text-sm lg:text-base`}
                       >
                         {item.capicity} صندلی
                       </span>
                     </div>
-                    <span className="font-medium text-blue">
+                    <span className="font-medium text-blue lg:text-xl">
                       {item.price.toLocaleString("en-US")} تومان
                     </span>
                   </div>

@@ -1,11 +1,12 @@
 import { IIcon } from "@/types/generalType";
 import React from "react";
 
-function SmaillTrain({ width, height, color }: IIcon) {
+function SmaillTrain({ width, height, color, className }: IIcon) {
   return (
     <svg
       width={width}
       height={height}
+      className={className}
       aria-hidden="true"
       focusable="false"
       data-prefix="fa-mrbilit"
