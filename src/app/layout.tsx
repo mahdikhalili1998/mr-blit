@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "../font/iranSans.css";
+import "@/styles/iranSans.css";
 import Layout from "@/components/layout/Layout";
 
 export const metadata: Metadata = {
