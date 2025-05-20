@@ -39,8 +39,8 @@
   font-style: normal;
   font-weight: 600;
   src:
-    url("/fonts/woff/IRANSansXFaNum-Demibold.woff") format("woff"),
-    url("/fonts/woff2/IRANSansXFaNum-Demibold.woff2") format("woff2");
+    url("/fonts/woff/IRANSansXFaNum-DemiBold.woff") format("woff"),
+    url("/fonts/woff2/IRANSansXFaNum-DemiBold.woff2") format("woff2");
 }
 
 @font-face {
@@ -48,8 +48,8 @@
   font-style: normal;
   font-weight: 800;
   src:
-    url("/fonts/woff/IRANSansXFaNum-Extrabold.woff") format("woff"),
-    url("/fonts/woff2/IRANSansXFaNum-Extrabold.woff2") format("woff2");
+    url("/fonts/woff/IRANSansXFaNum-ExtraBold.woff") format("woff"),
+    url("/fonts/woff2/IRANSansXFaNum-ExtraBold.woff2") format("woff2");
 }
 
 @font-face {
