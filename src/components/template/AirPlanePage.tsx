@@ -7,12 +7,49 @@ import SearchResult from "../module/SearchResult";
 import toast, { Toaster } from "react-hot-toast";
 import NineYears from "../module/NineYears";
 import { useRouter } from "next/navigation";
+import PwaModal from "./PwaModal";
 
 function AirPlanePage() {
   const [selectedType, setSelectedType] = useState({
     type: "inside",
     way: "یک طرفه",
   });
+
+  // مربوط به pwa
+  const [showInstallModal, setShowInstallModal] = useState<boolean>(false);
+  const [prompt, setPrompt] = useState<any>(null);
+  useEffect(() => {
+    const handleBeforPrompt = (event: any) => {
+      event.preventDefault();
+      setPrompt(true);
+      if (!window.matchMedia("(display-mode:standalone)").matches) {
+        setShowInstallModal(true);
+      }
+    };
+    window.addEventListener("beforeinstallprompt", handleBeforPrompt);
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handleBeforPrompt);
+    };
+  }, []);
+  const closeHandler = () => {
+    setShowInstallModal(false);
+  };
+
+  const instalHandler = () => {
+    if (prompt) {
+      prompt.prompt();
+      prompt.userChioice.then((choiceResult: any) => {
+        if (choiceResult.outcome === "accepted") {
+          console.log("Accepted");
+        } else {
+          console.log("canceld");
+        }
+        setPrompt(null);
+        setShowInstallModal(false);
+      });
+    }
+  };
+
   // استیت مربوط به جستجو
   const [searchResult, setSearchResult] = useState<boolean>(false);
   const [userOrigin, setUserOrigin] = useState<string>(""); // مبدا انتخاب شده توسط کاربر
@@ -45,6 +82,11 @@ function AirPlanePage() {
     <SearchResult userDestination={userDestination} userOrigin={userOrigin} />
   ) : (
     <div>
+      <PwaModal
+        show={showInstallModal}
+        closeHandler={closeHandler}
+        instalHandler={instalHandler}
+      />
       <div className="my-2 bg-white pb-5">
         <Toaster />
         <TypeOfTravel
