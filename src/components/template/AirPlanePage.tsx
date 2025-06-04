@@ -21,7 +21,7 @@ function AirPlanePage() {
   useEffect(() => {
     const handleBeforPrompt = (event: any) => {
       event.preventDefault();
-      setPrompt(true);
+      setPrompt(event);
       if (!window.matchMedia("(display-mode:standalone)").matches) {
         setShowInstallModal(true);
       }
@@ -38,7 +38,7 @@ function AirPlanePage() {
   const instalHandler = () => {
     if (prompt) {
       prompt.prompt();
-      prompt.userChioice.then((choiceResult: any) => {
+      prompt.userChoice.then((choiceResult: any) => {
         if (choiceResult.outcome === "accepted") {
           console.log("Accepted");
         } else {
