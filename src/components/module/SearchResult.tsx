@@ -400,7 +400,7 @@ function SearchResult({ userDestination, userOrigin }: ISearchResult) {
                       />
                       {/* آیکون دستکتاپ */}
                       <SmaillTrain
-                        className="hidden rotate-180 lg:block"
+                        className="hidden lg:block"
                         width={44}
                         height={44}
                         color=" #4b5563"
@@ -524,7 +524,7 @@ function SearchResult({ userDestination, userOrigin }: ISearchResult) {
                       />
                       {/* آیکون دستکتاپ */}
                       <SmallBus
-                        className="hidden rotate-180 lg:block"
+                        className="hidden  lg:block"
                         width={44}
                         height={44}
                         color=" #4b5563"

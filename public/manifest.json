@@ -1,0 +1,81 @@
+{
+  "name": " مِستربلیط ",
+  "short_name": " مِستربلیط ",
+  "description": "در کوتاه ترین زمان بلیط های خود را رزرو کنید",
+  "start_url": "/",
+  "scope": "/",
+  "orientation": "portrait-primary",
+  "display": "standalone",
+  "dir": "rtl",
+  "background_color": "#38bdf8",
+  "theme_color": "#a855f7",
+  "icons": [
+    {
+      "src": "/icon/48.png",
+      "type": "image/png",
+      "sizes": "48x48",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon/64.png",
+      "type": "image/png",
+      "sizes": "64x64",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon/96.png",
+      "type": "image/png",
+      "sizes": "96x96",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon/144.png",
+      "type": "image/png",
+      "sizes": "144x144",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon/180.png",
+      "type": "image/png",
+      "sizes": "180x180",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon/192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon/512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon/192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon/512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/icon/512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/icon/320.png",
+      "sizes": "320x320",
+      "type": "image/png"
+    }
+  ]
+}
