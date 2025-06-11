@@ -10,10 +10,10 @@ function PwaModal({ show, closeHandler, instalHandler }: any) {
     const handleResize = () => {
       const screenWidth = window.innerWidth;
       const baseWidth = 355;
-      let baseTop = 20;
+     const baseTop = 20;
       const extra = screenWidth > baseWidth ? screenWidth - baseWidth : 0;
       const steps = Math.floor(extra / 36);
-      let newTop = baseTop + steps * 20;
+     const newTop = baseTop + steps * 20;
       setTopOffset(newTop);
     };
     handleResize(); // مقدار اولیه
